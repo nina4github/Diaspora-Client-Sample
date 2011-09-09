@@ -1,0 +1,4 @@
+= form_tag('/auth/diaspora', :method => :get) do
+  = text_field_tag :diaspora_id, '', :placeholder => "Diaspora ID"
+  = submit_tag :connect
+
