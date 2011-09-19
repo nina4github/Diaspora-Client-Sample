@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :rememberable, :trackable
+  devise :registerable, :rememberable, :trackable
 
   validates_length_of :diaspora_id, :maximum => 127
 

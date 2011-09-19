@@ -1,3 +1,4 @@
+
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.9'
@@ -25,18 +26,19 @@ gem 'nokogiri'
 # gem 'aws-s3', :require => 'aws/s3'
 
 # Diaspora
-gem 'diaspora-client', #:git => 'git://github.com/diaspora/diaspora-client.git'
-                       :path => "~/workspace/diaspora-client"
+gem 'diaspora-client', :git => 'git://github.com/diaspora/diaspora-client.git'
+                       #:path => "~/workspace/diaspora-client"
 
 
 
 group :test do
   gem 'capybara', '~> 0.3.9'
+  gem 'selenium-webdriver', '>= 2.5.0'
   gem 'rest-client'
   gem 'database_cleaner', '0.6.0'
 
   gem 'cucumber-rails', '0.3.2'
-  gem 'factory_girl_rails', :require => false
+  gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 2.4'
   gem 'shoulda-matchers'
 end
@@ -44,9 +46,9 @@ end
 group :development, :test do
   gem "nifty-generators"
   gem 'sqlite3'
-  gem 'ruby-debug-base19', '0.11.23' if RUBY_VERSION.include? '1.9.1'
-  gem 'ruby-debug19' if RUBY_VERSION.include? '1.9'
-  gem 'ruby-debug' if defined?(Rubinius).nil? && RUBY_VERSION.include?('1.8')
+  gem 'ruby-debug19', :platform => :mri_19
+  gem 'ruby-debug', :platform => :mri_18
 end
+
 
 

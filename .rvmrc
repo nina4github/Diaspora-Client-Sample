@@ -1,1 +1,1 @@
-rvm --create use 1.9.2@epic_parties
+rvm --create use 1.9.2@diaspora_client_sample
