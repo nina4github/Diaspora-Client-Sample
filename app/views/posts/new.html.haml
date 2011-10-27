@@ -1,0 +1,8 @@
+form in haml :) to add info in and create command
+%form{:name=>"post_create",:method=>"post", :action=>"/posts"}
+%fieldset
+  %label{:for => "msg"} Message:
+  %input{:type => "text", :name => "msg"}
+%input{:type => "submit", :value => "Send", :class => "button"}
+
+I cannot figure out how to submit the form :) I need to call something like form.submit

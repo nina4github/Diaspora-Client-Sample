@@ -2,6 +2,19 @@ SampleApp::Application.routes.draw do
   devise_for :users
 
   mount DiasporaClient::App.new => '/auth/diaspora'
+  
+  #mount DiasporaClient::App::new.status => '/status'
+  
+  resources :activities 
+  match 'activities/:activityname/:service' => 'activities#service', :as => :activityname
+ 
+  match 'geniehub/listener' => 'geniehub#listener'
+  
+  resources :status
+
+  #map.log_out 'logout', :controller => 'sessions', :action => 'destroy'
+  match 'exit' => 'home#logout', :as => :logout
+  
 
   root :to => "home#show"
 

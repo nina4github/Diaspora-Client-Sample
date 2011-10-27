@@ -1,0 +1,15 @@
+#PUT http://tiger.itu.dk:8004/informationbus/register/listener
+#url=<callbackUrl>&pattern=<tokens>[&sendform=<true|false>]
+#Returns: Json( {registration: <registrationId>} ), the registrationId for the listener.
+conn = Faraday.new(:url => 'http://localhost:8000') do |builder|
+  builder.request  :url_encoded
+  builder.response :logger
+  builder.adapter  :net_http
+end
+
+## POST ##
+
+json = JSON.generate [{"field"=>"activity","operator"=>"=","value"=>"*"}]
+
+response=conn.put '/informationbus/register/listener', { :url => 'http://localhost:3000/geniehub/listener', :pattern => json }  # POST "name=maguro" to http://sushi.com/nigiri
+puts response.body

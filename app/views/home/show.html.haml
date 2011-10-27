@@ -1,4 +1,29 @@
+%h1 Poppelvænget
+
+
+
+
 = form_tag('/auth/diaspora', :method => :get) do
   = text_field_tag :diaspora_id, '', :placeholder => "Diaspora ID"
   = submit_tag :connect
+
+chose your username:
+= link_to 'Elena' , 'status?username=ninaondiaspora@diaspora.localhost' 
+= link_to 'cheng' , 'status?username=cheng81@diaspora.localhost' 
+= link_to 'user1' , 'status?username=user1@diaspora.localhost' 
+
+= response.body
+
+
+
+
+#content
+  %iframe{:src=>"http://elna.itu.dk/augustwimmersvej/noticeboard", :width=>"100%", :height=>"100%"}
+    %p Your browser does not support iframes.
+
+#activities
+%ul
+=@activities.each do |activity|
+  =activity
+ 
 

@@ -1,0 +1,106 @@
+# Logfile created on 2011-10-04 20:42:59 +0200 by logger.rb/25413
+get http://diaspora.localhost/posts/1.json
+
+200
+server: "nginx/1.0.6"
+date: "Tue, 04 Oct 2011 18:43:52 GMT"
+content-type: "text/html; charset=utf-8"
+transfer-encoding: "chunked"
+connection: "close"
+etag: "\"968d10e143db5f5b2bc97983ffd9e85d\""
+x-ua-compatible: "IE=Edge,chrome=1"
+x-git-revision: "4bd1f0997d8001a9894b430fb87a668c024fd3a1"
+x-runtime: "0.670153"
+x-git-update: "2011-09-25 13:14:09 -0700"
+set-cookie: "_diaspora_session=BAh7ByIQX2NzcmZfdG9rZW4iMU1pRXZDU3RFUCs1cXM1aHk2VjYzbGlRKzkwRFNLdlRvWDY5QzZ5MUFhQzQ9Ig9zZXNzaW9uX2lkIiU5MmQ0NmQyMTUyYTUyYzhjYjY2YTM5ODI1NjBlMmJlNA%3D%3D--d7cd526c359eb4ef9ba731548764696d5ae49aea; path=/"
+cache-control: "max-age=0, private, must-revalidate"
+get http://diaspora.localhost/posts/1.json
+
+200
+server: "nginx/1.0.6"
+date: "Tue, 04 Oct 2011 18:44:03 GMT"
+content-type: "text/html; charset=utf-8"
+transfer-encoding: "chunked"
+connection: "close"
+etag: "\"9212201ccde3ae0e3b9afd1d4d0a5c3f\""
+x-ua-compatible: "IE=Edge,chrome=1"
+x-git-revision: "4bd1f0997d8001a9894b430fb87a668c024fd3a1"
+x-runtime: "0.808678"
+x-git-update: "2011-09-25 13:14:09 -0700"
+set-cookie: "_diaspora_session=BAh7ByIQX2NzcmZfdG9rZW4iMWJzVnk5eHJYRWZuSXhoUnEwMVE0ZjBlZG9Tdy9GZENnNitiR1NwaXZEZW89Ig9zZXNzaW9uX2lkIiUxNTcxOWNkZjg0ODg5MDZhNGY1ZWI3OGE3ZWI2MDc5Mg%3D%3D--e9a90edfeb5e1730af5613c1df34e0f409cbb96f; path=/"
+cache-control: "max-age=0, private, must-revalidate"
+get http://diaspora.localhost/posts/1.json
+
+200
+server: "nginx/1.0.6"
+date: "Wed, 05 Oct 2011 08:39:36 GMT"
+content-type: "text/html; charset=utf-8"
+transfer-encoding: "chunked"
+connection: "close"
+etag: "\"a83168754f95f8a96cbfd627d5d5bc2f\""
+x-ua-compatible: "IE=Edge,chrome=1"
+x-git-revision: "17417f6495c1f32f81adca3d812ae9d5c93d2e23"
+x-runtime: "0.869258"
+x-git-update: "2011-10-05 09:51:53 +0200"
+set-cookie: "_diaspora_session=BAh7ByIQX2NzcmZfdG9rZW4iMS83MVk3dWlOVDU5eDlmUmtkWHpraUkvREZ3TklvWWtKcU5HNWcrOW00NkU9Ig9zZXNzaW9uX2lkIiVjMDY4Y2QzMTljYjhkZmJjZTIzMmM5NWU0MzUzYmRiZg%3D%3D--b92e62df0b820bacea3cab0044553880c7465363; path=/"
+cache-control: "max-age=0, private, must-revalidate"
+get http://diaspora.localhost/posts/1.json
+
+200
+server: "nginx/1.0.6"
+date: "Wed, 05 Oct 2011 08:51:46 GMT"
+content-type: "text/html; charset=utf-8"
+transfer-encoding: "chunked"
+connection: "close"
+etag: "\"2c9adf0f2ee621d8389cb54a32e18bc9\""
+x-ua-compatible: "IE=Edge,chrome=1"
+x-git-revision: "17417f6495c1f32f81adca3d812ae9d5c93d2e23"
+x-runtime: "0.763058"
+x-git-update: "2011-10-05 09:51:53 +0200"
+set-cookie: "_diaspora_session=BAh7ByIQX2NzcmZfdG9rZW4iMTNKR241VmczS0FzRnFPdUZ6MXNaa0wzWjk4V3MxM0dNb3FsTjZnRDlKNEk9Ig9zZXNzaW9uX2lkIiU1NGM2OWE5NmU3YzhjMjQyZjNkNzlmOWMwZWE3OWE0OQ%3D%3D--8ba5f42953f2bd306620cace44e85f0956ef7bb0; path=/"
+cache-control: "max-age=0, private, must-revalidate"
+get http://diaspora.localhost/posts/1.json
+
+200
+server: "nginx/1.0.6"
+date: "Wed, 05 Oct 2011 08:56:58 GMT"
+content-type: "text/html; charset=utf-8"
+transfer-encoding: "chunked"
+connection: "close"
+etag: "\"c1a63e0553d757e54f1e4df2554935a5\""
+x-ua-compatible: "IE=Edge,chrome=1"
+x-git-revision: "17417f6495c1f32f81adca3d812ae9d5c93d2e23"
+x-runtime: "0.822780"
+x-git-update: "2011-10-05 09:51:53 +0200"
+set-cookie: "_diaspora_session=BAh7ByIQX2NzcmZfdG9rZW4iMXNDQVlic2hhZVl3R3hxVG1JcUZQbjhsbTF2TGNjSWlNNnVqRzRYd2Z3YTA9Ig9zZXNzaW9uX2lkIiViMWE0ZDRmMzM5NzVhN2I3ODIyMjVhNTQ2OWE0ZTY0ZA%3D%3D--766898474be91220d31233570ce7e2e4fd0b736d; path=/"
+cache-control: "max-age=0, private, must-revalidate"
+get http://diaspora.localhost/posts/1.json
+
+200
+server: "nginx/1.0.6"
+date: "Wed, 05 Oct 2011 08:57:19 GMT"
+content-type: "text/html; charset=utf-8"
+transfer-encoding: "chunked"
+connection: "close"
+etag: "\"386b4b7d286567d40006a610d06fcc6a\""
+x-ua-compatible: "IE=Edge,chrome=1"
+x-git-revision: "17417f6495c1f32f81adca3d812ae9d5c93d2e23"
+x-runtime: "0.802507"
+x-git-update: "2011-10-05 09:51:53 +0200"
+set-cookie: "_diaspora_session=BAh7ByIQX2NzcmZfdG9rZW4iMWJNbFlkSE0vMyt3ZlBLTzNSZnpDakZZLzF2bjZ3UkR0VmtQekw0a3dTelk9Ig9zZXNzaW9uX2lkIiU3ZDViYjQxZDU3Yjk4MDYwMGQzY2UxNmUwNjMxNWFkMw%3D%3D--591399074d1a60b9840c8f77e644f681d0343555; path=/"
+cache-control: "max-age=0, private, must-revalidate"
+get http://diaspora.localhost/posts/1.json
+
+200
+server: "nginx/1.0.6"
+date: "Wed, 05 Oct 2011 08:59:43 GMT"
+content-type: "text/html; charset=utf-8"
+transfer-encoding: "chunked"
+connection: "close"
+etag: "\"1bf52893cb70faa143d034c0f6a2415c\""
+x-ua-compatible: "IE=Edge,chrome=1"
+x-git-revision: "17417f6495c1f32f81adca3d812ae9d5c93d2e23"
+x-runtime: "0.795490"
+x-git-update: "2011-10-05 09:51:53 +0200"
+set-cookie: "_diaspora_session=BAh7ByIQX2NzcmZfdG9rZW4iMVBjMDlWZit2aysxc2c1ZGVBcThrd3hPQVorcWt4a2xEbzIyK1pJU00yRms9Ig9zZXNzaW9uX2lkIiVkODExMmU2MjNjNzZjZWEyMWZhMDAwNjE0ZWJhZTZkZg%3D%3D--a28f5cd34186ca90a894ca5decb3664f4982d8f6; path=/"
+cache-control: "max-age=0, private, must-revalidate"

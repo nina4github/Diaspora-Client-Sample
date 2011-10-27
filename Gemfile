@@ -26,10 +26,12 @@ gem 'nokogiri'
 # gem 'aws-s3', :require => 'aws/s3'
 
 # Diaspora
-gem 'diaspora-client', :git => 'git://github.com/diaspora/diaspora-client.git'
-                       #:path => "~/workspace/diaspora-client"
+gem 'diaspora-client', :path => "/Developer/ninaGithub/diaspora-client"
+						#:git => 'git://github.com/diaspora/diaspora-client.git'
+                       
 
-
+# faraday
+gem 'faraday-stack'
 
 group :test do
   gem 'capybara', '~> 0.3.9'

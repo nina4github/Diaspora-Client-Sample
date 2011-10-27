@@ -1,0 +1,9 @@
+index activity
+for user 
+= @current_user.diaspora_id
+<br/>
+This is going to be the list of activities of my account
+%p
+	-@activities["aspects"].each do |item| 
+		= link_to item["aspect"]["name"], "/activities/"+item["aspect"]["name"]
+		, 

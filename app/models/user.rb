@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates_length_of :diaspora_id, :maximum => 127
 
   has_one :access_token, :class_name => "DiasporaClient::AccessToken", :dependent => :destroy
+  
 
   # Create a new user account with data from a diaspora pod
   # @option opts [String] :diaspora_id The new user's diaspora id
@@ -15,5 +16,7 @@ class User < ActiveRecord::Base
       self.create!(opts)
     end
   end
+  
+  
 
 end
