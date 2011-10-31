@@ -1,9 +1,24 @@
 class GeniehubController < ActionController::Base
 
+  # I need to have a variable that hosts a counter for each activity ($activities is the global variable)
+  # that is incremented or decremented depending on listener function
+
   def listener
     @genie = request
-    # Parameters: {"state"=>"start", "timestamp"=>1318781631703, "objectid"=>"object", "activity"=>"shopping"}
+    # Parameters: {"state"=>"start", "timestamp"=>1318781631703, "objectid"=>"object", "activity"=>"shopping", ("user"=>"nina")}
 
+    
+    
+    
+    #first send the message to diaspora
+    #and
+    #update the view through javascript 
+    #what I have to update is some elements in shared/bar _bar.html.haml
+    #therefore: parse the message, detect the related activity and glow the related image 
+    # saving a counter variable with the number of users on so that when noting is happening the interface is consistent
+    
+    
+    
     # the object is the one who posts a new status with the mention of the person it is associated to
     #user = User.find_by_diaspora_id(params[:objectid]+'@diaspora.localhost')
     user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')
@@ -26,5 +41,8 @@ class GeniehubController < ActionController::Base
     puts "done"
   end
 
+  def js
+    
+    end 
 
 end

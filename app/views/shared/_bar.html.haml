@@ -1,0 +1,7 @@
+#activities
+  -$activities.keys.each do |activity|
+    .activity 
+      %p
+        =$activities[activity]["name"]
+      %a{:href=>"/activities/#{$activities[activity]["name"]}"}
+        %img{:id=>"#{$activities[activity]["name"]}", :class=>"home", :src=>"images/#{$activities[activity]["name"]}.png"}

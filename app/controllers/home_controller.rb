@@ -5,13 +5,9 @@ class HomeController < ApplicationController
     if current_user
       flash[:notice] = "YAY!"
       @current_user = current_user
-
       render "success" 
     else
     end
-    @activities = ["name"=>"shopping",
-      "name"=>"laundry",
-      "name"=>"petanque"]
   end
     
 def logout

@@ -1,3 +1,4 @@
+= content_for :title, "Poppelvænget"
 You are on the success page
 The current user is 
 = @current_user.diaspora_id
@@ -8,3 +9,9 @@ The current user is
 = link_to 'status' , 'status/'
 = link_to 'create' , 'create/'
 
+#content
+  %iframe{:src=>"http://idea.itu.dk/augustwimmersvej/noticeboard", :width=>"100%", :height=>"100%"}
+    %p Your browser does not support iframes.
+
+=render "shared/bar"
+        

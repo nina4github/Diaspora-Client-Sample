@@ -3,16 +3,14 @@ SampleApp::Application.routes.draw do
 
   mount DiasporaClient::App.new => '/auth/diaspora'
   
-  #mount DiasporaClient::App::new.status => '/status'
-  
   resources :activities 
   match 'activities/:activityname/:service' => 'activities#service', :as => :activityname
  
   match 'geniehub/listener' => 'geniehub#listener'
   
-  resources :status
+  resources :status # todelete
 
-  #map.log_out 'logout', :controller => 'sessions', :action => 'destroy'
+
   match 'exit' => 'home#logout', :as => :logout
   
 
