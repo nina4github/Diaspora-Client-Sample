@@ -1,6 +1,6 @@
 class GeniehubController < ActionController::Base
 
-  @@domain = '@idea.itu.dk:3000';
+  $domain = '@idea.itu.dk:3000'
   # I need to have a variable that hosts a counter for each activity ($activities is the global variable)
   # that is incremented or decremented depending on listener function
 
@@ -22,14 +22,14 @@ class GeniehubController < ActionController::Base
     #user = User.find_by_diaspora_id(params[:objectid]+'@diaspora.localhost')
     #params[:user] = "community";
     
-    if (User.find_by_diaspora_id(params[:object]+@@domain)!=null){
-      user = User.find_by_diaspora_id(params[:object]+@@domain)
+    if (User.find_by_diaspora_id(params[:object]+$domain)!=null){
+      user = User.find_by_diaspora_id(params[:object]+$domain)
     }
     else{ 
-       if( User.find_by_diaspora_id(params[:user]+@@domain)!=null){
-         user=User.find_by_diaspora_id(params[:user]+@@domain)
+       if( User.find_by_diaspora_id(params[:user]+$domain)!=null){
+         user=User.find_by_diaspora_id(params[:user]+$domain)
        }
-       else{ user = User.find_by_diaspora_id("communityawvej"+@@domain)}
+       else{ user = User.find_by_diaspora_id("communityawvej"+$domain)}
        
        }
     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
@@ -39,7 +39,7 @@ class GeniehubController < ActionController::Base
     # mentions derived from the javascript :): status_message[text]:ciao @{Elena Nazzi; ninaondiaspora@localhost:3000} 
     #params[:person] = "ninaondiaspora"
     text = ""
-    mention = "@{"+params[:user]+"; "+params[:user]+@@domain+"}"
+    mention = "@{"+params[:user]+"; "+params[:user]+$domain+"}"
     if params[:content]=="start"
       text += mention + " started #"+ params[:activity]
     else
