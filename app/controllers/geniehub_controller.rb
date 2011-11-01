@@ -1,18 +1,15 @@
 class GeniehubController < ActionController::Base
 
-
   @@domain = '@idea.itu.dk:3000';
   # I need to have a variable that hosts a counter for each activity ($activities is the global variable)
   # that is incremented or decremented depending on listener function
 
   def listener
+    
     @genie = request
     # Parameters: {"content"=>"start", "timestamp"=>1318781631703, "object"=>"object", "activity"=>"shopping", "user"=>"nina"}
 
-    
-    
-    
-    #first send the message to diaspora
+  #first send the message to diaspora
     #and
     #update the view through javascript 
     #what I have to update is some elements in shared/bar _bar.html.haml
@@ -33,6 +30,7 @@ class GeniehubController < ActionController::Base
        user=User.find_by_diaspora_id(params[:user]+@@domain);
      }
      else{ user = User.find_by_diaspora_id("communityawvej"+@@domain)}
+     }
     }
     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
     request.env["warden"].set_user(user, :scope => :user, :store => true)
