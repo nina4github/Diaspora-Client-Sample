@@ -6,7 +6,7 @@
 	$.eventbus.start( EventBusURL, LogLevel, AfterConnectionFunction )
 	*/
 	//$.eventbus.start( 'http://tiger.itu.dk:8004','warn',function(){
-	$.eventbus.start( 'http://localhost:8000','warn',function(){
+	$.eventbus.start( 'http://idea.itu.dk:8000','warn',function(){
 	
 		//this function is called when the connection has been established
 		

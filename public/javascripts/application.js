@@ -16,10 +16,10 @@
 function onNewActivityEvent(evt){
   	var data = evt.data;
 	var activity = data.activity;
-	var state = data.state;
+	var content = data.content;
 	var timestamp = data.timestamp;
 
-	if (state == "start"){
+	if (content == "start"){
 	  $( "#"+activity )
 		 .animate({ borderWidth: "10px" }, 1000 )
 		 .animate({ borderWidth: "1px" }, 10 )
@@ -33,7 +33,7 @@ function onNewActivityEvent(evt){
 	     	/*ideally here I should update the field #activity with an animation*/
 		$('#log').text('There is someone ' + activity);
 	}	
-	if (state == "stop"){
+	if (content == "stop"){
 		$( "#"+activity ).css('borderWidth',"0px")	
 		$('#log').text('Stopping ' + activity);
 	}

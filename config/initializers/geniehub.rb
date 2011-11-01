@@ -1,7 +1,7 @@
 #PUT http://tiger.itu.dk:8004/informationbus/register/listener
 #url=<callbackUrl>&pattern=<tokens>[&sendform=<true|false>]
 #Returns: Json( {registration: <registrationId>} ), the registrationId for the listener.
-conn = Faraday.new(:url => 'http://localhost:8000') do |builder|
+conn = Faraday.new(:url => 'http://idea.itu.dk:8000') do |builder|
   builder.request  :url_encoded
   builder.response :logger
   builder.adapter  :net_http
