@@ -1,6 +1,6 @@
 class GeniehubController < ActionController::Base
 
-  @@domain = '@idea.itu.dk:3000';
+  @@domain = '@idea.itu.dk:3000'
   # I need to have a variable that hosts a counter for each activity ($activities is the global variable)
   # that is incremented or decremented depending on listener function
 
