@@ -22,19 +22,17 @@ class GeniehubController < ActionController::Base
     #user = User.find_by_diaspora_id(params[:objectid]+'@diaspora.localhost')
     #params[:user] = "community";
     
-    if (User.find_by_diaspora_id(params[:object]+domain)){
+    if User.find_by_diaspora_id(params[:object]+domain 
       user = User.find_by_diaspora_id(params[:object]+domain)
-    }
-    else{ 
-       if( User.find_by_diaspora_id(params[:user]+domain)){
+    
+    else 
+       if User.find_by_diaspora_id(params[:user]+domain)
          user=User.find_by_diaspora_id(params[:user]+domain)
-       }
-       else{ 
+       else 
          user = User.find_by_diaspora_id("communityawvej"+domain)
-         }
-       
-       }
-       puts user.diaspora_name
+       end
+     end
+    puts user.diaspora_name
     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
     request.env["warden"].set_user(user, :scope => :user, :store => true)
     
