@@ -21,14 +21,16 @@ class GeniehubController < ActionController::Base
     #user = User.find_by_diaspora_id(params[:objectid]+'@diaspora.localhost')
     #params[:user] = "community";
     
-    if (User.find_by_diaspora_id(params[:object]+domain)!=null){
+    if (User.find_by_diaspora_id(params[:object]+domain)){
       user = User.find_by_diaspora_id(params[:object]+domain)
     }
     else{ 
-       if( User.find_by_diaspora_id(params[:user]+domain)!=null){
+       if( User.find_by_diaspora_id(params[:user]+domain)){
          user=User.find_by_diaspora_id(params[:user]+domain)
        }
-       else{ user = User.find_by_diaspora_id("communityawvej"+domain)}
+       else{ 
+         user = User.find_by_diaspora_id("communityawvej"+domain)
+         }
        
        }
     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
