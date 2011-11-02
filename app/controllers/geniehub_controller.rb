@@ -46,7 +46,7 @@ class GeniehubController < ActionController::Base
     else
       text += mention + " stopped #"+  params[:activity]
     end  
-    message = {'status_message'=>{'text'=>text,'aspect_name' => params[:activity],'tag'=> params[:activity]}}
+    message = {'status_message'=>{'text'=>text},'aspect_name' => params[:activity],'tag'=> params[:activity]}
     puts params[:activity]
     
     # request is then translated to the diaspora server 
