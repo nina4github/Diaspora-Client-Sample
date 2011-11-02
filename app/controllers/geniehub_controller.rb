@@ -32,7 +32,7 @@ class GeniehubController < ActionController::Base
          user = User.find_by_diaspora_id("communityawvej"+domain)
        end
      end
-    puts user.diaspora_name
+    puts user.diaspora_id
     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
     request.env["warden"].set_user(user, :scope => :user, :store => true)
     
