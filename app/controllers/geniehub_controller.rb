@@ -40,11 +40,13 @@ class GeniehubController < ActionController::Base
     # mentions derived from the javascript :): status_message[text]:ciao @{Elena Nazzi; ninaondiaspora@localhost:3000} 
     #params[:person] = "ninaondiaspora"
     text = ""
-    mention = "@{"+params[:user]+"; "+params[:user]+domain+"}"
+    mention = "@{"+params[:user]+"; "+params[:user]+domain+"}" 
+    #mention2 = "@{"+params[:object]+"; "+params[:object]+domain+"}" 
+    mention2 = "#"+params[:object]
     if params[:content]=="start"
-      text += mention + " started #"+ params[:activity]
+      text += mention + " started #"+ params[:activity] + " with " +mention2 
     else
-      text += mention + " stopped #"+  params[:activity]
+      text += mention + " stopped #"+  params[:activity] + " with " +mention2
     end  
     message = {'status_message'=>{'text'=>text},'aspect_name' => params[:activity],'tag'=> params[:activity]}
     puts params[:activity]
