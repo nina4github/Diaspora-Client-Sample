@@ -47,7 +47,7 @@ class GeniehubController < ActionController::Base
       text += mention + " stopped #"+  params[:activity]
     end  
     message = {'status_message'=>{'text'=>text,'aspect_name' => params[:activity],'tag'=> params[:activity]}}
-    puts "hello"
+    puts params[:activity]
     
     # request is then translated to the diaspora server 
     @response = JSON.parse(current_user.access_token.token.post('/api/v0/create',message))
