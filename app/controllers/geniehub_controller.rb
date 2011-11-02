@@ -4,7 +4,8 @@ class GeniehubController < ActionController::Base
   # that is incremented or decremented depending on listener function
 
   def listener
-    domain = '@idea.itu.dk:3000'  
+    domain = "@idea.itu.dk:3000"
+    puts "listener"
     @genie = request
     # Parameters: {"content"=>"start", "timestamp"=>1318781631703, "object"=>"object", "activity"=>"shopping", "user"=>"nina"}
 
@@ -33,6 +34,7 @@ class GeniehubController < ActionController::Base
          }
        
        }
+       puts user.diaspora_name
     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
     request.env["warden"].set_user(user, :scope => :user, :store => true)
     
