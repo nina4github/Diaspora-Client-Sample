@@ -1,5 +1,5 @@
 body {
-  background: rgba(100,100,100,1);
+  background: rgba(100,100,100,.9);
   color:white;
   font-family: Verdana, Helvetica, Arial;
   font-size: 1.5em;
@@ -112,7 +112,7 @@ iframe{
 	top:0px;
 }
 #activities{
-	bottom:0;
+	bottom:10px;
 	width:96%;
 	height:200px;
 		background: rgba(100,100,100,.5);
