@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Activity name:
+  = @event.activity_name
+%p
+  %b Counter:
+  = @event.counter
+%p
+  %b Timestamp:
+  = @event.timestamp
+
+= link_to 'Edit', edit_event_path(@event)
+\|
+= link_to 'Back', events_path

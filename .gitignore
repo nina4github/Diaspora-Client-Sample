@@ -8,3 +8,5 @@ config/SampleApp.private.pem
 config/SampleApp.public.pem
 public/manifest.json
 Gemfile
+
+faraday-stack/*

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110815020208) do
+ActiveRecord::Schema.define(:version => 20111107000047) do
 
   create_table "access_tokens", :force => true do |t|
     t.integer  "user_id",                          :null => false
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20110815020208) do
 
   add_index "access_tokens", ["uid", "resource_server_id"], :name => "index_access_tokens_on_uid_and_resource_server_id", :unique => true
   add_index "access_tokens", ["user_id"], :name => "index_access_tokens_on_user_id", :unique => true
+
+  create_table "events", :force => true do |t|
+    t.string   "activity_name"
+    t.integer  "counter"
+    t.datetime "timestamp"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "resource_servers", :force => true do |t|
     t.string   "client_id",     :limit => 40,  :null => false
