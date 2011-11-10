@@ -39,7 +39,7 @@ $(document).ready(function(){
 			}
 		}
 			// DEBUG alert
-			alert("minzega " + tmp)
+			// alert("minzega " + tmp)
 			// end DEBUG
 		$.elena={activitycounter:activitycounter} // $.elena is a global variable that holds useful data to share instead of always asking the server
 	}); 
