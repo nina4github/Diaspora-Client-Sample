@@ -1,6 +1,5 @@
 class ActivitiesController < ActionController::Base
-  
-  
+ 
   def index
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects'))
     @activities = @response
@@ -52,6 +51,15 @@ class ActivitiesController < ActionController::Base
         format.json {render json: @response}
     end
     
+  end
+  
+  def status
+    # who is the current user?
+    # current_user
+    @activitycounter={"laundry"=>1,"shopping"=>0,"petanque"=>1,"coffee"=>2,"gym"=>6}
+    respond_to do |format|
+      format.json {render json: @activitycounter}
+    end
   end
   
 end

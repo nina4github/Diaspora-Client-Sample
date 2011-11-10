@@ -1,12 +1,18 @@
 SampleApp::Application.routes.draw do
+
+  resources :events
+
   devise_for :users
 
   mount DiasporaClient::App.new => '/auth/diaspora'
   
   resources :activities 
-  match 'activities/:activityname/:service' => 'activities#service', :as => :activityname
+  match 'activities/:activityname/:service' => 'activities#service', :as => :activityname # why I don't comment?!
  
+  match 'geniehub/status' => 'geniehub#status' # function to return the current status to a javascript call
+  
   match 'geniehub/listener' => 'geniehub#listener'
+ 
   
   resources :status # todelete
 
