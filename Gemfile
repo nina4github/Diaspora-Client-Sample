@@ -22,7 +22,7 @@ gem 'devise', '~> 1.2.1'
 # Bundle the extra gems:
 # gem 'bj'
 gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
 # Diaspora
@@ -52,5 +52,5 @@ group :development, :test do
   gem 'ruby-debug', :platform => :mri_18
 end
 
-
+gem 'rake', '0.8.7'
 
