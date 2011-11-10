@@ -1,5 +1,5 @@
 body {
-  background: rgba(100,100,100,.9);
+  background: rgba(200,200,200,.9);
   color:white;
   font-family: Verdana, Helvetica, Arial;
   font-size: 1.5em;
@@ -103,8 +103,7 @@ iframe{
 #title, #activities, h1{
 	color:white;
 	margin:20px;
-	text-align:center;
-	position:fixed;
+	position:absolute;
 
 }
 
@@ -112,10 +111,10 @@ iframe{
 	top:0px;
 }
 #activities{
-	bottom:10px;
+	bottom:20px;
 	width:96%;
-	height:200px;
-		background: rgba(100,100,100,.5);
+	height:250px;
+	background: rgba(200,200,200,1);
 		
 }
 
@@ -132,5 +131,34 @@ img.home{
 	border-radius: 15px;
 	width:140px;
 	height:140px;
-	border: solid 0px rgba(200,0,0,0.8);
+	/*border: solid 0px rgba(200,0,0,0.8);*/
+}
+
+.inactive{
+	border: solid 10px rgba(200,0,0,0);
+		z-index:1;
+}
+.active{
+	border: solid 10px rgba(255,100,100,0.8);
+	z-index:1;
+}
+
+a{
+		text-decoration:none;
+} 
+
+/*class for the red spots displaying the number of active users/objects for each activity in the list 
+it is updated at run time on javascript
+*/
+.activitycounter{
+	z-index:10;
+	background-color:rgba(255,0,0,0.8);
+	border:solid 3px rgba(255,0,0,0.8);
+	color:white;
+	padding:.5em;
+	margin-left:-20px;
+
+	-moz-border-radius: 35px;
+	border-radius: 35px;
+	display:inline;
 }

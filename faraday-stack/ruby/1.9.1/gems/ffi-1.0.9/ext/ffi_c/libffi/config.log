@@ -30,8 +30,8 @@ Kernel configured for up to 2 processors.
 Processor type: i486 (Intel 80486)
 Processors active: 0 1
 Primary memory available: 4.00 gigabytes
-Default processor set: 101 tasks, 512 threads, 2 processors
-Load average: 1.08, Mach factor: 1.16
+Default processor set: 120 tasks, 608 threads, 2 processors
+Load average: 2.92, Mach factor: 0.61
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -457,8 +457,8 @@ configure: failed program was:
 configure:14257: result: no
 configure:14283: checking assembler .cfi pseudo-op support
 configure:14311: /usr/bin/gcc-4.2 -c   conftest.c >&5
-/var/folders/oE/oEtLn+y-FWKp0-hPKzz6Tk+++TM/-Tmp-//ccFtzee0.s:1:Unknown pseudo-op: .cfi_startproc
-/var/folders/oE/oEtLn+y-FWKp0-hPKzz6Tk+++TM/-Tmp-//ccFtzee0.s:2:Unknown pseudo-op: .cfi_endproc
+/var/folders/oE/oEtLn+y-FWKp0-hPKzz6Tk+++TM/-Tmp-//ccr5gKcL.s:1:Unknown pseudo-op: .cfi_startproc
+/var/folders/oE/oEtLn+y-FWKp0-hPKzz6Tk+++TM/-Tmp-//ccr5gKcL.s:2:Unknown pseudo-op: .cfi_endproc
 configure:14318: $? = 1
 configure: failed program was:
 | /* confdefs.h.  */

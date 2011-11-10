@@ -51,7 +51,7 @@ ld: warning: directory '/opt/local/lib' following -L not found
 ld: warning: directory '/usr/local/lib' following -L not found
 Undefined symbols:
   "_iconv_open", referenced from:
-      _t in ccXx36Vz.o
+      _t in ccu5x1Oy.o
 ld: symbol(s) not found
 collect2: ld returned 1 exit status
 checked program was:

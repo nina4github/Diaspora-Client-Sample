@@ -4,5 +4,3 @@ log/*.log
 tmp/
 
 config/EpicParties.private.pem
-
-faraday-stack/*
