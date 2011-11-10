@@ -1,6 +1,6 @@
 DiasporaClient.config do |d|
   d.test_mode = true
-  d.application_base_url = "http://192.168.1.103:3000/" #"https://www.awesomeapp.com:443/"
+  d.application_base_url = "http://idea.itu.dk:8080/" #"https://www.awesomeapp.com:443/"
 
   d.manifest_field(:name, "SampleApp")
   d.manifest_field(:description, "This is a description of this Salmple App")

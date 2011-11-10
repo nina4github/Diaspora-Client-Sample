@@ -11,5 +11,5 @@ end
 
 json = JSON.generate [{"field"=>"activity","operator"=>"=","value"=>"*"}]
 
-response=conn.put '/informationbus/register/listener', { :url => 'http://localhost:3000/geniehub/listener', :pattern => json }  # POST "name=maguro" to http://sushi.com/nigiri
+response=conn.put '/informationbus/register/listener', { :url => 'http://idea.itu.dk:8080/geniehub/listener', :pattern => json }  # POST "name=maguro" to http://sushi.com/nigiri
 puts response.body

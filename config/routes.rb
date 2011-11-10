@@ -6,7 +6,7 @@ SampleApp::Application.routes.draw do
   resources :activities 
   match 'activities/:activityname/:service' => 'activities#service', :as => :activityname
  
-  match 'geniehub/listener' => 'geniehub#listener'
+  match '/geniehub/listener' => 'geniehub#listener'
   
   resources :status # todelete
 
