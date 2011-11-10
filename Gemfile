@@ -26,7 +26,7 @@ gem 'nokogiri'
 # gem 'aws-s3', :require => 'aws/s3'
 
 # Diaspora
-gem 'diaspora-client', :path => "/Developer/ninaGithub/diaspora-client"
+gem 'diaspora-client', :path => "../diaspora-client"
 						#:git => 'git://github.com/diaspora/diaspora-client.git'
                        
 
