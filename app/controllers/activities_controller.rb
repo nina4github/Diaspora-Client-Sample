@@ -80,13 +80,14 @@ class ActivitiesController < ActionController::Base
           else
            @answer = '401 Unauthorized - This user is not registered, please register it first on your Diaspora Client service'
           end
-       else
+      else
          @answer='400 Bad Request - You need to send the user name with the domain of diaspora'
-       end
+      end
       respond_to do |format|
         format.xml {render xml: @answer}
         format.json {render json: @answer}
       end
+    end
   end
   
   
