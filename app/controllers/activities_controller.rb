@@ -81,12 +81,17 @@ class ActivitiesController < ActionController::Base
            @answer = '401 Unauthorized - This user is not registered, please register it first on your Diaspora Client service'
           end
       else
-         @answer='400 Bad Request - You need to send the user name with the domain of diaspora'
+         #@answer='400 Bad Request - You need to send the user name with the domain of diaspora'
+         render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false
+         #raise ActionController::RoutingError.new('Not Found')
       end
-      respond_to do |format|
-        format.xml {render xml: @answer}
-        format.json {render json: @answer}
-      end
+  
+      # respond_to do |format|
+      #         format.xml {render xml: @answer}
+      #         format.json {render json: @answer}
+      #       end
+    else
+      redirect_to(home_url) and return false
     end
   end
   
