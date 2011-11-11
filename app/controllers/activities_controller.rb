@@ -86,6 +86,7 @@ class ActivitiesController < ActionController::Base
       respond_to do |format|
         format.xml {render xml: @answer}
         format.json {render json: @answer}
+      end
   end
   
   
