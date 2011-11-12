@@ -61,9 +61,9 @@ class GeniehubController < ActionController::Base
     puts params[:activity]
     
     # request is then translated to the diaspora server 
-    #@response = JSON.parse(current_user.access_token.token.post('/api/v0/create',message))
+    @response = JSON.parse(current_user.access_token.token.post('/api/v0/create',message))
     puts "print response"
-    #puts @response
+    puts @response
     puts "done"
   end
 
