@@ -96,6 +96,7 @@ class ActivitiesController < ActionController::Base
   # we need some proper authentication methods
   # it was suggested to use NFC with a private key as a signature for the objects. In the case of tablets it can be the user signature
   #
+  private
   def authenticate
     case request.format
     when Mime::XML, Mime::JSON #authentication only applies for these types of requests
@@ -120,6 +121,7 @@ class ActivitiesController < ActionController::Base
     else
       redirect_to("#{Rails.root}") and return false
     end
+    return true
   end
   
   
