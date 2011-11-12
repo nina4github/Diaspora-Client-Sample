@@ -18,11 +18,11 @@ class ActivitiesController < ActionController::Base
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
     @tags = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:id]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
     @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
-    @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
+   # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
     
     respond_to do |format|
       format.html
-      format.json {render json: {"response"=>@response,"contacts"=>@contacts, "tags"=>@tags,"activities"=>@activities}}
+      format.json {render json: {"response"=>@response, "tags"=>@tags,"activities"=>@activities}} #"contacts"=>@contacts,
     end
   end
   
@@ -107,8 +107,8 @@ class ActivitiesController < ActionController::Base
            @answer =  current_user.access_token
            return true
           else
-           @answer = '401 Unauthorized - This user is not registered, please register it first on your Diaspora Client service'
-           return false
+           //@answer = '401 Unauthorized - This user is not registered, please register it first on your Diaspora Client service'
+           render :file => "#{Rails.root}/public/401.html", :status => 401, :layout => false and return false
           end
       else
          #@answer='400 Bad Request - You need to send the user name with the domain of diaspora'
