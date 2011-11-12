@@ -33,7 +33,7 @@ class ActivitiesController < ActionController::Base
   # eg. activities/shopping/me
   
   def me
-    @data1 = params[:id]
+    @data1 = params[:activityname]
     @response = "this call is under development"
 
     respond_to do |format|
@@ -44,10 +44,10 @@ class ActivitiesController < ActionController::Base
   end
   
   def week
-    @data1 = params[:id]
+    @data1 = params[:activityname]
     #@contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
     @response = "this call is under development"
-    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
+    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:activityname]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
         
     respond_to do |format|
         format.html
@@ -81,8 +81,8 @@ class ActivitiesController < ActionController::Base
   
   
   def contacts
-    @data1 = params[:id]
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
+    @data1 = params[:activityname]
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:activityname]+'/contacts'))
 
     respond_to do |format|
         format.html 
