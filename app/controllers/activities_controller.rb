@@ -107,7 +107,7 @@ class ActivitiesController < ActionController::Base
            @answer =  current_user.access_token
            return true
           else
-           //@answer = '401 Unauthorized - This user is not registered, please register it first on your Diaspora Client service'
+           #@answer = '401 Unauthorized - This user is not registered, please register it first on your Diaspora Client service'
            render :file => "#{Rails.root}/public/401.html", :status => 401, :layout => false and return false
           end
       else
