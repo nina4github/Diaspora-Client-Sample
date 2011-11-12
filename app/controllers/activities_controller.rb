@@ -16,8 +16,8 @@ class ActivitiesController < ActionController::Base
   def show
     @data1 = params[:id] # id is the NAME of the aspect not the ID
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
-    @tags = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:id]+'?only_posts=true&max_time='+(Time.now - (1*7*24*60*60)).to_i.to_s+"&page=1"))
-    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'?only_posts=true&max_time='+(Time.now - (1*7*24*60*60)).to_i.to_s+"&page=1"))
+    @tags = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:id]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
+    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
     @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
     
     respond_to do |format|
