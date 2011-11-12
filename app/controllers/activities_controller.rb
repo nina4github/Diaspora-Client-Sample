@@ -32,13 +32,26 @@ class ActivitiesController < ActionController::Base
   # eg. activities/shopping/week
   # eg. activities/shopping/me
   
-  def service
-    @data1 = params[:activityname]
-    @data2 = params[:service]
-    
+  def me
+    @data1 = params[:id]
+    @response = "this call is under development"
+
     respond_to do |format|
         format.html
-        #format.json {render json: @response}
+        format.json {render json: @response}
+    end
+  
+  end
+  
+  def week
+    @data1 = params[:id]
+    #@contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
+    @response = "this call is under development"
+    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
+        
+    respond_to do |format|
+        format.html
+        format.json {render json: @response}
     end
   
   end
@@ -64,6 +77,18 @@ class ActivitiesController < ActionController::Base
     respond_to do |format|
       format.json {render json: @activitycounter}
     end
+  end
+  
+  
+  def contacts
+    @data1 = params[:id]
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
+
+    respond_to do |format|
+        format.html 
+        format.json {render json: @response}
+    end
+  
   end
   
   # before filter method to check on the identity of the user. So far it is very bad and no password is provided 

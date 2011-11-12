@@ -7,13 +7,14 @@ SampleApp::Application.routes.draw do
   mount DiasporaClient::App.new => '/auth/diaspora'
   
   resources :activities 
-  match 'activities/:activityname/:service' => 'activities#service', :as => :activityname # why I don't comment?!
- 
+  #match 'activities/:activityname/:servicename' => 'activities#service', :as => {:activityname,:servicename} # why I don't comment?!
+  #match 'activities/:activityname/contacts' => 'activities#contact', :as => :activityname # why I don't comment?! 
   match 'geniehub/status' => 'geniehub#status' # function to return the current status to a javascript call
   
   match 'geniehub/listener' => 'geniehub#listener'
  
   resources :status # todelete
+  
 
 
   match 'exit' => 'home#logout', :as => :logout
