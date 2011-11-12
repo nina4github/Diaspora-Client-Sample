@@ -105,23 +105,26 @@ class ActivitiesController < ActionController::Base
          if(user!=nil)
            request.env["warden"].set_user(user, :scope => :user, :store => true)
            @answer =  current_user.access_token
+           return true
           else
            @answer = '401 Unauthorized - This user is not registered, please register it first on your Diaspora Client service'
+           return false
           end
       else
          #@answer='400 Bad Request - You need to send the user name with the domain of diaspora'
-         render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false
+         render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false and return false
          #raise ActionController::RoutingError.new('Not Found')
+
       end
-  
       # respond_to do |format|
-      #         format.xml {render xml: @answer}
-      #         format.json {render json: @answer}
-      #       end
-    else
-      redirect_to("#{Rails.root}") and return false
+      #                format.xml {render xml: @answer}
+      #                format.json {render json: @answer}
+      #              end
+      
+    # else
+    #       redirect_to("#{Rails.root}") and return false
     end
-    return true
+    
   end
   
   
