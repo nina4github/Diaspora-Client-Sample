@@ -92,7 +92,7 @@ class ActivitiesController < ActionController::Base
       #         format.json {render json: @answer}
       #       end
     else
-      redirect_to(home_url) and return false
+      redirect_to("/") and return false
     end
   end
   
