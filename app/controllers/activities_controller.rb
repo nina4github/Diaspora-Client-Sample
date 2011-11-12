@@ -16,12 +16,13 @@ class ActivitiesController < ActionController::Base
   def show
     @data1 = params[:id] # id is the NAME of the aspect not the ID
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
-    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:id]+'?only_posts=true'))
+    @tags = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:id]+'?only_posts=true&max_time='+(Time.now - (1*7*24*60*60))+"&page=1"))
+    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'?only_posts=true&max_time='+(Time.now - (1*7*24*60*60))+"&page=1"))
     @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
     
     respond_to do |format|
       format.html
-      format.json {render json: {"response"=>@response,"contacts"=>@contacts}}
+      format.json {render json: {"response"=>@response,"contacts"=>@contacts, "tags"=>@tags,"activities"=>@activities}}
     end
   end
   
