@@ -25,19 +25,18 @@ class GeniehubController < ActionController::Base
     #user = User.find_by_diaspora_id(params[:objectid]+'@diaspora.localhost')
     #params[:user] = "community";
     
-    # if User.find_by_diaspora_id(params[:object]+domain) 
-    #       user = User.find_by_diaspora_id(params[:object]+domain)
-    #     
-    #     else 
-    #        if User.find_by_diaspora_id(params[:user]+domain)
-    #          user=User.find_by_diaspora_id(params[:user]+domain)
-    #        else 
-    #          user = User.find_by_diaspora_id("communityawvej"+domain)
-    #        end
-    #      end
-    #     puts user.diaspora_id
+    if User.find_by_diaspora_id(params[:object]+domain) 
+      user = User.find_by_diaspora_id(params[:object]+domain)
+    else 
+      if User.find_by_diaspora_id(params[:user]+domain)
+        user=User.find_by_diaspora_id(params[:user]+domain)
+      else 
+        user = User.find_by_diaspora_id("communityawvej"+domain)
+      end
+    end
+    puts user.diaspora_id
     #     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
-    #     request.env["warden"].set_user(user, :scope => :user, :store => true)
+    request.env["warden"].set_user(user, :scope => :user, :store => true)
     
     counter = 0 # counter for maintaining the status of the open activities
     # mentions derived from the javascript :): status_message[text]:ciao @{Elena Nazzi; ninaondiaspora@localhost:3000} 
