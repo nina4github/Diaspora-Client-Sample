@@ -31,12 +31,12 @@ class ActivitiesController < ActionController::Base
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
     
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
-      
-    hasfriends =   
-    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
-   # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
-    @response['aspect_posts_friends'] = @activities['posts']
-    
+    @friends = JSON.parse(current_user.access_token.token.get('/api/v0/aspects'))
+    if @friends['aspects'].to_a.detect{|e| e['name'] == params[:id]+'friends'}
+      @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
+      # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
+      @response['aspect_posts_friends'] = @activities['posts']
+    end
     respond_to do |format|
       format.html
       format.json {render json: {"response"=>@response}} #"contacts"=>@contacts, "activities"=>@activities, "tags"=>@tags
@@ -97,13 +97,13 @@ class ActivitiesController < ActionController::Base
     end
   end
   
-  def tags
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:activityname]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
-    respond_to do |format|
-        format.html 
-        format.json {render json: @response}
-    end
-  end
+  # def tags
+  #     @response = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:activityname]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
+  #     respond_to do |format|
+  #         format.html 
+  #         format.json {render json: @response}
+  #     end
+  #   end
   
   def contacts
     @data1 = params[:activityname]
