@@ -32,7 +32,7 @@ class ActivitiesController < ActionController::Base
     
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
       
-    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page))
+    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
    # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
     @response['aspect_posts_friends'] = @activities['posts']
     
