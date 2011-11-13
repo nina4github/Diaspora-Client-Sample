@@ -27,12 +27,10 @@ class GeniehubController < ActionController::Base
     
     if User.find_by_diaspora_id(params[:object]+domain) 
       user = User.find_by_diaspora_id(params[:object]+domain)
+    elsif User.find_by_diaspora_id(params[:user]+domain)
+     user=User.find_by_diaspora_id(params[:user]+domain)
     else 
-      if User.find_by_diaspora_id(params[:user]+domain)
-        user=User.find_by_diaspora_id(params[:user]+domain)
-      else 
-        user = User.find_by_diaspora_id("communityawvej"+domain)
-      end
+      user = User.find_by_diaspora_id("communityawvej"+domain)
     end
     puts user.diaspora_id
     #     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
