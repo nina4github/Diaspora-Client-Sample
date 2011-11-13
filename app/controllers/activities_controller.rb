@@ -28,14 +28,17 @@ class ActivitiesController < ActionController::Base
    
   def show
     @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
+    page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
     
-    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
+      
+    @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page))
    # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
+    @response['aspect_posts_friends'] = @activities['posts']
     
     respond_to do |format|
       format.html
-      format.json {render json: {"response"=>@response, "tags"=>@tags,"activities"=>@activities}} #"contacts"=>@contacts,
+      format.json {render json: {"response"=>@response}} #"contacts"=>@contacts, "activities"=>@activities, "tags"=>@tags
     end
   end
   
