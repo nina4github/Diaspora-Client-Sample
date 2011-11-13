@@ -32,6 +32,7 @@ class ActivitiesController < ActionController::Base
     
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
       
+    hasfriends =   
     @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
    # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
     @response['aspect_posts_friends'] = @activities['posts']
@@ -73,6 +74,7 @@ class ActivitiesController < ActionController::Base
   end
   
   
+  # TOREVIEW, the most updated is in GENIEHUB_controller/listen
   # POST activities/:id (id = activity name)
   def new
     # call to create will generate a new post with these information and on this aspect
@@ -96,7 +98,7 @@ class ActivitiesController < ActionController::Base
   end
   
   def tags
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:id]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:activityname]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
     respond_to do |format|
         format.html 
         format.json {render json: @response}
