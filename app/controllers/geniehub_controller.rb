@@ -8,8 +8,6 @@ class GeniehubController < ActionController::Base
     puts "listener"
     @genie = request
     
-  
-    
     # Parameters: {"content"=>"start", "timestamp"=>1318781631703, "object"=>"object", "activity"=>"shopping", "user"=>"nina"}
 
   #first send the message to diaspora
@@ -19,18 +17,16 @@ class GeniehubController < ActionController::Base
     #therefore: parse the message, detect the related activity and glow the related image 
     # saving a counter variable with the number of users on so that when noting is happening the interface is consistent
     
-    
-    
     # the object is the one who posts a new status with the mention of the person it is associated to
     #user = User.find_by_diaspora_id(params[:objectid]+'@diaspora.localhost')
     #params[:user] = "community";
     
     if User.find_by_diaspora_id(params[:object]+domain) 
       user = User.find_by_diaspora_id(params[:object]+domain)
-    elsif User.find_by_diaspora_id(params[:user]+domain)
-     user=User.find_by_diaspora_id(params[:user]+domain)
-    else 
-      user = User.find_by_diaspora_id("communityawvej"+domain)
+    # elsif User.find_by_diaspora_id(params[:user]+domain)
+    #       user=User.find_by_diaspora_id(params[:user]+domain)
+    #     else 
+    #       user = User.find_by_diaspora_id("communityawvej"+domain)
     end
     puts user.diaspora_id
     #     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
