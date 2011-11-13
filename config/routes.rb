@@ -17,6 +17,7 @@ SampleApp::Application.routes.draw do
   
   match 'geniehub/listener' => 'geniehub#listener'
  
+ match 'tags/:activityname' => 'activities#tags'
   resources :status # todelete
   
 
