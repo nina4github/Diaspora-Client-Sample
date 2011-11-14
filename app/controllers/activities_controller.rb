@@ -32,7 +32,8 @@ class ActivitiesController < ActionController::Base
     
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
     @friends = JSON.parse(current_user.access_token.token.get('/api/v0/aspects'))
-    if @friends['aspects'].to_a.detect{|e| e['name'] == params[:id]+'friends'}
+    hasFriends =  @friends['aspects'].to_a.detect {|e| e['name'] == params[:id]+'friends'}
+    if hasFriends
       @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
       # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
       @response['aspect_posts_friends'] = @activities['posts']
