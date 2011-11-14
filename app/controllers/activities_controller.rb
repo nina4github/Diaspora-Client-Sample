@@ -109,14 +109,14 @@ class ActivitiesController < ActionController::Base
   def contacts
     @data1 = params[:activityname]
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:activityname]+'/contacts'))
-    contact_ids=Array.new
+    contact_ids={}
     j=0
     @response['contacts'][0].each do |contact|
            contact_ids[j] = 6
            j=j+1
     end
     
-    @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids))
+    @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids.to_s))
     
     respond_to do |format|
         format.html 
