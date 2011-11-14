@@ -116,8 +116,8 @@ class ActivitiesController < ActionController::Base
            contact_ids[j] = contact['contact']['person_id']
            j=j+1
     end
-    
-    @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids.to_s))
+    puts contact_ids
+    @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids))
     
     respond_to do |format|
         format.html 
