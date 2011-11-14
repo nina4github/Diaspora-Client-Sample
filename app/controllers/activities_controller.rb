@@ -29,7 +29,7 @@ class ActivitiesController < ActionController::Base
   def show
     @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
-    
+    @response = Hash.new
     @my_activities = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
     @response['my_activities'] = @my_activities
     
