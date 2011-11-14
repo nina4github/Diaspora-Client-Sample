@@ -35,7 +35,7 @@ class ActivitiesController < ActionController::Base
     # this control is not working as I would like. WHY?
     hasActivityFriends =  @aspects['aspects'].detect {|e| e['aspect']['name'] == params[:id]+'friends'}
     puts hasActivityFriends
-    if hasActivitiyFriends
+    if hasActivityFriends
       @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
       # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
       @response['aspect_posts_friends'] = @activities['posts']
