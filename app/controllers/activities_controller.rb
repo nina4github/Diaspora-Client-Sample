@@ -40,7 +40,7 @@ class ActivitiesController < ActionController::Base
       @friends_activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
       @sparks = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]+'friends'))
       # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
-      @response['friends_activities'] = @activities['posts']
+      @response['friends_activities'] = @friends_activities['posts']
       @response['sparks'] = @sparks
     end
     respond_to do |format|
