@@ -112,10 +112,11 @@ class ActivitiesController < ActionController::Base
     contact_ids=Array.new
     j=0
     @response['contacts'][0].each do |contact|
-             contact_ids[j] = contact['person_id']
-             j=j+1
-           end
-           @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids))
+           contact_ids[j] = 6
+           j=j+1
+    end
+    
+    @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids))
     
     respond_to do |format|
         format.html 
