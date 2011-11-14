@@ -111,10 +111,10 @@ class ActivitiesController < ActionController::Base
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:activityname]+'/contacts'))
     contact_ids=[]
     j=0
-    puts @response['contacts']
+    puts @response
     @response['contacts'].first.each do |contact|
-           contact_ids[j] = contact['contact']['person_id']
-           j=j+1
+        contact_ids[j] = contact['contact']['person_id']
+        j=j+1
     end
     puts contact_ids
     @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids))
