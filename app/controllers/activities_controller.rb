@@ -117,7 +117,7 @@ class ActivitiesController < ActionController::Base
 
     respond_to do |format|
         format.html 
-        format.json {render json: =>{'contact response' => @response, 'profile response'=>@profiles}}
+        format.json {render json: {'contact response' => @response, 'profile response'=>@profiles}}
     end
   
   end
