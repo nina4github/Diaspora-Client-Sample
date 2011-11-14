@@ -31,9 +31,11 @@ class ActivitiesController < ActionController::Base
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
     
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
-    @friends = JSON.parse(current_user.access_token.token.get('/api/v0/aspects'))
-    hasFriends =  @friends['aspects'].to_a.detect {|e| e['name'] == params[:id]+'friends'}
-    if hasFriends
+    @aspects = JSON.parse(current_user.access_token.token.get('/api/v0/aspects'))
+    # this control is not working as I would like. WHY?
+    hasActivityFriends =  @aspects['aspects'].detect {|e| e['aspect']['name'] == params[:id]+'friends'}
+    puts hasActivityFriends
+    if hasActivitiyFriends
       @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
       # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
       @response['aspect_posts_friends'] = @activities['posts']
