@@ -112,7 +112,7 @@ class ActivitiesController < ActionController::Base
     contact_ids=[]
     j=0
     @response['contacts'][0].each do |contact|
-           contact_ids[j] = contact['person_id']
+           contact_ids[j] = contact.person_id
            j=j+1
     end
     
