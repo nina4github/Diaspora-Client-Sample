@@ -13,6 +13,8 @@ SampleApp::Application.routes.draw do
   match 'activities/:activityname/week' => 'activities#week' #, :as => :activityname # why I don't comment?! 
   match 'activities/:activityname/me' => 'activities#me' #, :as => :activityname # why I don't comment?! 
   
+  match 'activities/profiles' => 'activities#profiles'
+  
   match 'geniehub/status' => 'geniehub#status' # function to return the current status to a javascript call
   
   match 'geniehub/listener' => 'geniehub#listener'
