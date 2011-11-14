@@ -30,15 +30,18 @@ class ActivitiesController < ActionController::Base
     @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
     
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
+    @my_activities = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
+    @response['my_activities'] = @my_activities
+    
     @aspects = JSON.parse(current_user.access_token.token.get('/api/v0/aspects'))
-    # this control is not working as I would like. WHY?
     hasActivityFriends =  @aspects['aspects'].detect {|e| e['aspect']['name'] == params[:id]+'friends'}
-    puts hasActivityFriends
+    
     if hasActivityFriends
-      @activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
+      @friends_activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
+      @sparks = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]+'friends'))
       # @contacts = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
-      @response['aspect_posts_friends'] = @activities['posts']
+      @response['friends_activities'] = @activities['posts']
+      @response['sparks'] = @sparks
     end
     respond_to do |format|
       format.html
