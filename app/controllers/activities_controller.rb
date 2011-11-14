@@ -111,6 +111,7 @@ class ActivitiesController < ActionController::Base
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:activityname]+'/contacts'))
     contact_ids=[]
     j=0
+    puts @response['contacts']
     @response['contacts'].each do |contact|
            contact_ids[j] = contact['person_id']
            j=j+1
