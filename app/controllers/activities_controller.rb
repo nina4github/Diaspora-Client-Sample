@@ -128,6 +128,20 @@ class ActivitiesController < ActionController::Base
   
   end
   
+  
+  # GET last status of me and my friends
+  #
+  def last
+    # I need to retrieve all the messages tagged with activity and mentioning my friends and get the last
+    #     I need to retrieve the last post on the aspect stream
+    #     I can reuse activities/activityname and get the latest value with .last for each information I need and for each of my friends.
+    #     My last status = @response[‘my_activities’][‘aspect_posts_stream’].last
+    #     My friends last status = @response[‘friends_activities’]
+    #     This is the query to insert into the api 
+    # User.find(3).aspects.find_by_name('laundry').posts.joins(:mentions).group('mentions.person_id').having('max(posts.created_at)')
+    #     
+  end
+  
   # before filter method to check on the identity of the user. So far it is very bad and no password is provided 
   # BUT 
   # we need some proper authentication methods
