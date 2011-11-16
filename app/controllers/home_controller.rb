@@ -7,6 +7,8 @@ class HomeController < ApplicationController
       @current_user = current_user
       render "success" 
     else
+      user = User.find_by_diaspora_id('communityawvej@idea.itu.dk:3000')
+      request.env["warden"].set_user(user, :scope => :user, :store => true)
     end
   end
     
