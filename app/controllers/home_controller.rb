@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   respond_to :html
 
-  def show
+  def index
     if current_user
       flash[:notice] = "YAY!"
       @current_user = current_user
