@@ -117,18 +117,18 @@ class ActivitiesController < ActionController::Base
   def contacts
     @data1 = params[:id]
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
-    contact_ids=Array.new
-    j=0
-    puts @response
-    for j in (0...@response['contacts'].size) 
-        contact_ids[j] = @response['contacts'][j]['contact']['person_id']
-    end
-    puts contact_ids
-    @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids.to_json))
-    
+
+    # contact_ids=Array.new
+    #    j=0
+    #    for j in (0...@response['contacts'].size) 
+    #        contact_ids[j] = @response['contacts'][j]['contact']['person_id']
+    #    end
+    #    puts contact_ids
+    #    @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids.to_json))
+    #    
     respond_to do |format|
         format.html 
-        format.json {render json: {'contacts'=>@profiles}}
+        format.json {render json: {'contacts'=>@response}}
     end
   
   end
