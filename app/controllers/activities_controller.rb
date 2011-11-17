@@ -30,8 +30,8 @@ class ActivitiesController < ActionController::Base
     @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
     @response = Hash.new
-    addquery =  ""
-    if defined?(params[:querytype])
+    
+    if !(params[:querytype]).nil
       addquery = "?querytype="+params[:querytype];
     else
       addquery =  ""
@@ -79,8 +79,8 @@ class ActivitiesController < ActionController::Base
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
     @response = Hash.new
     
-    if defined?(params[:querytype])
-      addquery = "?querytype="+params[:querytype].to_s;
+    if !(params[:querytype]).nil
+      addquery = "?querytype="+params[:querytype];
     else
       addquery =  ""
     end
