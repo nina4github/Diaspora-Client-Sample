@@ -101,7 +101,7 @@ class ActivitiesController < ActionController::Base
     @status_message = @response
     respond_to do |format|
         format.html
-        format.json {render json: "response"=>@response}
+        format.json {render json: {"response"=>@response}}
     end
     
   end
