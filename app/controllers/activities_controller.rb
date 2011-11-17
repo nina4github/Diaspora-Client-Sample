@@ -36,7 +36,7 @@ class ActivitiesController < ActionController::Base
     else
       addquery =  ""
     end
-    @response['myactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id])+'objects'+addquery)
+    @response['myactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'objects'+addquery))
     
     # start temporary control
     @aspects = JSON.parse(current_user.access_token.token.get('/api/v0/aspects'))
@@ -44,13 +44,13 @@ class ActivitiesController < ActionController::Base
     if hasActivityFriends
       # this call will gather the stream of the aspect <activityname>friends plus it offers, for each of my friends their activity
       # the implementation happens in diaspora 
-      @response['friendsactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id])+'friends'+addquery)
+      @response['friendsactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'friends'+addquery))
     end
     #end temporary control
     
     # UNCOMMENT if resources and places are in use
-    #@response['resourcesactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspect/'+params[:id])+'resources'+addquery)
-    #@response['placesactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspect/'+params[:id])+'places'+addquery)
+    #@response['resourcesactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspect/'+params[:id]+'resources'+addquery))
+    #@response['placesactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspect/'+params[:id]+'places'+addquery))
     
   
     #@my_activities = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
