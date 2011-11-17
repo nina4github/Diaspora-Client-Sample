@@ -32,7 +32,7 @@ class ActivitiesController < ActionController::Base
     @response = Hash.new
     
     if defined?(params[:querytype])
-      addquery = "?querytype="+params[:querytype];
+      addquery = "&querytype="+params[:querytype];
     else
       addquery =  ""
     end
@@ -80,7 +80,7 @@ class ActivitiesController < ActionController::Base
     @response = Hash.new
     
     if defined?(params[:querytype])
-      addquery = "?querytype="+params[:querytype];
+      addquery = "&querytype="+params[:querytype].to_s;
     else
       addquery =  ""
     end
