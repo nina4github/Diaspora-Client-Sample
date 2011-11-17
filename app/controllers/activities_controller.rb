@@ -84,7 +84,7 @@ class ActivitiesController < ActionController::Base
     else
       addquery =  ""
     end
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect/'+params[:id])'/fullstream'+addquery)
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspect/'+params[:id])+'/fullstream'+addquery)
     
      respond_to do |format|
         format.html {render "stream"}
