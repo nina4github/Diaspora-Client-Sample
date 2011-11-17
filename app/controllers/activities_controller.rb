@@ -31,7 +31,7 @@ class ActivitiesController < ActionController::Base
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
     @response = Hash.new
     
-    if !(params[:querytype]).nil
+    if !(params[:querytype]).nil?
       addquery = "?querytype="+params[:querytype];
     else
       addquery =  ""
@@ -79,7 +79,7 @@ class ActivitiesController < ActionController::Base
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
     @response = Hash.new
     
-    if !(params[:querytype]).nil
+    if !(params[:querytype]).nil?
       addquery = "?querytype="+params[:querytype];
     else
       addquery =  ""
