@@ -25,7 +25,7 @@ class ActivitiesController < ActionController::Base
     
     respond_to do |format|
         format.html 
-        format.json {render json: {"response"=>@response}}
+        format.json {render json: @response}
     end
   
   end
@@ -51,7 +51,7 @@ class ActivitiesController < ActionController::Base
     
      respond_to do |format|
         format.html {render "stream"}
-        format.json {render json: {"response"=>@response}}
+        format.json {render json: @response}
       end
   end
   
@@ -68,7 +68,7 @@ class ActivitiesController < ActionController::Base
     
      respond_to do |format|
         format.html {render "stream"}
-        format.json {render json: {"response"=>@response}}
+        format.json {render json: @response}
       end
 
   end
@@ -85,7 +85,7 @@ class ActivitiesController < ActionController::Base
     
      respond_to do |format|
         format.html {render "stream"}
-        format.json {render json: {"response"=>@response}}
+        format.json {render json: @response}
       end
   end
   
@@ -99,7 +99,7 @@ class ActivitiesController < ActionController::Base
     @status_message = @response
     respond_to do |format|
         format.html
-        format.json {render json: {"response"=>@response}}
+        format.json {render json: @response}
     end
     
   end
@@ -113,7 +113,7 @@ class ActivitiesController < ActionController::Base
       @response = JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+params[:id]))
       respond_to do |format|
         format.html
-        format.json {render json: {'response'=> @response}}
+        format.json {render json: @response}
       end
   end
     
@@ -128,7 +128,7 @@ class ActivitiesController < ActionController::Base
     @response = JSON.parse(current_user.access_token.token.post('/api/v0/group', message))
       respond_to do |format|
         format.html {render 'group'}
-        format.json {render json: {'response'=> @response}}
+        format.json {render json: @response}
       end
     end  
    
