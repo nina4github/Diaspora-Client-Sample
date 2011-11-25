@@ -44,12 +44,41 @@ class ActivitiesController < ActionController::Base
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
     @response = Hash.new
     
-    if !(params[:querytype]).nil?
-      addquery = "?querytype="+params[:querytype];
-    else
-      addquery =  ""
-    end
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+''+addquery))
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]))
+   
+    
+    #TODO _> query last how to verify that the content is tagged accordingly
+    
+     respond_to do |format|
+        format.html {render "stream"}
+        format.json {render json: {"response"=>@response}}
+      end
+  end
+  
+  
+  def last
+    @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
+    page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
+    @response = Hash.new
+    
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/last'))
+   
+    
+    #TODO _> query last how to verify that the content is tagged accordingly
+    
+     respond_to do |format|
+        format.html {render "stream"}
+        format.json {render json: {"response"=>@response}}
+      end
+
+  end
+  
+  def week 
+    @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
+    page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
+    @response = Hash.new
+    
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/week'))
    
     
     #TODO _> query last how to verify that the content is tagged accordingly

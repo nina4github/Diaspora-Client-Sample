@@ -10,6 +10,8 @@ SampleApp::Application.routes.draw do
 
   match 'activities/:id/contacts' => 'activities#contacts' #, :as => :activityname # why I don't comment?! 
   match 'activities/:id/stream' => 'activities#stream'
+  match 'activities/:id/last' => 'activities#last'
+  match 'activities/:id/week' => 'activities#week'
   match 'profiles/:id' => 'activities#profiles'
   match 'group/' => 'activities#group' # creates a new group of people for a specific activity. It does not need a user to operate, but just to authenticate
   
