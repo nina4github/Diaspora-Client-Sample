@@ -11,7 +11,7 @@ SampleApp::Application.routes.draw do
   match 'activities/:id/contacts' => 'activities#contacts' #, :as => :activityname # why I don't comment?! 
   match 'activities/:id/stream' => 'activities#stream'
   match 'profiles/:id' => 'activities#profiles'
-  match 'group' => 'activities#group' # creates a new group of people for a specific activity. It does not need a user to operate, but just to authenticate
+  match 'group/' => 'activities#group' # creates a new group of people for a specific activity. It does not need a user to operate, but just to authenticate
   
   match 'geniehub/status' => 'geniehub#status' # function to return the current status to a javascript call 
   match 'geniehub/listener' => 'geniehub#listener'
