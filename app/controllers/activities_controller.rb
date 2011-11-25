@@ -96,7 +96,7 @@ class ActivitiesController < ActionController::Base
     @users = params[:users]
     message = {'activity'=>'billiard', 'users'=>'[12,14,15,16,17]'}
     #message = {'activity'=>@activity, 'users'=>@users}
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/group',message))
+    @response = JSON.parse(current_user.access_token.token.post('/api/v0/group', message))
       respond_to do |format|
         format.html {render 'group'}
         format.json {render json: {'response'=> @response}}
