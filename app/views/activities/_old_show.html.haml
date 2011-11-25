@@ -1,0 +1,49 @@
+show activity
+<br/>
+Our Posts for the 
+%strong 
+= @data1
+activity
+<br/>
+
+- @response["aspect_posts_stream"].each do |post|
+	%p
+	-if post["photo"]!=nil
+		- current_post=post["photo"]
+		%img{:src => post["photo"]["remote_photo_path"]+post["photo"]["remote_photo_name"]}
+	-else
+		- current_post=post["status_message"]
+		= post["status_message"]["text"]
+	by user 
+	= current_post["author_id"]
+	on 
+	= current_post["created_at"]
+
+<br/>
+%p
+	number of contacts
+	=@contacts['contacts'].size
+	%ol
+	-@contacts['contacts'].each do |contact|
+		%li	
+			Person id of the contact is: 
+			=contact['contact']['person_id']
+<br/>
+%p
+
+
+
+last status of my friends and my self:
+-@contacts['contacts'].each do |contact|
+	%p
+	= contact
+	<br/>
+	=@response["aspect_posts_stream"].select {|post| !(post.select {|k,v| v["author_id"]==contact["contact"]["person_id"]}).empty?}.first
+	
+	
+	
+	 
+
+
+
+

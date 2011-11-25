@@ -1,5 +1,4 @@
 class ActivitiesController < ActionController::Base
-  #require 'carrierwave/orm/activerecord'
   before_filter :authenticate
  
  # GET activities
@@ -23,6 +22,14 @@ class ActivitiesController < ActionController::Base
     @data1 = params[:id]
     @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/contacts'))
     
+    # contact_ids=Array.new
+    #    j=0
+    #    for j in (0...@response['contacts'].size) 
+    #        contact_ids[j] = @response['contacts'][j]['contact']['person_id']
+    #    end
+    #    puts contact_ids
+    #    @profiles= JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids='+contact_ids.to_json))
+    #    
     respond_to do |format|
         format.html 
         format.json {render json: {"response"=>@response}}
@@ -38,6 +45,53 @@ class ActivitiesController < ActionController::Base
   # solution :: we use the TAG #xxx to filter on the posts that are tagged with xx
   #                  
    
+  def stream
+    @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
+    page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
+    @response = Hash.new
+    
+    if !(params[:querytype]).nil?
+      addquery = "?querytype="+params[:querytype];
+    else
+      addquery =  ""
+    end
+    @response['myactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'objects'+addquery))
+    
+    # start temporary control
+    @aspects = JSON.parse(current_user.access_token.token.get('/api/v0/aspects'))
+    hasActivityFriends =  @aspects['aspects'].detect {|e| e['aspect']['name'] == params[:id]+'friends'}
+    if hasActivityFriends
+      # this call will gather the stream of the aspect <activityname>friends plus it offers, for each of my friends their activity
+      # the implementation happens in diaspora 
+      @response['friendsactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'friends'+addquery))
+    end
+    #end temporary control
+    
+    # UNCOMMENT if resources and places are in use
+    #@response['resourcesactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspect/'+params[:id]+'resources'+addquery))
+    #@response['placesactivities'] = JSON.parse(current_user.access_token.token.get('/api/v0/aspect/'+params[:id]+'places'+addquery))
+    
+  
+    #@my_activities = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]))
+    #@response['my_activities'] = @my_activities
+    #@aspects = JSON.parse(current_user.access_token.token.get('/api/v0/aspects'))
+    #hasActivityFriends =  @aspects['aspects'].detect {|e| e['aspect']['name'] == params[:id]+'friends'}
+    
+    #if hasActivityFriends
+    #  @friends_activities = JSON.parse(current_user.access_token.token.get('/api/v0/activities/'+params[:id]+'friends?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page="+page.to_s))
+    #  @sparks = JSON.parse(current_user.access_token.token.get('/api/v0/aspect_posts?aspect_name='+params[:id]+'friends'))
+    # 
+    #  @response['friends_activities'] = @friends_activities['posts']
+    #  @response['sparks'] = @sparks
+    #end
+    respond_to do |format|
+      format.html {render "stream"}
+      format.json {render json: {"response"=>@response}} #"contacts"=>@contacts, "activities"=>@activities, "tags"=>@tags
+    end
+    
+  end
+  
+  
   #GET activities/:id
   def show
     @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
@@ -49,14 +103,11 @@ class ActivitiesController < ActionController::Base
     else
       addquery =  ""
     end
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+''+addquery))
-   
-    
-    #TODO _> query last how to verify that the content is tagged accordingly
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/fullstream'+addquery))
     
      respond_to do |format|
         format.html {render "stream"}
-        format.json {render json: {"response"=>@response}}
+        format.json {render json: {"response"=>@response}} #"contacts"=>@contacts, "activities"=>@activities, "tags"=>@tags
       end
   end
   
@@ -64,8 +115,7 @@ class ActivitiesController < ActionController::Base
   # POST activities/:id id is the activity name
   def new
     # call to create will generate a new post with these information and on this aspect
-    text=params[:text]
-    message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
+    message = {'status_message'=>{'text'=>params[:text]},'aspect_name' => params[:id]}
     @response =JSON.parse(current_user.access_token.token.post('/api/v0/posts/new', message))
     @status_message = @response
     respond_to do |format|
@@ -74,6 +124,7 @@ class ActivitiesController < ActionController::Base
     end
     
   end
+  
   
   
   ## GET profiles/:id
@@ -87,24 +138,23 @@ class ActivitiesController < ActionController::Base
         format.json {render json: {'response'=> @response}}
       end
   end
+  
+  # GET last status of me and my friends
+  #
+  # def last
+  #     # I need to retrieve all the messages tagged with activity and mentioning my friends and get the last
+  #     #     I need to retrieve the last post on the aspect stream
+  #     #     I can reuse activities/activityname and get the latest value with .last for each information I need and for each of my friends.
+  #     #     My last status = @response[‘my_activities’][‘aspect_posts_stream’].last
+  #     #     My friends last status = @response[‘friends_activities’]
+  #     #     This is the query to insert into the api 
+  #     # User.find(3).aspects.find_by_name('laundry').posts.joins(:mentions).group('mentions.person_id').having('max(posts.created_at)')
+  #     #     
+  #   end
     
-    
-  # POST  
-  def group
-
-    @activity = params[:activity]
-    @users = params[:users]
-    message = {'activity'=>'billiard', 'users'=>'[12,14,15,16,17]'}
-    #message = {'activity'=>@activity, 'users'=>@users}
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/group',message))
-      respond_to do |format|
-        format.html {render 'group'}
-        format.json {render json: {'response'=> @response}}
-      end
-    end  
    
   def delete
-    render 'delete'
+    puts "you cannot delete an activity right now"
   end  
   
   # def tags
