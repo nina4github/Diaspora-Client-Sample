@@ -2,7 +2,7 @@
   -$activities.keys.each do |activity|
     .activity 
       %p
-        =$activities[activity]["value"]
+        =CGI.escape($activities[activity]["value"])
       %a{:href=>"/activities/#{$activities[activity]["name"]}"}
         %img{:id=>"#{$activities[activity]["name"]}", :class=>"home inactive", :src=>"images/#{$activities[activity]["name"]}.png"}
         %span{:class=>"activitycounter"}
