@@ -15,3 +15,4 @@ post "/upload" do
   end
   return "The file was successfully uploaded!"
 end
+end

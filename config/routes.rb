@@ -26,6 +26,7 @@ SampleApp::Application.routes.draw do
   match 'exit' => 'home#logout', :as => :logout
   
   resources :upload
+  
   root :to => "home#show"
 
   # The priority is based upon order of creation:
