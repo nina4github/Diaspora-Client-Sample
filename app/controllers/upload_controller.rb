@@ -11,7 +11,7 @@ end
 # Handle POST-request (Receive and save the uploaded file)
 def create
   File.open('public/images' + params['myfile'].original_filename, "w") do |f|
-    f.write(params['myfile'][:tempfile].read)
+    f.write(params['myfile'].tempfile.read)
   end
   return "The file was successfully uploaded!"
 end
