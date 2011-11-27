@@ -24,7 +24,7 @@ SampleApp::Application.routes.draw do
   resources :status # todelete
   
   match 'exit' => 'home#logout', :as => :logout
-  
+  match 'upload' => 'home#upload'
 
   root :to => "home#show"
 
