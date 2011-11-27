@@ -10,7 +10,7 @@ end
 
 # Handle POST-request (Receive and save the uploaded file)
 def create
-  params[:activity]
+  params[:activity]='shopping'
   user = User.find_by_diaspora_id('communityawvej@idea.itu.dk:3000')
   request.env["warden"].set_user(user, :scope => :user, :store => true)
   @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', params['myfile']))
