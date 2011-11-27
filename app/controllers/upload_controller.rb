@@ -9,7 +9,7 @@ get "/upload" do
 end      
 
 # Handle POST-request (Receive and save the uploaded file)
-post "/upload" do
+def create
   File.open('public/images' + params['myfile'][:filename], "w") do |f|
     f.write(params['myfile'][:tempfile].read)
   end
