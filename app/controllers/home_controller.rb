@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
   respond_to :html
   
-  require 'rubygems'
-  require 'sinatra'
-  require 'haml'
+  
 
   def show
     if current_user
@@ -19,18 +17,7 @@ class HomeController < ApplicationController
   
  
 
-  # Handle GET-request (Show the upload form)
-  get "/upload" do
-    haml :upload
-  end      
-
-  # Handle POST-request (Receive and save the uploaded file)
-  post "/upload" do
-    File.open('public/images' + params['myfile'][:filename], "w") do |f|
-      f.write(params['myfile'][:tempfile].read)
-    end
-    return "The file was successfully uploaded!"
-  end
+  
   
 def logout
   request.env['warden'].logout

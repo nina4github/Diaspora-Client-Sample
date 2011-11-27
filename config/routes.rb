@@ -24,8 +24,8 @@ SampleApp::Application.routes.draw do
   resources :status # todelete
   
   match 'exit' => 'home#logout', :as => :logout
-  match 'upload' => 'home#upload'
-
+  
+  resources :upload
   root :to => "home#show"
 
   # The priority is based upon order of creation:
