@@ -15,17 +15,21 @@ def create
   request.env["warden"].set_user(user, :scope => :user, :store => true)
   message = Hash.new
   message = {'myfile'=>
-              { 'original_filename'=>params['myfile'].original_filename,
-                 'tempfile' =>IO.read(params['myfile'].tempfile)}
-              } # TODO not able to pass the correct parameters... why? serializable or simply passing the right info?
+                  { 'original_filename'=>params['myfile'].original_filename,
+                     'tempfile' =>IO.read(params['myfile'].tempfile)}
+                  } 
+      
+      payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg'),:original_filename => params['myfile'].original_filename } # this might be cool but I don't know how to use it
+      
+      @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', payload, {'Content-Type' => 'multipart/form-data','Content-Size'=>205}))
+    
+      File.open('public/images/' + params['myfile'].original_filename, "wb") do |f|
+        f.write(params['myfile'].tempfile.read)
+      end
+    
   
-  payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg'),:original_filename => params['myfile'].original_filename } # this might be cool but I don't know how to use it
+ 
   
-  @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', payload))
-
-  File.open('public/images/' + params['myfile'].original_filename, "wb") do |f|
-    f.write(params['myfile'].tempfile.read)
-  end
   return "The file was successfully uploaded!"
 end
 end
