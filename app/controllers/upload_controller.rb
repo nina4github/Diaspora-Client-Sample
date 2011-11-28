@@ -16,11 +16,12 @@ def create
   message = Hash.new
   message = {'myfile'=>
               { 'original_filename'=>params['myfile'].original_filename,
-                 'tempfile' =>params['myfile'].tempfile}
+                 'tempfile' =>IO.read(params['myfile'].tempfile)}
               } # TODO not able to pass the correct parameters... why? serializable or simply passing the right info?
   
-  payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg') }
-  @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', message, {'Content-Type' => 'multipart/form-data'}))
+  payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg') } # this might be cool but I don't know how to use it
+  
+  @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', payload))
 
   File.open('public/images/' + params['myfile'].original_filename, "wb") do |f|
     f.write(params['myfile'].tempfile.read)
