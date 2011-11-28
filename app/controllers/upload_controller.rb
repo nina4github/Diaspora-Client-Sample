@@ -15,7 +15,7 @@ def create
   request.env["warden"].set_user(user, :scope => :user, :store => true)
   message = {
     :original_filename => params['myfile'].original_filename,
-    :file => params['myfile'].tempfile
+    :file => params['myfile'].tempfile.read
   }
   # message = {'myfile'=>
   #                 { 'original_filename'=>params['myfile'].original_filename,
@@ -25,11 +25,11 @@ def create
       
       #payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg'),:original_filename => params['myfile'].original_filename } # this might be cool but I don't know how to use it
       
-      @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', message, {'Content-type'=>'multipart/form-data'}))
+      @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', message, {'Content-Type'=>'multipart/form-data'}))
     
-      File.open('public/images/' + params['myfile'].original_filename, "wb") do |f|
-        f.write(params['myfile'].tempfile.read)
-      end
+#      File.open('public/images/' + params['myfile'].original_filename, "wb") do |f|
+#        f.write(params['myfile'].tempfile.read)
+#      end
     
  
   
