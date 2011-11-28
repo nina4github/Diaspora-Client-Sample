@@ -19,7 +19,7 @@ def create
                  'tempfile' =>params['myfile'].tempfile}
               } # TODO not able to pass the correct parameters... why? serializable or simply passing the right info?
   
-  payload = { :myfile => Faraday::UploadIO.new(params['myfile'].original_filename, 'image/jpeg') }
+  payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg') }
   @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', message))
 
   File.open('public/images/' + params['myfile'].original_filename, "wb") do |f|
