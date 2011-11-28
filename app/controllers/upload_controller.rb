@@ -49,7 +49,6 @@ require 'mime/types'
 require 'cgi'
 
 
-  VERSION = "1.0.0" unless const_defined?(:VERSION)
 
   # Formats a given hash as a multipart form post
   # If a hash value responds to :string or :read messages, then it is
