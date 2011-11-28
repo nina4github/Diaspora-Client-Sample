@@ -16,18 +16,18 @@ def create
   message = Hash.new
   message = {'myfile'=>
                   { 'original_filename'=>params['myfile'].original_filename,
-                     'tempfile' =>IO.read(params['myfile'].tempfile)}
-                  } 
+                     'tempfile' =>File.new(params['myfile'].tempfile)
+                     }
+              } 
       
-      payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg'),:original_filename => params['myfile'].original_filename } # this might be cool but I don't know how to use it
+      #payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg'),:original_filename => params['myfile'].original_filename } # this might be cool but I don't know how to use it
       
-      @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', payload, {'Content-Type' => 'multipart/form-data','Content-Size'=>205}))
+      @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', message))
     
       File.open('public/images/' + params['myfile'].original_filename, "wb") do |f|
         f.write(params['myfile'].tempfile.read)
       end
     
-  
  
   
   return "The file was successfully uploaded!"
