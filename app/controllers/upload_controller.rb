@@ -14,8 +14,8 @@ def create
   user = User.find_by_diaspora_id('communityawvej@idea.itu.dk:3000')
   request.env["warden"].set_user(user, :scope => :user, :store => true)
   message = {
-    :original_filename => params['myfile'].original_filename,
-    :file => params['myfile'].tempfile
+    'original_filename' => params['myfile'].original_filename,
+    'file' => params['myfile'].tempfile
   }
 #  message = {'myfile'=>
 #                  { 'original_filename'=>params['myfile'].original_filename,
