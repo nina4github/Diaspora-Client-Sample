@@ -57,10 +57,10 @@ require 'cgi'
   # to be a string
   class Post
     # We have to pretend like we're a web browser...
-    USERAGENT = "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/523.10.6 (KHTML, like Gecko) Version/3.0.4 Safari/523.10.6" unless const_defined?(:USERAGENT)
-    BOUNDARY = "0123456789ABLEWASIEREISAWELBA9876543210" unless const_defined?(:BOUNDARY)
-    CONTENT_TYPE = "multipart/form-data; boundary=#{ BOUNDARY }" unless const_defined?(:CONTENT_TYPE)
-    HEADER = { "Content-Type" => CONTENT_TYPE, "User-Agent" => USERAGENT } unless const_defined?(:HEADER)
+    USERAGENT = "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/523.10.6 (KHTML, like Gecko) Version/3.0.4 Safari/523.10.6"
+    BOUNDARY = "0123456789ABLEWASIEREISAWELBA9876543210"
+    CONTENT_TYPE = "multipart/form-data; boundary=#{ BOUNDARY }"
+    HEADER = { "Content-Type" => CONTENT_TYPE, "User-Agent" => USERAGENT }
 
     def self.prepare_query(params)
       fp = []
