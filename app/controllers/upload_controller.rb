@@ -24,7 +24,7 @@ def create
 #              } 
       
       #payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg'),:original_filename => params['myfile'].original_filename } # this might be cool but I don't know how to use it
-      body,head = Post.new.prepare_query(message)
+      body,head = Post.prepare_query(message)
       current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', body, head)
 #      @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', message))
     
