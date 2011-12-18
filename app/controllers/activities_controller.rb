@@ -145,7 +145,7 @@ class ActivitiesController < ActionController::Base
    body = StringIO.new(open(file.path, "rb") {|io| io.read})
    #request.raw_post.force_encoding('BINARY')
   # logger.info ("request content_length: #{request.content_length}")
-   response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, body)
+   response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, {:body => body})
    logger.info("response from Diaspora: #{response}")
 #   FileUtils.cp file, File.new('public/images/' + params[:original_filename],"wb")
    respond_to do |format|
