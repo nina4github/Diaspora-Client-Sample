@@ -142,7 +142,7 @@ class ActivitiesController < ActionController::Base
 #   file = file_handler(params)
    q = "original_filename=#{CGI::escape(params[:original_filename])}"
    body = request.raw_post.force_encoding('BINARY')
-   logger.info (request)
+   logger.info ("request content_length: #{request.content_length}")
    response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, body))
 #   FileUtils.cp file, File.new('public/images/' + params[:original_filename],"wb")
    respond_to do |format|
