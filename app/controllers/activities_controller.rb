@@ -140,7 +140,7 @@ class ActivitiesController < ActionController::Base
  def upload
    activity = params[:activity]
    file = file_handler(params)
-   FileUtils.cp file File.new('public/images/' + params[:original_filename],"wb")
+   FileUtils.cp file, File.new('public/images/' + params[:original_filename],"wb")
    # message = {
    #   'original_filename' => params['myfile'].original_filename,
    #   'file' => params['myfile'].tempfile
