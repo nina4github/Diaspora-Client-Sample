@@ -141,7 +141,8 @@ class ActivitiesController < ActionController::Base
    activity = params[:id]
    file = file_handler(params)
    q = "original_filename=#{CGI::escape(params[:original_filename])}"
-   body = open(file.path, "rb") {|io| io.read}
+   logger.info("query string for upload: #{q}")
+   body = StringIO.new(open(file.path, "rb") {|io| io.read})
    #request.raw_post.force_encoding('BINARY')
   # logger.info ("request content_length: #{request.content_length}")
    response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, body)
