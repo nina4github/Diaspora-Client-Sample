@@ -2,6 +2,7 @@ class UploadController< ApplicationController
 require 'rubygems'
 require 'sinatra'
 require 'haml'
+require 'cgi'
 
 # Handle GET-request (Show the upload form)
 get "/upload" do
@@ -15,7 +16,7 @@ def create
   request.env["warden"].set_user(user, :scope => :user, :store => true)
   message = {
     'original_filename' => params['myfile'].original_filename,
-    'file' => params['myfile'].tempfile
+    'file' => params['myfile']
   }
 #  message = {'myfile'=>
 #                  { 'original_filename'=>params['myfile'].original_filename,
@@ -24,8 +25,9 @@ def create
 #              } 
       
       #payload = { :myfile => Faraday::UploadIO.new(params['myfile'].tempfile, 'image/jpeg'),:original_filename => params['myfile'].original_filename } # this might be cool but I don't know how to use it
-      body,head = Post.prepare_query(message)
-      current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', body, head)
+#      body,head = Post.prepare_query(message)
+      q = "original_filename=#{CGI::escape(params['myfile'].original_filename)}"
+      current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload?'+q, params['myfile'].read)
 #      @response = JSON.parse(current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', message))
     
       File.open('public/images/' + params['myfile'].original_filename, "wb") do |f|
@@ -46,7 +48,6 @@ end
 
 require 'rubygems'
 require 'mime/types'
-require 'cgi'
 
 
 
@@ -66,8 +67,8 @@ require 'cgi'
 
       params.each do |k, v|
         # Are we trying to make a file parameter?
-        if v.respond_to?(:path) and v.respond_to?(:read) then
-          fp.push(FileParam.new(k, v.path, v.read))
+        if v.respond_to?(:read) then
+          fp.push(FileParam.new(k, v.original_filename, v.read, v.content_type))
         # We must be trying to make a regular parameter
         else
           fp.push(StringParam.new(k, v))
@@ -101,17 +102,18 @@ require 'cgi'
   class FileParam
     attr_accessor :k, :filename, :content
 
-    def initialize(k, filename, content)
+    def initialize(k, filename, content, mime)
       @k = k
       @filename = filename
       @content = content
+      @mime = mime
     end
 
     def to_multipart
       # If we can tell the possible mime-type from the filename, use the
       # first in the list; otherwise, use "application/octet-stream"
-      mime_type = MIME::Types.type_for(filename)[0] || MIME::Types["application/octet-stream"][0]
+      mime_type = @mime || MIME::Types["application/octet-stream"][0].simplified
       return "Content-Disposition: form-data; name=\"#{CGI::escape(k)}\"; filename=\"#{ filename }\"\r\n" +
-             "Content-Type: #{ mime_type.simplified }\r\n\r\n#{ content }\r\n"
+             "Content-Type: #{ mime_type }\r\nContent-Transfer-Encoding: binary\r\n\r\n#{ content }\r\n"
     end
   end
