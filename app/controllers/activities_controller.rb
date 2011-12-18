@@ -146,7 +146,9 @@ class ActivitiesController < ActionController::Base
    att_content_type = (request.content_type.to_s == "") ? "application/octet-stream" : request.content_type.to_s
    #body = request.raw_post.force_encoding('BINARY')
   # logger.info ("request content_length: #{request.content_length}")
-   response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, request.body, {'Content-Type' => att_content_type})
+   response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, 
+    request.raw_post.force_encoding('BINARY'), 
+    {'Content-Type' => att_content_type})
    logger.info("response from Diaspora: #{response}")
 #   FileUtils.cp file, File.new('public/images/' + params[:original_filename],"wb")
    respond_to do |format|
