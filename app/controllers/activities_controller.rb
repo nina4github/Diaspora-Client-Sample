@@ -117,6 +117,13 @@ class ActivitiesController < ActionController::Base
       end
   end
     
+  def me
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/me'))
+    respond_to do |format|
+      format.html 
+      format.json {render json: @response}
+    end
+  end
     
   # POST  
   def group
@@ -142,61 +149,21 @@ class ActivitiesController < ActionController::Base
    #file = file_handler(params)
    q = "original_filename=#{CGI::escape(params[:original_filename])}"
    logger.info("query string for upload: #{q}")
-   #body = StringIO.new(open(file.path, "rb") {|io| io.read})
+
    att_content_type = (request.content_type.to_s == "") ? "application/octet-stream" : request.content_type.to_s
-   #body = request.raw_post.force_encoding('BINARY')
-  # logger.info ("request content_length: #{request.content_length}")
-   response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, 
+
+   @response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, 
     request.raw_post.force_encoding('BINARY'), 
     {'Content-Type' => att_content_type})
    logger.info("response from Diaspora: #{response}")
-#   FileUtils.cp file, File.new('public/images/' + params[:original_filename],"wb")
+
    respond_to do |format|
-       format.html {render "true"}
-       format.json {render json: true}
+       #format.html {render @response}
+       format.json {render json: @response}
      end
-     
-   # message = {
-   #   'original_filename' => params['myfile'].original_filename,
-   #   'file' => params['myfile'].tempfile
-   # }
-   #     body,head = Post.prepare_query(message)
-   #     current_user.access_token.token.post('/api/v0/aspects/'+params[:activity]+'/upload', body, head)
-   #  
-   #     File.open('public/images/' + params['myfile'].original_filename, "wb") do |f|
-   #       f.write(params['myfile'].tempfile.read)
-   #     end
-
-
 
    return
  end
- 
- def file_handler(params)
-      ######################## dealing with local files #############
-      # get file name
-      file_name = params[:original_filename]
-      # get file content type
-      att_content_type = (request.content_type.to_s == "") ? "application/octet-stream" : request.content_type.to_s
-      # create tempora##l file
-      begin
-        file = Tempfile.new(file_name, {:encoding =>  'BINARY'})
-        file.print request.raw_post.force_encoding('BINARY')
-      rescue RuntimeError => e
-        raise e unless e.message.include?('cannot generate tempfile')
-        file = Tempfile.new(file_name) # Ruby 1.8 compatibility
-        file.binmode
-        file.print request.raw_post
-      end
-      # put data into this file from raw post request
-
-      # create several required methods for this temporal file
-      Tempfile.send(:define_method, "content_type") {return att_content_type}
-      Tempfile.send(:define_method, "original_filename") {return file_name}
-      file
-  end
-  
-  
   
   # def tags
    #     @response = JSON.parse(current_user.access_token.token.get('/api/v0/tags/'+params[:activityname]+'?only_posts=true&max_time='+(Time.now).to_i.to_s+"&page=1"))
