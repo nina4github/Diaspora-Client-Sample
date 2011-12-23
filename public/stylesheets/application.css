@@ -1,11 +1,14 @@
 body {
-  background: rgba(200,200,200,.9);
+  /*background: rgba(200,200,200,.9);*/
+  background: url("images/christmas2.jpg") center bottom no-repeat;
+  background-size:100% auto;
   color:white;
   font-family: Verdana, Helvetica, Arial;
   font-size: 1.5em;
   margin:0;
   padding:0; 
   width:100%;
+  height: 100%;
 }
 
 a {
@@ -30,10 +33,12 @@ a {
 iframe::-webkit-scrollbar { display: none; }
 
 iframe{
+	opacity: 0.9;
 	width:98%;
 	margin-left:1%;
 	position:absolute;
 	top:80px;
+	bottom: 300px;
 	height:468px;
 	border:none;
 	-webkit-box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.9);
@@ -56,54 +61,12 @@ iframe{
 
 
 
-
-#flash_notice,
-#flash_error,
-#flash_alert {
-  padding: 5px 8px;
-  margin: 10px 0; }
-
-#flash_notice {
-  background-color: #ccffcc;
-  border: solid 1px #66cc66; }
-
-#flash_error,
-#flash_alert {
-  background-color: #ffcccc;
-  border: solid 1px #cc6666; }
-
-.fieldWithErrors {
-  display: inline; }
-
-.error_messages {
-  width: 400px;
-  border: 2px solid #cf0000;
-  padding: 0;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-  font-size: 12px; }
-  .error_messages h2 {
-    text-align: left;
-    padding: 5px 5px 5px 15px;
-    margin: 0;
-    font-weight: bold;
-    font-size: 12px;
-    background-color: #cc0000;
-    color: white; }
-  .error_messages p {
-    margin: 8px 10px; }
-  .error_messages ul {
-    margin: 0; }
-
-
-
 /*Elena's review*/
 
-#title, #activities, h1{
+#title,  #activities, h1{
 	color:white;
 	margin:20px;
-	position:absolute;
+	position:relative;
 
 }
 
@@ -111,12 +74,15 @@ iframe{
 	top:0px;
 }
 #activities{
+margin-left: -5px;
 	bottom:20px;
-	width:96%;
+	width:100%;
 	height:250px;
-	background: rgba(200,200,200,1);
+	background: rgba(255,0,0,.3);
+	
 		
 }
+
 
 #activities .activity{
 	display:inline;
