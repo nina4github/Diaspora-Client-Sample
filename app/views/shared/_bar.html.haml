@@ -4,6 +4,6 @@
       %p
         =$activities[activity]["value"].html_safe
       %a 
-		-#{:href=>"/activities/#{$activities[activity]["name"]}"}
+        -#{:href=>"/activities/#{$activities[activity]["name"]}"}
         %img{:id=>"#{$activities[activity]["name"]}", :class=>"home inactive", :src=>"images/#{$activities[activity]["name"]}.png"}
         %span{:class=>"activitycounter"}
