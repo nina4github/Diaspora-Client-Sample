@@ -118,7 +118,7 @@ class ActivitiesController < ActionController::Base
   end
     
   def me
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/me'))
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/profile'))
     respond_to do |format|
       format.html 
       format.json {render json: @response}
