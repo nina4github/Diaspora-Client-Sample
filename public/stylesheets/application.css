@@ -1,5 +1,5 @@
 body {
-  /*background: rgba(200,200,200,.9);*/
+  background: rgba(100,200,100,.9);
  /* background: url("../images/christmas2.jpg") center bottom no-repeat;*/ 
   background-size:100% auto;
   color:white;
@@ -65,7 +65,7 @@ iframe{
 #title,  #activities, h1{
 	color:white;
 	margin:10px;
-	position:relative;
+	position:absolute;
 
 }
 
@@ -76,7 +76,7 @@ iframe{
 margin-left: -5px;
 	bottom:20px;
 	width:100%;
-	background: rgba(255,0,0,.3);
+	/*background: rgba(255,0,0,.3);*/
 	
 		
 }
