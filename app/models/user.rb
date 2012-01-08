@@ -11,8 +11,10 @@ class User < ActiveRecord::Base
   def self.find_or_create_with_diaspora opts
     puts opts.inspect
     if user = self.find_by_diaspora_id(opts[:diaspora_id])
+      logger.info("DEBUG:: found a user from diaspora")
       user
     else
+      logger.info("DEBUG:: NOT found a user from diaspora, I create one with id= "+opts[:diaspora_id])
       self.create!(opts)
     end
   end
