@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # Create a new user account with data from a diaspora pod
   # @option opts [String] :diaspora_id The new user's diaspora id
   def self.find_or_create_with_diaspora opts
-    puts opts.inspect
+    puts "DEBUG find or create with diaspora opts:: "+ opts.inspect
     if user = self.find_by_diaspora_id(opts[:diaspora_id])
       logger.info("DEBUG:: found a user from diaspora")
       user
