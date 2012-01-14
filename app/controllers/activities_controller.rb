@@ -185,7 +185,7 @@ class ActivitiesController < ActionController::Base
        if (params[:user]!=nil )
          user = User.find_by_diaspora_id(params[:user])  
          if(user!=nil)
-           request.env["warden"].set_user(user, :scope => :user, :store => true)
+           request.env["warden"].set_user(user, :scope => :user, :store => false)
            @answer =  current_user.access_token
            return true
           else

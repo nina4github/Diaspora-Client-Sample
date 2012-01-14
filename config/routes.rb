@@ -8,7 +8,7 @@ SampleApp::Application.routes.draw do
   
   resources :activities
 
-  # match 'me' => 'activities#me'
+  match 'me' => 'activities#me'
   match 'activities/:id/contacts' => 'activities#contacts' #, :as => :activityname # why I don't comment?! 
   match 'activities/:id/stream' => 'activities#stream'
   match 'activities/:id/last' => 'activities#last'
