@@ -1,17 +1,7 @@
 class ActivitiesV1Controller < ActionController::Base
     #require 'carrierwave/orm/activerecord'
     before_filter :authenticate
- 
-    # GET a list of all aspects for a user
-    def activities
-        @response = JSON.parse(current_user.access_token.token.get('/api/v1/aspects'))
-        respond_to do |format|
-          format.html
-          format.json {render :json => @response}
-        end
-    end
-    
-    
+
     #get a users' profile
     def me
       @response = JSON.parse(current_user.access_token.token.get('/api/v1/profile'))
@@ -21,17 +11,34 @@ class ActivitiesV1Controller < ActionController::Base
       end
     end
 
+    # GET a list of all aspects for a user
+    def activities
+        @response = JSON.parse(current_user.access_token.token.get('/api/v1/aspects'))
+        respond_to do |format|
+          format.html
+          format.json {render :json => @response}
+        end
+    end
+
+    # GET all posts within a specific aspect for the current user
+    def stream
+        @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:name]))
+        respond_to do |format|
+            format.html 
+            format.json {render :json => @response}
+        end
+    end
+  
     #get all contacts of an aspect
     def contacts
-        @data1 = params[:id]
-        @response = JSON.parse(current_user.access_token.token.get('/api/v1/aspects/'+params[:id]+'/contacts'))
+        @response = JSON.parse(current_user.access_token.token.get('/api/v1/aspects/'+params[:name]+'/contacts'))
         respond_to do |format|
             format.html 
             format.json {render :json => @response}
         end
     end 
   
-    def new
+    def newpost
         # call to create will generate a new post with these information and on this aspect
         text=params[:text]
         message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
@@ -43,6 +50,14 @@ class ActivitiesV1Controller < ActionController::Base
         end
     end
 
+    def newprofile
+        @response =JSON.parse(current_user.access_token.token.post('/api/v1/newprofile'+params[:info]))
+        @status_message = @response
+        respond_to do |format|
+            format.html
+            format.json {render :json => @response}
+        end
+    end
     
     # POST  
     def group
