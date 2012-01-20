@@ -3,7 +3,7 @@ class ActivitiesV1Controller < ActionController::Base
     before_filter :authenticate
  
     # GET a list of all aspects for a user
-    def index
+    def activities
         @response = JSON.parse(current_user.access_token.token.get('/api/v1/aspects'))
         respond_to do |format|
           format.html
