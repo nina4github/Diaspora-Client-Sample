@@ -22,7 +22,7 @@ class ActivitiesV1Controller < ActionController::Base
 
     # GET all posts within a specific aspect for the current user
     def stream
-        @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:name]))
+        @response = JSON.parse(current_user.access_token.token.get('/api/v1/aspects/'+params[:name]))
         respond_to do |format|
             format.html 
             format.json {render :json => @response}
