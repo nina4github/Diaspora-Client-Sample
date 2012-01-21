@@ -94,8 +94,20 @@ class ActivitiesController < ActionController::Base
   def new
     # call to create will generate a new post with these information and on this aspect
     text=params[:text]
-    message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
-    @response =JSON.parse(current_user.access_token.token.post('/api/v0/posts/new', message))
+    # OLD # message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
+    # OLD # @response =JSON.parse(current_user.access_token.token.post('/api/v0/posts/new', message))
+    message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id],'tag'=> params[:id]}
+    @response =JSON.parse(current_user.access_token.token.post('/api/v0/create', message))
+    
+
+    # Generate a post on the genie hub
+    # POST http://tiger.itu.dk:8004/informationbus/publish
+    # (form encoded)
+    # event=<event>
+    getConn
+    event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>'','generator'=>'server'}}]
+    @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
+    
     @status_message = @response
     respond_to do |format|
         format.html
@@ -156,6 +168,15 @@ class ActivitiesController < ActionController::Base
     request.raw_post.force_encoding('BINARY'), 
     {'Content-Type' => att_content_type})
    logger.info("response from Diaspora: #{response}")
+   
+   # Generate a post on the genie hub to notify the new CONTENT
+   # POST http://tiger.itu.dk:8004/informationbus/publish
+   # (form encoded)
+   # event=<event>
+   getConn
+   text = "spark:photo"
+   event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>'','generator'=>'server'}]
+   @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
 
    respond_to do |format|
        #format.html {render @response}
@@ -207,6 +228,14 @@ class ActivitiesController < ActionController::Base
     #       redirect_to("#{Rails.root}") and return false
     end
     
+  end
+  
+  
+  def getConn
+  @conn = Faraday.new(:url => 'http://idea.itu.dk:8000') do |builder|
+    builder.request  :url_encoded
+    builder.response :logger
+    builder.adapter  :net_http
   end
   
   

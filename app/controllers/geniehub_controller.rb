@@ -1,7 +1,11 @@
 class GeniehubController < ActionController::Base
 
-  # I need to have a variable that hosts a counter for each activity ($activities is the global variable)
-  # that is incremented or decremented depending on listener function
+
+# this function is the callback function called when the geniehub receives a message 
+# that the listener registered by the diaspora client app (this)
+# has been register for (i.e. matches the creterias)
+# this basic implementation is developed for messages of type: activity,user,object,content,timestamp
+# used in the first version of the common objects, therefore it needs to remain here for consistency
 
   def listener
     domain = "@idea.itu.dk:3000"
@@ -32,6 +36,7 @@ class GeniehubController < ActionController::Base
     #     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
     request.env["warden"].set_user(user, :scope => :user, :store => true)
     
+    
     counter = 0 # counter for maintaining the status of the open activities
     # mentions derived from the javascript :): status_message[text]:ciao @{Elena Nazzi; ninaondiaspora@localhost:3000} 
     #params[:person] = "ninaondiaspora"
@@ -48,7 +53,7 @@ class GeniehubController < ActionController::Base
       counter>0 ? counter-1:0; 
     end  
     
-    updateEventCounter(params[:activity],counter)
+    updateEventCounter(params[:activity],counter)  # handling internal storage of active activities and the related counter
     
     message = {'status_message'=>{'text'=>text},'aspect_name' => params[:activity],'tag'=> params[:activity]}
     puts params[:activity]
@@ -96,5 +101,53 @@ class GeniehubController < ActionController::Base
       end
   end
     
+    
+    
+  # listener callback function to handle notifications of type: activity, actor, content, timestamp
+  # that (of course) has not been created by the diaspora client app (this) itself in activitycontroller.rb
+  # 
+  def activitiesListener
+     domain = "@idea.itu.dk:3000"
+      puts "activities_listener"
+      @genie = request
+      actor = params[:actor]
+      if User.find_by_diaspora_id(actor+domain) 
+        user = User.find_by_diaspora_id(actor+domain)
+      end
+      puts user.diaspora_id
+      #     # user = User.find_by_diaspora_id('ninaondiaspora@diaspora.localhost')  
+      request.env["warden"].set_user(user, :scope => :user, :store => true)
+
+      counter = 0 # counter for maintaining the status of the open activities
+      # mentions derived from the javascript :): status_message[text]:ciao @{Elena Nazzi; ninaondiaspora@localhost:3000} 
+      #params[:person] = "ninaondiaspora"
+      text = ""
+      # mention = "@{"+params[:user]+"; "+params[:user]+domain+"}" 
+      # mention2 = "@{"+params[:object]+"; "+params[:object]+domain+"}" 
+      # mention2 = "#"+params[:object]
+      if params[:content]=="start"
+        text += mention + " started #"+ params[:activity] + " with " +mention2 
+        counter = counter + 1
+
+      elsif params[:content]=="stop"
+        text += mention + " stopped #"+  params[:activity] + " with " +mention2
+        counter>0 ? counter-1:0; 
+      end  
+
+      updateEventCounter(params[:activity],counter)
+
+      message = {'status_message'=>{'text'=>text},'aspect_name' => params[:activity],'tag'=> params[:activity]}
+      puts params[:activity]
+
+      # request is then translated to the diaspora server 
+      @response = JSON.parse(current_user.access_token.token.post('/api/v0/create',message))
+      puts "print response"
+      puts @response
+      puts "done"
+  end
+
+def generator
+  # do nothing to catch messages to generators from the GH
+end
 
 end
