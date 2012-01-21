@@ -13,7 +13,7 @@ end
 
 ## POST ##
 
-json = JSON.generate [{"field"=>"activity","operator"=>"=","value"=>"*"},{"field"=>"actor","operator"=>"=","value"=>"*"}]
+json = JSON.generate [{"field"=>"activity","operator"=>"=","value"=>"*"},{"field"=>"user","operator"=>"=","value"=>"*"}]
 
 ## development informationbus callback url -- local host
 #response=conn.put '/informationbus/register/listener', { :url => 'http://localhost:3000/geniehub/listener', :pattern => json }  # POST "name=maguro" to http://sushi.com/nigiri
@@ -29,5 +29,5 @@ puts response.body
 # Ignore results
 
 name = 'twitterIdoServer'
-response2 = conn.put '/informationbus/register/generator/twitterIdoServer', {:url=>'http://idea.itu.dk:8080/geniehub/generator',:specs=>['activity','actor','content','timestamp','generator']}
+response2 = conn.put '/informationbus/register/generator/twitterIdoServer', {:url=>'http://idea.itu.dk:8080/geniehub/generator',:specs=>'["activity","actor","content","timestamp","generator"]'}
 puts response2.body
