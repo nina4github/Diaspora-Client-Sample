@@ -41,8 +41,8 @@ class ActivitiesV1Controller < ActionController::Base
               'password'              => params[:password],
               'password_confirmation' => params[:password_confirmation]
         }
+        puts user
         @result =JSON.parse(current_user.access_token.token.post('/api/v1/newprofile',user))
-        @status_message = @result
         output(@result)
     end
     
