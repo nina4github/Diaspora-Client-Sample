@@ -106,7 +106,7 @@ class ActivitiesController < ActionController::Base
     # event=<event>
     getConn
     event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>'','generator'=>'server'}}]
-    @gh_respons = @conn.put 'informationbus/publish', {:event=>event}
+    @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
     
     @status_message = @response
     respond_to do |format|
@@ -176,7 +176,7 @@ class ActivitiesController < ActionController::Base
    getConn
    text = "spark:photo"
    event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>'','generator'=>'server'}]
-   @gh_respons = @conn.put 'informationbus/publish', {:event=>event}
+   @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
 
    respond_to do |format|
        #format.html {render @response}
