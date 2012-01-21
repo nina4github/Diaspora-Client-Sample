@@ -27,7 +27,8 @@
 			>> Value can be a single value or an array (only for the = operator)
 		*/
 		//var ptn = [ eb.Eq('activity','petanque')];//, eb.Any('latitude'), eb.Any('longitude') ];
-		var ptn = [ eb.Any('activity')];
+		var ptn = [ eb.Any('activity'),eb.Eq('generator','client')];
+		
 
 		/*
 		$.createEventBusListener( Pattern, Callback )
@@ -46,6 +47,7 @@
 			//$('#dbg').text(user + " with device " + btmac + " is in " + zone);
 		});*/
 		
+		//var generator = $.createEventBusGenerator('client.em.twitterido.dk',['activity','actor','content','timestamp'], function(msg){});
 //		var generator = $.createEventBusGenerator('test.generator',['user','terminal.btmac','zone.current'], function(msg){});
 		
 		//after 5 seconds, fire an event. Since it matches the test listener, we should see a message in the div#dbg

@@ -13,7 +13,7 @@ end
 
 ## POST ##
 
-json = JSON.generate [{"field"=>"activity","operator"=>"=","value"=>"*"}]
+json = JSON.generate [{"field"=>"activity","operator"=>"=","value"=>"*"},{"field"=>"actor","operator"=>"=","value"=>"*"}]
 
 ## development informationbus callback url -- local host
 #response=conn.put '/informationbus/register/listener', { :url => 'http://localhost:3000/geniehub/listener', :pattern => json }  # POST "name=maguro" to http://sushi.com/nigiri
@@ -21,3 +21,13 @@ json = JSON.generate [{"field"=>"activity","operator"=>"=","value"=>"*"}]
 ## "[production] informationbus callback url -- server where the DIASPORA CLIENT SAMPLE application resides on port 8080"
 response=conn.put '/informationbus/register/listener', { :url => 'http://idea.itu.dk:8080/geniehub/listener', :pattern => json }  # POST "name=maguro" to http://sushi.com/nigiri
 puts response.body
+
+
+# GENERATOR
+#PUT http://tiger.itu.dk:8004/informationbus/register/generator/<name>
+# url=<callbackUrl>&specs=<specs>[&sendform=<true|false>]
+# Ignore results
+
+name = 'twitterIdoServer'
+response2 = conn.put 'informationbus/register/generator/'+name, {:url=>'http://idea.itu.dk:8080/geniehub/generator',:specs=>['activity','actor','content','timestamp','generator']}
+puts response2.body
