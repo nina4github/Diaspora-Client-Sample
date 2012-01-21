@@ -41,7 +41,6 @@ class ActivitiesV1Controller < ActionController::Base
               'password'              => params[:password],
               'password_confirmation' => params[:password_confirmation]
         }
-        puts user
         @result =JSON.parse(current_user.access_token.token.post('/api/v1/newprofile',user))
         output(@result)
     end
@@ -78,31 +77,31 @@ class ActivitiesV1Controller < ActionController::Base
      
      private
      
-        def authenticate
-            case request.format
-            when Mime::XML, Mime::JSON #authentication only applies for these types of requests
-                if (params[:user]!=nil )
-                   user = User.find_by_diaspora_id(params[:user])  
-                   if(user!=nil)
-                       request.env["warden"].set_user(user, :scope => :user, :store => false)
-                       @answer =  current_user.access_token
-                       return true
-                    else
-                       #@answer = '401 Unauthorized - This user is not registered, please register it first on your Diaspora Client service'
-                       render :file => "#{Rails.root}/public/401.html", :status => 401, :layout => false and return false
-                    end
+    def authenticate
+        case request.format
+        when Mime::XML, Mime::JSON #authentication only applies for these types of requests
+            if (params[:user]!=nil )
+               user = User.find_by_diaspora_id(params[:user])  
+               if(user!=nil)
+                   request.env["warden"].set_user(user, :scope => :user, :store => false)
+                   @answer =  current_user.access_token
+                   return true
                 else
-                    #@answer='400 Bad Request - You need to send the user name with the domain of diaspora'
-                    render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false and return false
-                    #raise ActionController::RoutingError.new('Not Found')
+                   #@answer = '401 Unauthorized - This user is not registered, please register it first on your Diaspora Client service'
+                   render :file => "#{Rails.root}/public/401.html", :status => 401, :layout => false and return false
                 end
-                # respond_to do |format|
-                #                format.xml {render xml: @answer}
-                #                format.json {render json: @answer}
-                #              end
-                
-                # else
-                #       redirect_to("#{Rails.root}") and return false
+            else
+                #@answer='400 Bad Request - You need to send the user name with the domain of diaspora'
+                render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false and return false
+                #raise ActionController::RoutingError.new('Not Found')
             end
+            # respond_to do |format|
+            #                format.xml {render xml: @answer}
+            #                format.json {render json: @answer}
+            #              end
+            
+            # else
+            #       redirect_to("#{Rails.root}") and return false
         end
+    end
 end
