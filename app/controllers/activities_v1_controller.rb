@@ -4,59 +4,46 @@ class ActivitiesV1Controller < ActionController::Base
 
     #get a users' profile
     def me
-      @response = JSON.parse(current_user.access_token.token.get('/api/v1/profile'))
-      respond_to do |format|
-          format.html 
-          format.json {render :json => @response}
-      end
+      @result = JSON.parse(current_user.access_token.token.get('/api/v1/profile'))
+      output(@result)
     end
 
     # GET a list of all aspects for a user
     def activities
-        @response = JSON.parse(current_user.access_token.token.get('/api/v1/aspects'))
-        respond_to do |format|
-          format.html
-          format.json {render :json => @response}
-        end
+        @result = JSON.parse(current_user.access_token.token.get('/api/v1/aspects'))
+        output(@result)
     end
 
     # GET all posts within a specific aspect for the current user
     def stream
-        @response = JSON.parse(current_user.access_token.token.get('/api/v1/aspects/'+params[:name]))
-        respond_to do |format|
-            format.html 
-            format.json {render :json => @response}
-        end
+        @result = JSON.parse(current_user.access_token.token.get('/api/v1/aspects/'+params[:name]))
+        output(@result)
     end
   
     #get all contacts of an aspect
     def contacts
-        @response = JSON.parse(current_user.access_token.token.get('/api/v1/aspects/'+params[:name]+'/contacts'))
-        respond_to do |format|
-            format.html 
-            format.json {render :json => @response}
-        end
+        @result = JSON.parse(current_user.access_token.token.get('/api/v1/aspects/'+params[:name]+'/contacts'))
+        output(@result)
     end 
   
     def newpost
         # call to create will generate a new post with these information and on this aspect
         text=params[:text]
         message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
-        @response =JSON.parse(current_user.access_token.token.post('/api/v1/posts/new', message))
-        @status_message = @response
-        respond_to do |format|
-            format.html
-            format.json {render :json => @response}
-        end
+        @result =JSON.parse(current_user.access_token.token.post('/api/v1/posts/new', message))
+        @status_message = @result
+        output(@result)
     end
 
     def newprofile
-        @response =JSON.parse(current_user.access_token.token.post('/api/v1/newprofile'+params[:info]))
-        @status_message = @response
-        respond_to do |format|
-            format.html
-            format.json {render :json => @response}
-        end
+        user={:username              => params[:username],
+              :email                 => params[:email],
+              :password              => params[:password],
+              :password_confirmation => params[:password_confirmation]
+        }
+        @result =JSON.parse(current_user.access_token.token.post('/api/v1/newprofile',user))
+        @status_message = @result
+        output(@result)
     end
     
     # POST  
@@ -65,11 +52,8 @@ class ActivitiesV1Controller < ActionController::Base
         @users = params[:users]
         #message = {'activity'=>'billiard', 'users'=>'[12,14,15,16,17]'}
         message = {'activity'=>@activity, 'users'=>@users}
-        @response = JSON.parse(current_user.access_token.token.post('/api/v1/group', message))
-        respond_to do |format|
-            format.html {render 'group'}
-            format.json {render :json => @response}
-        end
+        @result = JSON.parse(current_user.access_token.token.post('/api/v1/group', message))
+        output(@result)
      end  
        
     
@@ -78,18 +62,19 @@ class ActivitiesV1Controller < ActionController::Base
          #file = file_handler(params)
          q = "original_filename=#{CGI::escape(params[:original_filename])}"
          logger.info("query string for upload: #{q}")
-      
          att_content_type = (request.content_type.to_s == "") ? "application/octet-stream" : request.content_type.to_s
-      
-         @response = current_user.access_token.token.post('/api/v1/aspects/'+activity+'/upload?'+q, request.raw_post.force_encoding('BINARY'), {'Content-Type' => att_content_type})
+         @result = current_user.access_token.token.post('/api/v1/aspects/'+activity+'/upload?'+q, request.raw_post.force_encoding('BINARY'), {'Content-Type' => att_content_type})
          logger.info("response from Diaspora: #{response}")
       
-         respond_to do |format|
-               #format.html {render @response}
-               format.json {render :json => @response}
-         end
+         output(@result)
      end
 
+     def output(result)
+        respond_to do |format|
+            format.html {render result }
+            format.json {render :json => result}
+        end
+     end
      
      private
      
