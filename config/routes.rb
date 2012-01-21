@@ -20,8 +20,18 @@ SampleApp::Application.routes.draw do
   match 'geniehub/status' => 'geniehub#status' # function to return the current status to a javascript call 
   match 'geniehub/listener' => 'geniehub#listener'
   
- 
   
+  #******************NFC Social API**************#
+  resources :activities_v1
+    match 'v1/me'             => 'activities_v1#me'
+    match 'v1/newprofile'     => 'activities_v1#newprofile'
+    match 'v1/activities'     => 'activities_v1#activities'
+    match 'v1/:name/stream'   => 'activities_v1#stream'
+    match 'v1/:name/contacts' => 'activities_v1#contacts' #, :as => :activityname # why I don't comment?! 
+    match 'v1/group/'         => 'activities_v1#group' # creates a new group of people for a specific activity.
+
+    
+  #******************end of NFC Social API**************# 
   
   resources :status # todelete
   
