@@ -4,12 +4,12 @@ class ActivitiesV1Controller < ActionController::Base
 
     #get a users' profile
     def profile
-      @result = JSON.parse(current_user.access_token.token.get('/apiv1/profiles/0'))
+      @result = JSON.parse(current_user.access_token.token.get('/api/v1/profile'))
       output(@result)
     end
 
     #get a users' profile
-    def test_profile
+    def testprofile
        @result = JSON.parse(current_user.access_token.token.get('/api/v1/profile'))
        output(@result)
     end
