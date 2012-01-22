@@ -232,10 +232,11 @@ class ActivitiesController < ActionController::Base
   
   
   def getConn
-  @conn = Faraday.new(:url => 'http://idea.itu.dk:8000') do |builder|
-    builder.request  :url_encoded
-    builder.response :logger
-    builder.adapter  :net_http
+    @conn = Faraday.new(:url => 'http://idea.itu.dk:8000') do |builder|
+      builder.request  :url_encoded
+      builder.response :logger
+      builder.adapter  :net_http
+    end
   end
   
   
