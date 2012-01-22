@@ -25,7 +25,7 @@ SampleApp::Application.routes.draw do
   #******************NFC Social API**************#
   scope 'v1', :controller => :activities_v1 do
       #profile
-      get  'profile'      => :profile
+      get  :profile
       post 'profile'      => :new_profile
       put  'profile'      => :update_profile
       
