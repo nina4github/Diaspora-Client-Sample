@@ -3,11 +3,21 @@ class ActivitiesV1Controller < ActionController::Base
     before_filter :authenticate
 
     #get a users' profile
-    def me
+    def profile
       @result = JSON.parse(current_user.access_token.token.get('/api/v1/profile'))
       output(@result)
     end
 
+    def newprofile
+        user={'username'              => params[:username],
+              'email'                 => params[:email],
+              'password'              => params[:password],
+              'password_confirmation' => params[:password_confirmation]
+        }
+        @result =JSON.parse(current_user.access_token.token.post('/api/v1/profile/new',user))
+        output(@result)
+    end
+    
     # GET a list of all aspects for a user
     def activities
         @result = JSON.parse(current_user.access_token.token.get('/api/v1/aspects'))
@@ -32,16 +42,6 @@ class ActivitiesV1Controller < ActionController::Base
         message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
         @result =JSON.parse(current_user.access_token.token.post('/api/v1/posts/new', message))
         @status_message = @result
-        output(@result)
-    end
-
-    def newprofile
-        user={'username'              => params[:username],
-              'email'                 => params[:email],
-              'password'              => params[:password],
-              'password_confirmation' => params[:password_confirmation]
-        }
-        @result =JSON.parse(current_user.access_token.token.post('/api/v1/newprofile',user))
         output(@result)
     end
     
