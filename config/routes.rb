@@ -23,17 +23,22 @@ SampleApp::Application.routes.draw do
   
   #******************NFC Social API**************#
   scope 'v1', :controller => :activities_v1 do
-      get  :profile
-      post 'profile'       => :newprofile
+      #profile
+      get  'profile'      => :profile
+      post 'profile'      => :new_profile
+      put  'profile'      => :update_profile
+      
+      #aspect
+      get  'aspects'              => :aspects
+      post 'aspects'              => :new_aspect
+      get  'aspects/:id'          => :aspect
+      put  'aspects/:id'          => :update_aspect
+      get  'aspects/:id/posts'    => :aspect_posts
+      post 'aspects/:id/post'     => :new_aspect_post
+      get  'aspects/:id/contacts' => :aspect_contacts
+      post 'aspects/:id/contact'  => :new_aspect_contact
   end
   
-  resources :activities_v1
-    match 'v1/activities'     => 'activities_v1#activities'
-    match 'v1/:name/stream'   => 'activities_v1#stream'
-    match 'v1/:name/contacts' => 'activities_v1#contacts' #, :as => :activityname # why I don't comment?! 
-    match 'v1/group/'         => 'activities_v1#group' # creates a new group of people for a specific activity.
-
-    
   #******************end of NFC Social API**************# 
   
   resources :status # todelete
