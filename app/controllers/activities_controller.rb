@@ -105,7 +105,7 @@ class ActivitiesController < ActionController::Base
     # (form encoded)
     # event=<event>
     getConn
-    event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>'','generator'=>'server'}}]
+    event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>"","generator"=>"server"}]
     @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
     
     @status_message = @response
@@ -175,7 +175,7 @@ class ActivitiesController < ActionController::Base
    # event=<event>
    getConn
    text = "spark:photo"
-   event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>'','generator'=>'server'}]
+   event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>"","generator"=>"server"}]
    @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
 
    respond_to do |format|
@@ -232,10 +232,11 @@ class ActivitiesController < ActionController::Base
   
   
   def getConn
-  @conn = Faraday.new(:url => 'http://idea.itu.dk:8000') do |builder|
-    builder.request  :url_encoded
-    builder.response :logger
-    builder.adapter  :net_http
+    @conn = Faraday.new(:url => 'http://idea.itu.dk:8000') do |builder|
+      builder.request  :url_encoded
+      builder.response :logger
+      builder.adapter  :net_http
+    end
   end
   
   
