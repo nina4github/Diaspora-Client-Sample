@@ -8,6 +8,12 @@ class ActivitiesV1Controller < ActionController::Base
       output(@result)
     end
 
+    #get a users' profile
+      def testprofile
+        @result = JSON.parse(current_user.access_token.token.get('/api/v1/profile'))
+        output(@result)
+      end
+    
     def newp_rofile
         user={'username'              => params[:username],
               'email'                 => params[:email],
