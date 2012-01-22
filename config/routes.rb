@@ -26,7 +26,7 @@ SampleApp::Application.routes.draw do
   scope 'v1', :controller => :activities_v1 do
       #profile
       get  :profile
-      get  :testprofile
+      get  'testprofile'  => :test_profile
       post 'profile'      => :new_profile
       put  'profile'      => :update_profile
       
