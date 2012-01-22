@@ -73,6 +73,7 @@ class ActivitiesController < ActionController::Base
 
   end
   
+  
   def week 
     @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
     page = params[:page] ?  params[:page] : 1 # to allow for multiple page retrieval
@@ -88,6 +89,19 @@ class ActivitiesController < ActionController::Base
         format.json {render json: @response}
       end
   end
+  
+  def today 
+    @data1 = params[:id] # id is the NAME of the activity/aspect not the ID
+    @response = Hash.new
+    
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/'+params[:id]+'/today'))
+    
+     respond_to do |format|
+        format.html {render "stream"}
+        format.json {render json: @response}
+      end
+  end
+  
   
   # TOREVIEW, the most updated is in GENIEHUB_controller/listen
   # POST activities/:id id is the activity name
