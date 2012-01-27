@@ -2,7 +2,7 @@ class Apiv1::ProfilesController < Apiv1::BaseController
   
     #get a users' profile
     def show
-         output(forward("/apiv1/profiles/#{params[:id]}/show"),'get')
+         output(forward("/apiv1/profiles/#{params[:id]}/show",'get'))
     end
     
     #create a new profile
