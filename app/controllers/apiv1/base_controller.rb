@@ -37,7 +37,6 @@ class Apiv1::BaseController < ActionController::Base
             else
                 @answer='400 Bad Request - You need to send the user name with the domain of diaspora'
                 render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false and return false
-                #raise ActionController::RoutingError.new('Not Found')
             end
             output(@answer)
             

@@ -24,7 +24,7 @@ SampleApp::Application.routes.draw do
   
   #******************NFC Social API**************#
   
-  match ':controller(/:id(/:action))', :controller => /apiv1\/[^\/]+/
+  match ':controller(/:action(/:id))', :controller => /apiv1\/[^\/]+/
 
   #******************end of NFC Social API**************# 
   
