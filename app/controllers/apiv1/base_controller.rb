@@ -8,12 +8,12 @@ class Apiv1::BaseController < ActionController::Base
         end
     end
     
-    def forward(url, method)
+    def forward(method, url, params)
         method= method.downcase
         if method== 'delete'
            return JSON.parse(current_user.access_token.token.delete(url)) 
         elsif method == 'post'
-           return JSON.parse(current_user.access_token.token.post(url))
+           return JSON.parse(current_user.access_token.token.post(url,params))
         elsif method == 'put'
            return JSON.parse(current_user.access_token.token.put(url))
         else

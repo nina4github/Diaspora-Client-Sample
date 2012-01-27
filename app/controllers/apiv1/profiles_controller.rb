@@ -2,7 +2,7 @@ class Apiv1::ProfilesController < Apiv1::BaseController
   
     #get a users' profile
     def show
-         output(forward("/apiv1/profiles/#{params[:id]}/show",'get'))
+         output(forward('get',"/apiv1/profiles/show"))
     end
     
     #create a new profile
@@ -12,7 +12,7 @@ class Apiv1::ProfilesController < Apiv1::BaseController
               'password'              => params[:password],
               'password_confirmation' => params[:password_confirmation]
         }
-        @result =JSON.parse(current_user.access_token.token.post('/apiv1/profiles/new',user))
+        forward('post','/apiv1/profiles/new',user)
         output(@result)
     end
     
