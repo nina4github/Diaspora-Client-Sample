@@ -6,7 +6,20 @@ class Apiv1::BaseController < ActionController::Base
             format.html {render result }
             format.json {render :json => result}
         end
-     end
+    end
+    
+    def forward(url, method)
+        method= method.downcase
+        if method== 'delete'
+           return JSON.parse(current_user.access_token.token.delete(url)) 
+        elsif method == 'post'
+           return JSON.parse(current_user.access_token.token.post(url))
+        elsif method == 'put'
+           return JSON.parse(current_user.access_token.token.put(url))
+        else
+           return JSON.parse(current_user.access_token.token.get(url))
+        end 
+    end
     
     def authenticate
         case request.format
