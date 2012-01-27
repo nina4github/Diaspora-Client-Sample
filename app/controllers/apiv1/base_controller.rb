@@ -23,7 +23,7 @@ class Apiv1::BaseController < ActionController::Base
     end
     
     def default_format_json
-        params[:format] = 'json'
+        request.format = "json" unless params[:format]
     end
     
     def authenticate
