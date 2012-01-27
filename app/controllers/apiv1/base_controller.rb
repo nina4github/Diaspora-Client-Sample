@@ -23,9 +23,7 @@ class Apiv1::BaseController < ActionController::Base
     end
     
     def default_format_json
-        if(request.headers["HTTP_ACCEPT"].nil? && params[:format].nil?)
-            request.format = "json"
-        end
+        request.format = "json"
     end
     
     def authenticate
