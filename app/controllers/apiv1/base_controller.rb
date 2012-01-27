@@ -8,7 +8,7 @@ class Apiv1::BaseController < ActionController::Base
         end
     end
     
-    def forward(method, url, params)
+    def forward(method, url, params=nil)
         method= method.downcase
         if method== 'delete'
            return JSON.parse(current_user.access_token.token.delete(url)) 
