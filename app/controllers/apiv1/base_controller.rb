@@ -1,6 +1,6 @@
 class Apiv1::BaseController < ActionController::Base
     before_filter :authenticate
-    respond_to :json
+    params[:format] < 'json'
   
     def output(result)
         respond_to do |format|
