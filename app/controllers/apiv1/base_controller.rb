@@ -1,6 +1,5 @@
 class Apiv1::BaseController < ActionController::Base
     before_filter :authenticate
-    before_filter :default_format_json
   
     def output(result)
         respond_to do |format|
@@ -20,10 +19,6 @@ class Apiv1::BaseController < ActionController::Base
         else
            return JSON.parse(current_user.access_token.token.get(url))
         end 
-    end
-    
-    def default_format_json
-        request.format = "json" unless params[:format]
     end
     
     def authenticate
