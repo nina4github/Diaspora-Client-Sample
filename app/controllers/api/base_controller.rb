@@ -12,7 +12,7 @@ class Api::BaseController < ActionController::Base
         case request.format
         when Mime::XML, Mime::JSON #authentication only applies for these types of requests
             if (params[:user]!=nil )
-               user = User.find_by_diaspora_id(params[:user])  
+               user = User.find_by_diaspora_id("#{params[:user]}@idea.itu.dk:3000")  
                if(user!=nil)
                    request.env["warden"].set_user(user, :scope => :user, :store => false)
                    @answer =  current_user.access_token
