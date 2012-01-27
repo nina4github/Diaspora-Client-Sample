@@ -7,11 +7,11 @@ class Apiv1::AspectsController < Apiv1::BaseController
     
     # GET all posts within a specific aspect for the current user
     def posts
-        output(forward('get',"/apiv1/aspects/posts/#{params[:id]}"))
+        output(forward('get',"/apiv1/aspects/#{params[:id]}/posts"))
     end
     
     # GET all posts within a specific aspect for the current user
     def contacts
-        output(forward('get',"/apiv1/aspects/contacts/#{params[:id]}"))
+        output(forward('get',"/apiv1/aspects/#{params[:id]}/contacts"))
     end
 end
