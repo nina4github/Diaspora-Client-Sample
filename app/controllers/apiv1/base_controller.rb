@@ -1,4 +1,4 @@
-class Api::BaseController < ActionController::Base
+class Apiv1::BaseController < ActionController::Base
     before_filter :authenticate
     
     def output(result)
