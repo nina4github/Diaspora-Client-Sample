@@ -22,6 +22,13 @@ class Apiv1::BaseController < ActionController::Base
         end 
     end
     
+    def default_format_json
+        if(request.headers["HTTP_ACCEPT"].nil? &&
+            params[:format].nil?)
+            request.format = "json"
+        end
+    end
+    
     def authenticate
         case request.format
         when Mime::XML, Mime::JSON #authentication only applies for these types of requests
