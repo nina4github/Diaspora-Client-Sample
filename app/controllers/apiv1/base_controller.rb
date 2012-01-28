@@ -14,7 +14,8 @@ class Apiv1::BaseController < ActionController::Base
         @uri.port=3000
         method= method.downcase
         if method== 'get'
-          return Net::HTTP.get_response(@uri).body
+          return @uri.to_s
+          #return Net::HTTP.get_response(@uri).body
         elsif method == 'post'
            return Net::HTTP.post_form(@uri, params).body
         elsif method == 'put'
