@@ -136,7 +136,7 @@ class ActivitiesController < ActionController::Base
   # in our world also objects will have this person information set
   def profiles 
       personid = params[:id]
-      @response = JSON.parse(current_user.access_token.token.get('/api/v0/profiles?ids=['+params[:id]+']'))
+      @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/profiles?ids=['+params[:id]+']'))
       respond_to do |format|
         format.html
         format.json {render json: @response}
@@ -144,7 +144,7 @@ class ActivitiesController < ActionController::Base
   end
     
   def me
-    @response = JSON.parse(current_user.access_token.token.get('/api/v0/profile'))
+    @response = JSON.parse(current_user.access_token.token.get('/api/v0/aspects/profile'))
     respond_to do |format|
       format.html 
       format.json {render json: @response}
