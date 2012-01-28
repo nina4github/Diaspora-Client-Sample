@@ -13,6 +13,7 @@ class Apiv1::BaseController < ActionController::Base
     def forward(method, path, params=nil)
         @uri = URI.parse("http://idea.itu.dk")
         @uri.port = 3000  
+        @uri.path=path
         method= method.downcase
         if method== 'delete'
            return JSON.parse(current_user.access_token.token.delete(path)) 
@@ -22,7 +23,7 @@ class Apiv1::BaseController < ActionController::Base
            return JSON.parse(current_user.access_token.token.put(path,params))
         else
            @uri.query = URI.encode_www_form(params)
-           return @uri.to_s()
+           return Net::HTTP.get_response(@uri).body
         end 
     end
     
