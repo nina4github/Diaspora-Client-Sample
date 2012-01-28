@@ -2,9 +2,7 @@ class Apiv1::BaseController < ActionController::Base
     #before_filter :authenticate
     require 'net/http'
     require 'uri'
-    @uri = URI.parse("http://idea.itu.dk")
-    @uri.port = 3000  
-    
+      
     def output(result)
         respond_to do |format|
             format.html {render result }
@@ -13,6 +11,8 @@ class Apiv1::BaseController < ActionController::Base
     end
     
     def forward(method, path, params=nil)
+        @uri = URI.parse("http://idea.itu.dk")
+        @uri.port = 3000  
         method= method.downcase
         if method== 'delete'
            return JSON.parse(current_user.access_token.token.delete(path)) 
@@ -22,7 +22,7 @@ class Apiv1::BaseController < ActionController::Base
            return JSON.parse(current_user.access_token.token.put(path,params))
         else
            @uri.query = URI.encode_www_form(params)
-           return Net::HTTP.get_response(path).body
+           return Net::HTTP.get_response(@uri).body
         end 
     end
     
