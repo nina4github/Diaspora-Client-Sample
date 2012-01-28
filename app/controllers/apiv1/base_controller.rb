@@ -22,7 +22,7 @@ class Apiv1::BaseController < ActionController::Base
            return JSON.parse(current_user.access_token.token.put(path,params))
         else
            @uri.query = URI.encode_www_form(params)
-           return Net::HTTP.get_response(@uri).body
+           return @uri.to_s()
         end 
     end
     
