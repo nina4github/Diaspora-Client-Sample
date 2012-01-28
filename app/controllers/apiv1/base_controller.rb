@@ -2,7 +2,8 @@ class Apiv1::BaseController < ActionController::Base
     #before_filter :authenticate
     require 'net/http'
     require 'uri'
-    @uri = URI('http://idea.itu.dk:3000')
+    @uri = URI.parse("http://idea.itu.dk")
+    @uri.port = 3000  
     
     def output(result)
         respond_to do |format|
