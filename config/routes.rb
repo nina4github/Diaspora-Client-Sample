@@ -23,23 +23,9 @@ SampleApp::Application.routes.draw do
   
   
   #******************NFC Social API**************#
-  scope 'v1', :controller => :activities_v1 do
-      #profile
-      get  'profile'      => :profile
-      post 'profile'      => :new_profile
-      put  'profile'      => :update_profile
-      
-      #aspect
-      get  'aspects'              => :aspects
-      post 'aspects'              => :new_aspect
-      get  'aspects/:id'          => :aspect
-      put  'aspects/:id'          => :update_aspect
-      get  'aspects/:id/posts'    => :aspect_posts
-      post 'aspects/:id/post'     => :new_aspect_post
-      get  'aspects/:id/contacts' => :aspect_contacts
-      post 'aspects/:id/contact'  => :new_aspect_contact
-  end
   
+  match ':controller(/:action(/:id))', :controller => /apiv1\/[^\/]+/, :defaults => { :format => 'json' }
+
   #******************end of NFC Social API**************# 
   
   resources :status # todelete
