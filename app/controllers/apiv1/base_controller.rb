@@ -1,5 +1,5 @@
 class Apiv1::BaseController < ActionController::Base
-    before_filter :authenticate
+    #before_filter :authenticate
   
     def output(result)
         respond_to do |format|
