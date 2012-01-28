@@ -10,15 +10,17 @@ class Apiv1::BaseController < ActionController::Base
     end
     
     def forward(method, path, params=nil)
+        @uri=URI.parse(path)
+        @uri.port=3000
         method= method.downcase
-        if method== 'delete'
-           return JSON.parse(current_user.access_token.token.delete(path)) 
+        if method== 'get'
+          return Net::HTTP.get_response(@uri).body
         elsif method == 'post'
-           return Net::HTTP.post_form(path, params).body
+           return Net::HTTP.post_form(@uri, params).body
         elsif method == 'put'
-           return JSON.parse(current_user.access_token.token.put(path,params))
-        else
-           return Net::HTTP.get_response(path).body
+           #return JSON.parse(current_user.access_token.token.put(path,params))
+        elsif method == 'delete'
+           
         end 
     end
 end
