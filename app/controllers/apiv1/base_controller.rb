@@ -14,10 +14,9 @@ class Apiv1::BaseController < ActionController::Base
         @uri.port=3000
         method= method.downcase
         if method== 'get'
-          return @uri.to_s
-          #return Net::HTTP.get_response(@uri).body
+           return Net::HTTP.get_response(@uri).body
         elsif method == 'post'
-           return Net::HTTP.post_form(@uri, params).body
+           return Net::HTTP.post_form(@uri, params)
         elsif method == 'put'
            #return JSON.parse(current_user.access_token.token.put(path,params))
         elsif method == 'delete'
