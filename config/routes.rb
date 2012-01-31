@@ -24,7 +24,7 @@ SampleApp::Application.routes.draw do
   
   #******************NFC Social API**************#
   namespace :apiv1 do
-    constraints :format => "json" do
+    defaults :format => "json" do
         resources :aspects, :posts, :contacts, :profiles
     end
   end
