@@ -19,13 +19,14 @@ class Apiv1::BaseController < ActionController::Base
             when 'get' then
                 Net::HTTP::Get.new(path)
             when 'post' then
-                Net::HTTP::Post.new(path).set_form_data(params)
+                Net::HTTP::Post.new(path)
             when 'put' then
-                Net::HTTP::Put.new(path).set_form_data(params)
+                Net::HTTP::Put.new(path)
             when 'delete' then
                 Net::HTTP::Delete.new(path)
         end
-        render http.to_s
+        request.set_form_data(params)
+        render request.to_s
         #return http.request(request).body
     end
 end
