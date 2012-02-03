@@ -25,6 +25,7 @@ class Apiv1::BaseController < ActionController::Base
             when 'delete' then
                 Net::HTTP::Delete.new(path)
         end
+        http.set_debug_output($stdout)
         #return http.request(request).body
     end
 end
