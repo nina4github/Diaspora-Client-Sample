@@ -6,7 +6,8 @@ class Apiv1::ProfilesController < Apiv1::BaseController
     end
     
     def update
-        output(forward('put', request.url, params))
+        #output(forward('put', request.url, params))
+        render :json=>{:text=>"test"}
     end
     
 end
