@@ -13,7 +13,8 @@ class Apiv1::BaseController < ActionController::Base
         @uri=URI.parse(url)
         http = Net::HTTP.new(@uri.host, 3000)
         #include the username query
-        path=@uri.path+'?'+@uri.query;
+        query=@uri.query;
+        path= query.nil? ? @uri.path : @uri.path+@uri.query;
         request=case method.downcase
             when 'get' then
                 Net::HTTP::Get.new(path)
