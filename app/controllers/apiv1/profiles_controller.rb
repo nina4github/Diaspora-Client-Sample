@@ -5,4 +5,8 @@ class Apiv1::ProfilesController < Apiv1::BaseController
         output(forward('get', request.url))
     end
     
+    def update
+        output(forward('put', request.url, params))
+    end
+    
 end
