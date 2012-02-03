@@ -9,10 +9,11 @@ class Apiv1::BaseController < ActionController::Base
         end
     end
     
-    def forward(method, path, params=nil)
-        @uri=URI.parse(path)
+    def forward(method, url, params=nil)
+        @uri=URI.parse(url)
         http = Net::HTTP.new(@uri.host, 3000)
-
+        #include the username query
+        path=@uri.path+'?'+@uri.query;
         request=case method.downcase
             when 'get' then
                 Net::HTTP::Get.new(path)
