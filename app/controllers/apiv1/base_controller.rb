@@ -25,7 +25,9 @@ class Apiv1::BaseController < ActionController::Base
             when 'delete' then
                 Net::HTTP::Delete.new(path)
         end
-        request.set_form_data(params)
+        if !params.nil?
+            request.set_form_data(params)
+        end
         return http.request(request).body
     end
 end
