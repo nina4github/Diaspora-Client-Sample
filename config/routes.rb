@@ -25,7 +25,7 @@ SampleApp::Application.routes.draw do
   #******************NFC Social API**************#
   namespace :apiv1 do
     defaults :format => "json" do
-        resources :aspects, :posts, :contacts, :profiles
+        resources :aspects, :posts, :contacts, :profiles, :users
     end
   end
   #match ':controller(/:action(/:id))', :controller => /apiv1\/[^\/]+/, :defaults => { :format => 'json' }
