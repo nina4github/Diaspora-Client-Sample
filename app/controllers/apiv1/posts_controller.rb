@@ -1,4 +1,4 @@
-class Posts_controller < Apiv1::BaseController
+class Apiv1::PostsController < Apiv1::BaseController
     def index
         output(forward('get',request.url))
     end
