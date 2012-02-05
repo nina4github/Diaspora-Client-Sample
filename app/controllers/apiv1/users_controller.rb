@@ -11,7 +11,7 @@ class Apiv1::UsersController < Apiv1::BaseController
             response2=forward('put', @uri.to_s, params)
             output("User created and "+ response2.to_s) 
         else
-            render :json=> {:error => "user creation failed, username or email exists!", :status => 422  }
+            output("user creation failed, username or email exists!")
         end
     end
 end
