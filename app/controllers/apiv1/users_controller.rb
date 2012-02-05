@@ -7,7 +7,11 @@ class Apiv1::UsersController < Apiv1::BaseController
         @uri=URI.parse(request.url)
         @uri.path="/apiv1/profiles/"+params[:username]
         #update profile data
-        response2=forward('put', @uri.to_s, params)
-        output(response1.to_s + response2.to_s) 
+        if response1.status==200
+            response2=forward('put', @uri.to_s, params)
+            output(response1.to_s + response2.to_s) 
+        else
+            output("username or email exists")
+        end
     end
 end
