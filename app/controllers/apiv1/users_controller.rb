@@ -7,6 +7,6 @@ class Apiv1::UsersController < Apiv1::BaseController
         @uri=URI.parse(request.url)
         @uri.path="/apiv1/profiles/"+params[:username]
         #update profile data
-        output(forward('put', @uri.host + @uri.path, params))
+        output(forward('put', @uri.to_s, params))
     end
 end
