@@ -4,7 +4,7 @@ class Apiv1::UsersController < Apiv1::BaseController
     def create
         #create a new user
         @response = JSON.parse(forward('post', request.url, params))
-        @uri=URI.parse(url)
+        @uri=URI.parse(request.url)
         @uri.path="profiles/"+parmas[:useranme]
         #update profile data
         output(forward('put', @uri.host + @uri.path, params))
