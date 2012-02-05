@@ -14,4 +14,8 @@ class Apiv1::UsersController < Apiv1::BaseController
             output("user creation failed, username or email exists!")
         end
     end
+    
+    def destroy
+        output(forward('delete',request.url))
+    end
 end
