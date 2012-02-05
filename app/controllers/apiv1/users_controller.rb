@@ -8,7 +8,6 @@ class Apiv1::UsersController < Apiv1::BaseController
         @uri.path="/apiv1/profiles/"+params[:username]
         #update profile data
         response2=forward('put', @uri.to_s, params)
-        output(response1) 
-        output(response2)
+        output(response1.to_s + response2.to_s) 
     end
 end
