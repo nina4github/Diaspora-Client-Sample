@@ -9,9 +9,9 @@ class Apiv1::UsersController < Apiv1::BaseController
         #update profile data
         if response1.has_key? 'mes'
             response2=forward('put', @uri.to_s, params)
-            output(response1.to_s + response2.to_s) 
+            output("user create, "+ response2.to_s) 
         else
-            output("username or email exists")
+            output("user creation failed, username or email exists!")
         end
     end
 end
