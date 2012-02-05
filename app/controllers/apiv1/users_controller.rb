@@ -1,7 +1,7 @@
 class Apiv1::UsersController < Apiv1::BaseController
   
     #create a new user
-    def new
+    def create
         #create a new user
         @response = JSON.parse(forward('post', request.url, params))
         @uri=URI.parse(url)
