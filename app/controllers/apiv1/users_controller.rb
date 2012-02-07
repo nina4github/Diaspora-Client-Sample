@@ -13,9 +13,10 @@ class Apiv1::UsersController < Apiv1::BaseController
             #add to contact
             if !params[:currentUser].nil?
                 @uri.path="/apiv1/contacts/" + mes["id"].to_s
-                output(forward('put',@uri.to_s, params))
+				render mes["id"].to_s
+                #output(forward('put',@uri.to_s, params))
             end
-            output("User created and "+ response2.to_s) 
+            #output("User created and "+ response2.to_s) 
         else
             output("user creation failed, username or email exists!")
         end
