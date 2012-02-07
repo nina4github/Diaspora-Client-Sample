@@ -12,7 +12,7 @@ class Apiv1::UsersController < Apiv1::BaseController
 			mes=ActiveSupport::JSON.decode(response2)
             #add to contact
             if !params[:currentUser].nil?
-                @uri.path="/apiv1/contacts/" + mes["id"]
+                @uri.path="/apiv1/contacts/" + mes["id"].to_s
                 output(forward('put',@uri.to_s, params))
             end
             output("User created and "+ response2.to_s) 
