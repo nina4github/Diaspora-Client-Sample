@@ -6,8 +6,8 @@ class Apiv1::AspectsController < Apiv1::BaseController
     end
     
     #create a new aspect
-    def show
-        output(forward('get',request.url, params))
+    def create
+        output(forward('post',request.url, params))
     end
     
 end
