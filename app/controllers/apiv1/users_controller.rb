@@ -9,9 +9,10 @@ class Apiv1::UsersController < Apiv1::BaseController
         #update profile data
         if response1.has_key? 'mes'
             response2=forward('put', @uri.to_s, params)
+			mes=ActiveSupport::JSON.decode(response2)
             #add to contact
             if !params[:currentUser].nil?
-                @uri.path="/apiv1/contacts/"+params[:currentUser]
+                @uri.path="/apiv1/contacts/" + mes["id"]
                 output(forward('put',@uri.to_s, params))
             end
             output("User created and "+ response2.to_s) 
