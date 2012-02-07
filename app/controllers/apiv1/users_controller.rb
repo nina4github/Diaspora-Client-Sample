@@ -13,14 +13,14 @@ class Apiv1::UsersController < Apiv1::BaseController
 		#create an aspect for the object
 		@uri.path="/apiv1/aspects/"
 		params[:aspect][:name]="sharing"
-		forward('post', @uri.to_s, params)
+		output(forward('post', @uri.to_s, params))
 		
 		#add to contact
 		if !params[:currentUser].nil?
 			@uri.path="/apiv1/contacts/" + mes["id"].to_s
-			forward('post',@uri.to_s, params)
+			#forward('post',@uri.to_s, params)
 		end
-		output("User created and "+ response2.to_s) 
+		#output("User created and "+ response2.to_s) 
 
     end
     def destroy
