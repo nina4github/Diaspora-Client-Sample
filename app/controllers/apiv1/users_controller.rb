@@ -7,7 +7,7 @@ class Apiv1::UsersController < Apiv1::BaseController
 		#update profile data
         @uri=URI.parse(request.url)
         @uri.path="/apiv1/profiles/"+params[:username]
-		forward('put', @uri.to_s, params)
+		response2=forward('put', @uri.to_s, params)
 		mes=ActiveSupport::JSON.decode(response2)
 		
 		#create an aspect for the object
