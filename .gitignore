@@ -11,3 +11,5 @@ public/manifest.json
 Gemfile
 
 faraday-stack/*
+.buildpath
+.project

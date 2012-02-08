@@ -14,7 +14,7 @@ class Apiv1::UsersController < Apiv1::BaseController
 		@uri.path="/apiv1/aspects/"
 		
 		params[:aspect]={:name=>'sharing'}
-		output(forward('post', @uri.to_s, param))
+		output(forward('post', @uri.to_s, params))
 		#add to contact
 		if !params[:currentUser].nil?
 			#@uri.path="/apiv1/contacts/" + mes["id"].to_s
