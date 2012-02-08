@@ -12,7 +12,8 @@ class Apiv1::UsersController < Apiv1::BaseController
 		
 		#create an aspect for the object
 		@uri.path="/apiv1/aspects/"
-		params[:aspect]={:name=>"sharing"}
+		params[:aspect]=HashWithIndifferentAccess.new
+		params[:aspect]['name']='sharing'
 		output(forward('post', @uri.to_s, params))
 		#add to contact
 		if !params[:currentUser].nil?
