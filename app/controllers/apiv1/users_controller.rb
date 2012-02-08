@@ -3,12 +3,12 @@ class Apiv1::UsersController < Apiv1::BaseController
     #create a new user
     def create
         #create a new user
-        forward('post', request.url, params)
+        #forward('post', request.url, params)
 		#update profile data
         @uri=URI.parse(request.url)
         @uri.path="/apiv1/profiles/"+params[:username]
-		response2=forward('put', @uri.to_s, params)
-		mes=ActiveSupport::JSON.decode(response2)
+		#response2=forward('put', @uri.to_s, params)
+		#mes=ActiveSupport::JSON.decode(response2)
 		
 		#create an aspect for the object
 		@uri.path="/apiv1/aspects/"
