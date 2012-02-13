@@ -229,9 +229,13 @@ class ActivitiesController < ActionController::Base
           end
       else
          #@answer='400 Bad Request - You need to send the user name with the domain of diaspora'
-         render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false and return false
+         # render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false and return false
          #raise ActionController::RoutingError.new('Not Found')
-
+         user = User.find_by_diaspora_id("fakta")
+         request.env["warden"].set_user(user, :scope => :user, :store => false)
+         @answer =  current_user.access_token
+        return true
+         
       end
       # respond_to do |format|
       #                format.xml {render xml: @answer}
