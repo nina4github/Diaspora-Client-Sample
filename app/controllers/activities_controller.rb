@@ -216,7 +216,7 @@ class ActivitiesController < ActionController::Base
   private
   def authenticate
     case request.format
-    when Mime::XML, Mime::JSON #authentication only applies for these types of requests
+    when Mime::XML, Mime::JSON, Mime::HTML #authentication only applies for these types of requests
        if (params[:user]!=nil )
          user = User.find_by_diaspora_id(params[:user])  
          if(user!=nil)
