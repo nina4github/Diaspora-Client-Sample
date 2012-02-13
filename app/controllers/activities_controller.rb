@@ -120,7 +120,7 @@ class ActivitiesController < ActionController::Base
     # event=<event>
     getConn
     event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id.split('@')[0],"content"=>text,"timestamp"=>"","generator"=>"server"}]
-    @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
+    @gh_respons = @conn.post '/informationbus/publish', {:event=>event}
     
     @status_message = @response
     respond_to do |format|
@@ -190,7 +190,7 @@ class ActivitiesController < ActionController::Base
    getConn
    text = "spark:photo"
    event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id.split('@')[0],"content"=>text,"timestamp"=>"","generator"=>"server"}]
-   @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
+   @gh_respons = @conn.post '/informationbus/publish', {:event=>event}
    logger.info("I have published the info on gh user = "+current_user.diaspora_id.split('@')[0] + " response "+ @gh_respons.status.to_s());
    
    respond_to do |format|
