@@ -108,6 +108,7 @@ class ActivitiesController < ActionController::Base
   def new
     # call to create will generate a new post with these information and on this aspect
     text=params[:text]
+    logger.info('activities_controller.new [text] '+text)
     # OLD # message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
     # OLD # @response =JSON.parse(current_user.access_token.token.post('/api/v0/posts/new', message))
     message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id],'tag'=> params[:id]}
