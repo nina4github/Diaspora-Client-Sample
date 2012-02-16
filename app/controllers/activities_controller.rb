@@ -192,7 +192,7 @@ class ActivitiesController < ActionController::Base
    @response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, 
     request.raw_post.force_encoding('BINARY'), 
     {'Content-Type' => att_content_type})
-   logger.info("response from Diaspora: #{response.body}")
+   logger.info("response from Diaspora: #{JSON.parse @response.body}")
    
    # Generate a post on the genie hub to notify the new CONTENT
    # POST http://tiger.itu.dk:8004/informationbus/publish
