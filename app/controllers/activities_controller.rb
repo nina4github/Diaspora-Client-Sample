@@ -116,7 +116,7 @@ class ActivitiesController < ActionController::Base
       domain = "@idea.itu.dk:3000"
       mention = "@{"+user+"; "+user+domain+"}" 
       text_el = text.split
-      msg = mention + text_el[1]+text_el[2]
+      msg = mention + " "+ text_el[1]+" "+text_el[2]
     else
       msg=text
     end 
