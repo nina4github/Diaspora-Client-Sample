@@ -111,7 +111,7 @@ class ActivitiesController < ActionController::Base
     logger.info('activities_controller.new [text] '+text)
     # OLD # message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
     # OLD # @response =JSON.parse(current_user.access_token.token.post('/api/v0/posts/new', message))
-    if (text.include? " enter " || text.include? " leave ")
+    if (text.include?(" enter ") || text.include?(" leave "))
       user = text.split[0] # split already separates using spaces between words
       domain = "@idea.itu.dk:3000"
       mention = "@{"+user+"; "+user+domain+"}" 
