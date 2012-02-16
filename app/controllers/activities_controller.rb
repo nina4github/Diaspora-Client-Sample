@@ -111,9 +111,19 @@ class ActivitiesController < ActionController::Base
     logger.info('activities_controller.new [text] '+text)
     # OLD # message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
     # OLD # @response =JSON.parse(current_user.access_token.token.post('/api/v0/posts/new', message))
-    message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id],'tag'=> params[:id]}
+    if (text.include? " enter " || text.include? " leave ")
+      user = text.split[0] # split already separates using spaces between words
+      domain = "@idea.itu.dk:3000"
+      mention = "@{"+user+"; "+user+domain+"}" 
+      text_el = text.split
+      msg = mention + text_el[1]+text_el[2]
+    else
+      msg=text
+    end 
+    message = {'status_message'=>{'text'=>msg},'aspect_name' => params[:id],'tag'=> params[:id]}
     @response =JSON.parse(current_user.access_token.token.post('/api/v0/create', message))
     
+
 
     # Generate a post on the genie hub
     # POST http://tiger.itu.dk:8004/informationbus/publish
