@@ -192,14 +192,20 @@ class ActivitiesController < ActionController::Base
    @response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, 
     request.raw_post.force_encoding('BINARY'), 
     {'Content-Type' => att_content_type})
-   logger.info("response from Diaspora: #{JSON.parse @response}")
+    response = JSON.parse @response
+   logger.info("response from Diaspora: #{response}")
+   
+   photo = response["data"]["photo"]
+   photo_id = photo["id"]
+   photo_url = photo["remote_photo_path"]+photo["remote_photo_name"]
+   
    
    # Generate a post on the genie hub to notify the new CONTENT
    # POST http://tiger.itu.dk:8004/informationbus/publish
    # (form encoded)
    # event=<event>
    getConn
-   text = "spark:photo"
+   text = "spark:photo:"+photo_url+" #"+activity
    event = {"activity"=>params[:id],"actor"=>current_user.diaspora_id.split('@')[0],"content"=>text,"timestamp"=>"","generator"=>"server"}.to_json
    @gh_respons = @conn.post '/informationbus/publish', {:event=>event}
    logger.info("I have published the info on gh user = "+current_user.diaspora_id.split('@')[0] + " response "+ @gh_respons.status.to_s());
