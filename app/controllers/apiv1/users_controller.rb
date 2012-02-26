@@ -12,6 +12,7 @@ class Apiv1::UsersController < Apiv1::BaseController
 		
 		#create an aspect for the object
 		@uri.path="/apiv1/aspects/"
+		#params[:aspect]={:name=>'sharing'} will not be parsed correctly, use the following instead
 		params[:aspectname]='sharing'
 		output(forward('post', @uri.to_s, params))
 		#add to contact
