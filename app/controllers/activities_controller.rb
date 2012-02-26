@@ -108,19 +108,30 @@ class ActivitiesController < ActionController::Base
   def new
     # call to create will generate a new post with these information and on this aspect
     text=params[:text]
+    logger.info('activities_controller.new [text] '+text)
     # OLD # message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id]}
     # OLD # @response =JSON.parse(current_user.access_token.token.post('/api/v0/posts/new', message))
-    message = {'status_message'=>{'text'=>text},'aspect_name' => params[:id],'tag'=> params[:id]}
+    if (text.include?(" enter ") || text.include?(" leave "))
+      user = text.split[0] # split already separates using spaces between words
+      domain = "@idea.itu.dk:3000"
+      mention = "@{"+user+"; "+user+domain+"}" 
+      text_el = text.split
+      msg = mention + " "+ text_el[1]+" "+text_el[2]
+    else
+      msg=text
+    end 
+    message = {'status_message'=>{'text'=>msg},'aspect_name' => params[:id],'tag'=> params[:id]}
     @response =JSON.parse(current_user.access_token.token.post('/api/v0/create', message))
     
+
 
     # Generate a post on the genie hub
     # POST http://tiger.itu.dk:8004/informationbus/publish
     # (form encoded)
     # event=<event>
     getConn
-    event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>"","generator"=>"server"}]
-    @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
+    event = {"activity"=>params[:id],"actor"=>current_user.diaspora_id.split('@')[0],"content"=>text,"timestamp"=>"","generator"=>"server"}.to_json
+    @gh_respons = @conn.post '/informationbus/publish', {:event=>event}
     
     @status_message = @response
     respond_to do |format|
@@ -181,17 +192,24 @@ class ActivitiesController < ActionController::Base
    @response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, 
     request.raw_post.force_encoding('BINARY'), 
     {'Content-Type' => att_content_type})
+    response = JSON.parse @response
    logger.info("response from Diaspora: #{response}")
+   
+   photo = response["data"]["photo"]
+   photo_id = photo["id"]
+   photo_url = photo["remote_photo_path"]+photo["remote_photo_name"]
+   
    
    # Generate a post on the genie hub to notify the new CONTENT
    # POST http://tiger.itu.dk:8004/informationbus/publish
    # (form encoded)
    # event=<event>
    getConn
-   text = "spark:photo"
-   event = JSON.generate [{"activity"=>params[:id],"actor"=>current_user.diaspora_id,"content"=>text,"timestamp"=>"","generator"=>"server"}]
-   @gh_respons = @conn.put '/informationbus/publish', {:event=>event}
-
+   text = "spark:photo:"+photo_url+" #"+activity
+   event = {"activity"=>params[:id],"actor"=>current_user.diaspora_id.split('@')[0],"content"=>text,"timestamp"=>"","generator"=>"server"}.to_json
+   @gh_respons = @conn.post '/informationbus/publish', {:event=>event}
+   logger.info("I have published the info on gh user = "+current_user.diaspora_id.split('@')[0] + " response "+ @gh_respons.status.to_s());
+   
    respond_to do |format|
        #format.html {render @response}
        format.json {render json: @response}
@@ -216,7 +234,7 @@ class ActivitiesController < ActionController::Base
   private
   def authenticate
     case request.format
-    when Mime::XML, Mime::JSON #authentication only applies for these types of requests
+    when Mime::XML, Mime::JSON, Mime::HTML #authentication only applies for these types of requests
        if (params[:user]!=nil )
          user = User.find_by_diaspora_id(params[:user])  
          if(user!=nil)
@@ -229,9 +247,13 @@ class ActivitiesController < ActionController::Base
           end
       else
          #@answer='400 Bad Request - You need to send the user name with the domain of diaspora'
-         render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false and return false
+         # render :file => "#{Rails.root}/public/400.html", :status => 404, :layout => false and return false
          #raise ActionController::RoutingError.new('Not Found')
-
+         user = User.find_by_diaspora_id("place01@idea.itu.dk:3000")
+         request.env["warden"].set_user(user, :scope => :user, :store => false)
+         @answer =  current_user.access_token
+        
+         
       end
       # respond_to do |format|
       #                format.xml {render xml: @answer}

@@ -15,6 +15,7 @@ SampleApp::Application.routes.draw do
   match 'activities/:id/week' => 'activities#week'
   match 'activities/:id/today' => 'activities#today'
   match 'activities/:id/upload' => 'activities#upload'
+  match 'activities/:id' => 'activities#new'
   match 'profiles/:id' => 'activities#profiles'
   match 'group/' => 'activities#group' # creates a new group of people for a specific activity. It does not need a user to operate, but just to authenticate
   
