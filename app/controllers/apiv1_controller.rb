@@ -18,10 +18,10 @@ class Apiv1Controller < ActionController::Base
         #add contacts
         @uri.path='/apiv1/contacts'
         @uri.query='aspect='+params[:aspectname]+'&username='+params[:objectname]
-        results=query('get',@uri.to_s);
+        results=query('get', @uri.to_s);
         contacts=ActiveSupport::JSON.decode(results)["contacts"];
         #add contacts to user aspect
-        results=query('post',@uri.to_s, {:ids=>contacts, :aspect=>params[:aspectname], :username=>params[:username] } );
+        results=query('post', @uri.to_s, {:ids=>contacts, :aspect=>params[:aspectname], :username=>params[:username]} );
         output(results)
     end
     
