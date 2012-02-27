@@ -22,7 +22,9 @@ class Apiv1Controller < ActionController::Base
         contacts=ActiveSupport::JSON.decode(results)["contacts"];
         #add contacts to user aspect
         @uri.query=nil
-        results=query('post', @uri.to_s, {:ids=>contacts, :aspect=>params[:aspectname], :username=>params[:username]} );
+        query('post', @uri.to_s, {:ids=>contacts, :aspect=>params[:aspectname], :username=>params[:username]} );
+        #add contact to object aspect
+        query('post', @uri.to_s, {:ids=>userid, :aspect=>params[:aspectname], :username=>params[:objectname]} );
         output(results)
     end
     
