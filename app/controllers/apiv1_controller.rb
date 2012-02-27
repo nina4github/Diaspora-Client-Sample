@@ -55,7 +55,7 @@ class Apiv1Controller < ActionController::Base
                 Net::HTTP::Delete.new(path)
         end
         if !params.nil?
-            request.set_form_data(params)
+            request.form_data= params
         end
         return http.request(request).body
     end
