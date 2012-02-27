@@ -31,6 +31,22 @@ class Apiv1Controller < ActionController::Base
     
     #following are helper methods
     private
+    #refer to  ttp://blog.assimov.net/post/653645115/post-put-arrays-with-ruby-net-http-set-form-data
+    def set_form_data(request, params, sep = '&')
+      request.body = params.map {|k,v| 
+        if v.instance_of?(Array)
+          v.map {|e| "#{urlencode(k.to_s)}=#{urlencode(e.to_s)}"}.join(sep)
+        else
+          "#{urlencode(k.to_s)}=#{urlencode(v.to_s)}"
+        end
+      }.join(sep)
+      request.content_type = 'application/x-www-form-urlencoded'
+    end
+    
+    def urlencode(str)
+      str.gsub(/[^a-zA-Z0-9_\.\-]/n) {|s| sprintf('%%%02x', s[0]) }
+    end
+    
     def output(result)
         respond_to do |format|
             format.html {render result }
@@ -55,7 +71,7 @@ class Apiv1Controller < ActionController::Base
                 Net::HTTP::Delete.new(path)
         end
         if !params.nil?
-            request.form_data= params
+            set_form_data(request,params)
         end
         return http.request(request).body
     end
