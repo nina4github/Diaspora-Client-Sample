@@ -15,7 +15,7 @@ class Apiv1Controller < ActionController::Base
         #create an aspect
         query('post',request.url, params)
         #add contacts
-        results=query('get','http://idea.itu.dk/contacts?aspect='+params[:aspectname]+'&username='+params[:objectname]);
+        results=query('get','http://idea.itu.dk/apiv1/contacts?aspect='+params[:aspectname]+'&username='+params[:objectname]);
         contacts=ActiveSupport::JSON.decode(results)["contacts"];
         output(results)
     end
