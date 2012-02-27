@@ -3,21 +3,21 @@ class Apiv1Controller < ActionController::Base
     require 'uri'
     
     def profiles
-        output(forward('get', request.url))
+        output(query('get', request.url))
     end
     
     def aspects
-        output(forward('get',request.url))
+        output(query('get',request.url))
     end
     
     #create an asymmetric aspect
     def newaspect
         #create an aspect
-        forward('post',request.url, params)
+        query('post',request.url, params)
         #add contacts
-        results=forward('get','http://idea.itu.dk/contacts?aspect='+params[:aspectname]+'&username='+params[:objectname]);
+        results=query('get','http://idea.itu.dk/contacts?aspect='+params[:aspectname]+'&username='+params[:objectname]);
         contacts=ActiveSupport::JSON.decode(results)["contacts"];
-        output(contatcs)
+        output(contacts)
     end
     
     def stream
@@ -33,7 +33,7 @@ class Apiv1Controller < ActionController::Base
         end
     end
     
-    def forward(method, url, params=nil)
+    def query(method, url, params=nil)
         @uri=URI.parse(url)
         http = Net::HTTP.new(@uri.host, 3000)
         #include the username query
