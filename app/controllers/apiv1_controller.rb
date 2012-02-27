@@ -1,4 +1,4 @@
-class ActivitiesController < ActionController::Base
+class Apiv1Controller < ActionController::Base
     require 'net/http'
     require 'uri'
     
