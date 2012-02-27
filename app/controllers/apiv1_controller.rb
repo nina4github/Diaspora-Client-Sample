@@ -75,7 +75,11 @@ class Apiv1Controller < ActionController::Base
                 Net::HTTP::Delete.new(path)
         end
         if !params.nil?
-            set_form_data(request,params)
+            if @uri.path.include? 'contacts'
+                set_form_data(request,params)
+            else 
+                request.set_form_data(params)
+            end
         end
         return http.request(request).body
     end
