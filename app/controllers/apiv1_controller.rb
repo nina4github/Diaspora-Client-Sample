@@ -28,7 +28,7 @@ class Apiv1Controller < ActionController::Base
         output(results)
     end
     
-    def stream
+    def posts
         query('post',request.url, params)
     end
     
