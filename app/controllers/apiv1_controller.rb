@@ -29,7 +29,7 @@ class Apiv1Controller < ActionController::Base
     end
     
     def posts
-        query('post',request.url, params)
+        output(query('post',request.url, params))
     end
     
     
