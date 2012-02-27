@@ -14,8 +14,11 @@ class Apiv1Controller < ActionController::Base
     def newaspect
         #create an aspect
         query('post',request.url, params)
+        @uri=URI.parse(url)
         #add contacts
-        results=query('get','http://idea.itu.dk/apiv1/contacts?aspect='+params[:aspectname]+'&username='+params[:objectname]);
+        @uri.path='/apiv1/contacts'
+        @uri.query='aspect='+params[:aspectname]+'&username='+params[:objectname]
+        results=query('get',@uri);
         contacts=ActiveSupport::JSON.decode(results)["contacts"];
         output(contacts)
     end
