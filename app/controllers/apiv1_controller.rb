@@ -17,7 +17,7 @@ class Apiv1Controller < ActionController::Base
         #add contacts
         results=query('get','http://idea.itu.dk/contacts?aspect='+params[:aspectname]+'&username='+params[:objectname]);
         contacts=ActiveSupport::JSON.decode(results)["contacts"];
-        output(contacts)
+        output(results)
     end
     
     def stream
