@@ -14,7 +14,7 @@ class Apiv1Controller < ActionController::Base
     def newaspect
         #create an aspect
         query('post',request.url, params)
-        @uri=URI.parse(url)
+        @uri=URI.parse(request.url)
         #add contacts
         @uri.path='/apiv1/contacts'
         @uri.query='aspect='+params[:aspectname]+'&username='+params[:objectname]
