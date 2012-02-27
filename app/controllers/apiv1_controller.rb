@@ -35,9 +35,9 @@ class Apiv1Controller < ActionController::Base
     def set_form_data(request, params, sep = '&')
       request.body = params.map {|k,v| 
         if v.instance_of?(Array)
-          v.map {|e| "#{urlencode(k.to_s)}=#{urlencode(e.to_s)}"}.join(sep)
+            v.map {|e| "#{urlencode(k.to_s)}[]=#{urlencode(e.to_s)}"}.join(sep)
         else
-          "#{urlencode(k.to_s)}=#{urlencode(v.to_s)}"
+            "#{urlencode(k.to_s)}=#{urlencode(v.to_s)}"
         end
       }.join(sep)
       request.content_type = 'application/x-www-form-urlencoded'
