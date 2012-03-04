@@ -24,7 +24,7 @@ class Apiv1Controller < ActionController::Base
         #add contacts to user aspect
         @uri.query=nil
         query('post', @uri.to_s, {:ids=>pids, :aspect=>params[:aspectname], :username=>params[:username]} );
-        #add contact to object aspect
+        #add contact to other users aspect
         uids.each do |uid|
             query('post', @uri.to_s, {:ids=>params[:userid], :aspect=>params[:aspectname], :userid=>uid} );
         end
