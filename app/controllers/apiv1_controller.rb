@@ -37,7 +37,7 @@ class Apiv1Controller < ActionController::Base
     
     
     def newuser
-        query('post',request.url, params)
+        output(query('post',request.url, params))
     end
     
     #following are helper methods
