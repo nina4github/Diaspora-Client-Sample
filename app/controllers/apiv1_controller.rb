@@ -36,6 +36,10 @@ class Apiv1Controller < ActionController::Base
     end
     
     
+    def newuser
+        query('post',request.url, params)
+    end
+    
     #following are helper methods
     private
     #refer to  ttp://blog.assimov.net/post/653645115/post-put-arrays-with-ruby-net-http-set-form-data

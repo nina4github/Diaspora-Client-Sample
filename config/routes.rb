@@ -29,6 +29,7 @@ SampleApp::Application.routes.draw do
       match 'apiv1/aspects' => 'apiv1#newaspect',  :via => :post
       match 'apiv1/aspects/:name' => 'apiv1#aspects'
       match 'apiv1/posts' => 'apiv1#posts'
+      match 'apiv1/users' => 'apiv1#newuser'
   end
   #namespace :apiv1 do
    # defaults :format => "json" do
