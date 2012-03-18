@@ -13,7 +13,7 @@ class ActivitiesController < ActionController::Base
     @activities = @response
     respond_to do |format|
       format.html
-      format.json {render json: @response}
+      format.json {render :json=> @response, :callback=>params[:callback]}
     end
   end
   
@@ -197,7 +197,7 @@ class ActivitiesController < ActionController::Base
    
    photo = response["data"]["photo"]
    photo_id = photo["id"]
-   photo_url = photo["remote_photo_path"]+photo["remote_photo_name"]
+   photo_url = photo["remote_photo_path"]+ photo["remote_photo_name"]
    
    
    # Generate a post on the genie hub to notify the new CONTENT
