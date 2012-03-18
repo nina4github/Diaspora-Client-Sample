@@ -69,7 +69,7 @@ class ActivitiesController < ActionController::Base
      respond_to do |format|
         format.html {render "stream"}
         format.json {render :json=> @response, :callback=>params[:callback]}#{render json: @response}
-
+      end
   end
   
   
