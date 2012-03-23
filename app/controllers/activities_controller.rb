@@ -192,10 +192,10 @@ class ActivitiesController < ActionController::Base
     request.raw_post.force_encoding('BINARY'), 
     {'Content-Type' => att_content_type})
     reply = JSON.parse(@response)
-   logger.info("response from Diaspora: #{reply}")
+   logger.info("response from Diaspora: #{JSON.parse(@response)}")
    
    photo = reply["data"]["photo"]
-   logger.info("photo from Diaspora: #{reply.data}")
+  # logger.info("photo from Diaspora: #{reply.data}")
    photo_id = photo["id"]
    photo_url = photo["remote_photo_path"] + photo["remote_photo_name"]
    
