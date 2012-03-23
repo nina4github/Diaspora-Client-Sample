@@ -4,15 +4,6 @@
   = form_tag('/auth/diaspora', :method => :get) do
     = text_field_tag :diaspora_id, '', :placeholder => "Diaspora ID"
     = submit_tag :connect
-
-  %p 
-    chose your username:
-    = link_to 'NINA' , 'status?username=ninaondiaspora@idea.itu.dk:3000' 
-    = link_to 'Elena' , 'status?username=ninaondiaspora@diaspora.localhost' 
-    = link_to 'cheng' , 'status?username=cheng81@diaspora.localhost' 
-    = link_to 'user1' , 'status?username=user1@diaspora.localhost' 
-
-    = response.body
-
+ 
 #activities 
 
