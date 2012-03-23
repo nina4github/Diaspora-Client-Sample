@@ -195,7 +195,7 @@ class ActivitiesController < ActionController::Base
    logger.info("response from Diaspora: #{reply}")
    
    photo = reply["data"]["photo"]
-   logger.info("photo from Diaspora: #{photo}")
+   logger.info("photo from Diaspora: #{reply[data]}")
    photo_id = photo["id"]
    photo_url = photo["remote_photo_path"] + photo["remote_photo_name"]
    
