@@ -191,10 +191,10 @@ class ActivitiesController < ActionController::Base
    @response = current_user.access_token.token.post('/api/v0/aspects/'+activity+'/upload?'+q, 
     request.raw_post.force_encoding('BINARY'), 
     {'Content-Type' => att_content_type})
-    reply = JSON.parse(@response)
-   logger.info("response from Diaspora: #{JSON.parse(@response)}")
+    #reply = JSON.parse(@response)
+   logger.info("response from Diaspora: #{@response}")
    
-   photo = reply["data"]["photo"]
+   photo = @response["data"]["photo"]
   # logger.info("photo from Diaspora: #{reply.data}")
    photo_id = photo["id"]
    photo_url = photo["remote_photo_path"] + photo["remote_photo_name"]
