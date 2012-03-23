@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  activity_name: MyString
+  counter: 1
+  timestamp: 2011-11-07 01:00:47
+
+two:
+  activity_name: MyString
+  counter: 1
+  timestamp: 2011-11-07 01:00:47

@@ -24,5 +24,6 @@ def logout
   render "show"
 end
 
+
 end
 

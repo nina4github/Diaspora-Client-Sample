@@ -132,6 +132,10 @@ class GeniehubController < ActionController::Base
       elsif params[:content]=="stop"
         text += mention + " stopped #"+  params[:activity] + " with " +mention2
         counter>0 ? counter-1:0; 
+      
+      elsif params[:content]=="data"
+        text += mention + " stopped #"+  params[:activity] + " with " +mention2
+        counter>0 ? counter-1:0;
       end  
 
       updateEventCounter(params[:activity],counter)
