@@ -23,7 +23,7 @@ class Apiv1Controller < ActionController::Base
         
         aspect=Aspect.find_by_name(params[:aspectname])
         if aspect.nil?
-            params[:aspect]={:name=>params[:aspectname],:cretor=>params[:username], :feedUrl=>params[:feedUrl]}
+            params[:aspect]={:name=>params[:aspectname],:cretor=>params[:username], :feedUrl=>params.has_key?("feedUrl")? params[:feedUrl]: ' '}
             Aspect.new(params[:aspect])
             Aspect.save
         end
