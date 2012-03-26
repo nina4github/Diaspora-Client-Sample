@@ -55,8 +55,8 @@ class Apiv1Controller < ActionController::Base
         output(query('post',request.url, params))
     end
     
-    
-    def aspectList
+    #get the list of activities
+    def aspectlist
         @aspects = Aspect.all
         render :json=>@aspects
     end
