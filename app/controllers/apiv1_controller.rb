@@ -52,7 +52,12 @@ class Apiv1Controller < ActionController::Base
     #create a new user in diaspora
     #parameter: username,    email and password defaults to: username@object.com and 123456
     def newuser
-        output(query('post',request.url, params))
+        query('post',request.url, params)
+        if(!params[:aspectname].nil?)
+            @uri=URI.parse(request.url)
+            @uri.path='/apiv1/aspects'
+            query('post',request.url, params)
+        end
     end
     
     #get the list of activities
