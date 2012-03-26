@@ -2,25 +2,37 @@ class Apiv1Controller < ActionController::Base
     require 'net/http'
     require 'uri'
     
+    #get a profile data, 
+    #parameter: username
     def profiles
         output(query('get', request.url))
     end
     
+    #get a aspect data, 
+    #parameter: username and aspectname
     def aspects
         output(query('get',request.url))
     end
     
     #create an asymmetric aspect
+    #parameter: username and aspectname
     def newaspect
         #create an aspect
         query('post',request.url, params)
         @uri=URI.parse(request.url)
+        
+        aspect=Aspect.findByName(params[:aspectname])
+        if aspect.nil?
+            args={:name=>params[:aspectname],:cretor=>params[:username], :feedUrl=>params[:feedUrl]}
+            Aspect.new(args)
+            Aspect.save
+        end
         #add contacts
         @uri.path='/apiv1/contacts'
         @uri.query='aspect='+params[:aspectname]+'&username='+params[:objectname]
         results=ActiveSupport::JSON.decode(query('get', @uri.to_s));
         pids=results["pid"];
-		uids=results["uid"];
+        uids=results["uid"];
         #add contacts to user aspect
         @uri.query=nil
         query('post', @uri.to_s, {:ids=>pids, :aspect=>params[:aspectname], :username=>params[:username]} );
@@ -31,13 +43,22 @@ class Apiv1Controller < ActionController::Base
         output(results)
     end
     
+    #create a new post in an aspect
+    #parameter: username and aspectname and post content
     def posts
         output(query('post',request.url, params))
     end
     
-    
+    #create a new user in diaspora
+    #parameter: username,    email and password defaults to: username@object.com and 123456
     def newuser
         output(query('post',request.url, params))
+    end
+    
+    
+    def aspectList
+        @aspects = Aspect.all
+        render :json=>@aspects
     end
     
     #following are helper methods
