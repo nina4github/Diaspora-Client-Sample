@@ -21,7 +21,12 @@ class Apiv1Controller < ActionController::Base
         query('post',request.url, params)
         @uri=URI.parse(request.url)
         
-        
+        aspect=Aspect.find_by_name(params[:aspectname])
+        if !aspect.nil?
+            args={:name=>params[:aspectname],:cretor=>params[:username], :feedUrl=>params.has_key?("feedUrl")? params[:feedUrl]: ' '}
+            Aspect.new(args)
+            Aspect.save
+        end
         #add contacts
         @uri.path='/apiv1/contacts'
         @uri.query='aspect='+params[:aspectname]+'&username='+params[:objectname]
