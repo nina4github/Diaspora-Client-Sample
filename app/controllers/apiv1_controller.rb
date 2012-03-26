@@ -24,8 +24,8 @@ class Apiv1Controller < ActionController::Base
         aspect=Aspect.find_by_name(params[:aspectname])
         if aspect.nil?
             params[:aspect]={:name=>params[:aspectname],:creator=>params[:username], :feedUrl=>params.has_key?("feedUrl")? params[:feedUrl]: ' '}
-            Aspect.new(params[:aspect])
-            
+            @newaspect = Aspect.new(params[:aspect])
+            @newaspect.save
         end
         #add contacts
         @uri.path='/apiv1/contacts'
