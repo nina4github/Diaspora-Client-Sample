@@ -21,7 +21,6 @@ class Apiv1Controller < ActionController::Base
         query('post',request.url, params)
         @uri=URI.parse(request.url)
         
-        aspect=Aspect.findByName(params[:aspectname])
         
         #add contacts
         @uri.path='/apiv1/contacts'
