@@ -1,0 +1,107 @@
+=> Booting WEBrick
+=> Rails 3.0.9 application starting in development on http://0.0.0.0:8080
+=> Call with -d to detach
+=> Ctrl-C to shutdown server
+Sass is in the process of being separated from Haml,
+and will no longer be bundled at all in Haml 3.2.0.
+Please install the 'sass' gem if you want to use Sass.
+
+Haml will no longer automatically load Sass in Haml 3.2.0.
+Please add gem 'sass' to your Gemfile.
+
+put http://idea.itu.dk:8000/informationbus/register/listener
+Content-Type: "application/x-www-form-urlencoded"
+200
+content-type: "application/json;charset=ISO-8859-1"
+connection: "close"
+server: "Jetty(8.0.0.M0)"
+{registration: 'f470cb48-6bf0-43d1-94f2-1ee35f1d9005'}
+[2011-11-02 02:11:42] INFO  WEBrick 1.3.1
+[2011-11-02 02:11:42] INFO  ruby 1.8.7 (2010-01-10) [i486-linux]
+[2011-11-02 02:11:42] INFO  WEBrick::HTTPServer#start: pid=19448 port=8080
+
+
+Started GET "/" for 87.72.211.171 at Wed Nov 02 02:12:09 +0100 2011
+  Processing by HomeController#show as HTML
+Rendered home/show.html.haml within layouts/application (15.4ms)
+Completed 200 OK in 20ms (Views: 19.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for 87.72.211.171 at Wed Nov 02 02:12:09 +0100 2011
+
+ActionController::RoutingError (No route matches "/favicon.ico"):
+  
+
+Rendered /home/elna/.rvm/gems/ruby-1.9.2-p290@diaspora_client_sample/gems/actionpack-3.0.9/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+[2011-11-02 02:12:12] ERROR SignalException: SIGHUP
+	/usr/lib/ruby/1.8/webrick/server.rb:91:in `select'
+
+
+Started GET "/" for 87.72.211.171 at Wed Nov 02 02:12:16 +0100 2011
+  Processing by HomeController#show as HTML
+Rendered home/show.html.haml within layouts/application (17.5ms)
+Completed 200 OK in 68ms (Views: 67.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for 87.72.211.171 at Wed Nov 02 02:12:17 +0100 2011
+
+ActionController::RoutingError (No route matches "/favicon.ico"):
+  
+
+Rendered /home/elna/.rvm/gems/ruby-1.9.2-p290@diaspora_client_sample/gems/actionpack-3.0.9/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/" for 87.72.211.171 at Wed Nov 02 02:12:18 +0100 2011
+  Processing by HomeController#show as HTML
+Rendered home/show.html.haml within layouts/application (15.1ms)
+Completed 200 OK in 19ms (Views: 19.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for 87.72.211.171 at Wed Nov 02 02:12:19 +0100 2011
+
+ActionController::RoutingError (No route matches "/favicon.ico"):
+  
+
+Rendered /home/elna/.rvm/gems/ruby-1.9.2-p290@diaspora_client_sample/gems/actionpack-3.0.9/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/" for 87.72.211.171 at Wed Nov 02 02:12:19 +0100 2011
+  Processing by HomeController#show as HTML
+Rendered home/show.html.haml within layouts/application (14.9ms)
+Completed 200 OK in 19ms (Views: 18.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for 87.72.211.171 at Wed Nov 02 02:12:20 +0100 2011
+
+ActionController::RoutingError (No route matches "/favicon.ico"):
+  
+
+Rendered /home/elna/.rvm/gems/ruby-1.9.2-p290@diaspora_client_sample/gems/actionpack-3.0.9/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/" for 87.72.211.171 at Wed Nov 02 02:12:32 +0100 2011
+  Processing by HomeController#show as HTML
+Rendered home/show.html.haml within layouts/application (61.2ms)
+Completed 200 OK in 65ms (Views: 65.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for 87.72.211.171 at Wed Nov 02 02:12:33 +0100 2011
+
+ActionController::RoutingError (No route matches "/favicon.ico"):
+  
+
+Rendered /home/elna/.rvm/gems/ruby-1.9.2-p290@diaspora_client_sample/gems/actionpack-3.0.9/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 87.72.211.171 at Wed Nov 02 02:12:33 +0100 2011
+  Processing by HomeController#show as HTML
+Rendered home/show.html.haml within layouts/application (15.8ms)
+Completed 200 OK in 21ms (Views: 20.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for 87.72.211.171 at Wed Nov 02 02:12:34 +0100 2011
+
+ActionController::RoutingError (No route matches "/favicon.ico"):
+  
+
+Rendered /home/elna/.rvm/gems/ruby-1.9.2-p290@diaspora_client_sample/gems/actionpack-3.0.9/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)

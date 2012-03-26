@@ -1,0 +1,23 @@
+%h1 Listing aspects
+
+%table
+  %tr
+    %th Name
+    %th Creator
+    %th Feedurl
+    %th
+    %th
+    %th
+
+  - @aspects.each do |aspect|
+    %tr
+      %td= aspect.name
+      %td= aspect.creator
+      %td= aspect.feedUrl
+      %td= link_to 'Show', aspect
+      %td= link_to 'Edit', edit_aspect_path(aspect)
+      %td= link_to 'Destroy', aspect, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Aspect', new_aspect_path

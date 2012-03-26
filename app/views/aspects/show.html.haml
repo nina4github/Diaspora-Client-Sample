@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @aspect.name
+%p
+  %b Creator:
+  = @aspect.creator
+%p
+  %b Feedurl:
+  = @aspect.feedUrl
+
+= link_to 'Edit', edit_aspect_path(@aspect)
+\|
+= link_to 'Back', aspects_path

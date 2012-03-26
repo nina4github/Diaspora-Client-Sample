@@ -1,5 +1,7 @@
 SampleApp::Application.routes.draw do
 
+  resources :aspects
+
   resources :events
 
   devise_for :users
