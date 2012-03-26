@@ -23,8 +23,8 @@ class Apiv1Controller < ActionController::Base
         
         aspect=Aspect.find_by_name(params[:aspectname])
         if aspect.nil?
-            args={:name=>params[:aspectname],:cretor=>params[:username], :feedUrl=>params.has_key?("feedUrl")? params[:feedUrl]: ' '}
-            Aspect.new(args)
+            params[:aspect]={:name=>params[:aspectname],:cretor=>params[:username], :feedUrl=>params[:feedUrl]}
+            Aspect.new(params[:aspect])
             Aspect.save
         end
         #add contacts
