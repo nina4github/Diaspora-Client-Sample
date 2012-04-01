@@ -56,7 +56,7 @@ class Apiv1Controller < ActionController::Base
         if(!params[:aspectname].nil?)
             @uri=URI.parse(request.url)
             @uri.path='/apiv1/aspects'
-            output(query('post',request.url, params))
+            output(query('post', @uri.to_s , params))
         end
     end
     
