@@ -6,8 +6,17 @@ class Apiv1::AspectsController < Apiv1::BaseController
     end
   
     def show
-        output(query('get',request.url))
-		
+        result=ActiveSupport::JSON.decode(query('get',request.url))
+		if !result["name"].nil?
+			aspect=Aspect.find_by_name(result["name"])
+			render :json=>{	:name=> result["name"],
+                        :id=> result["id"],
+                        :userId=> result["user_id"],
+						:feedId=> aspect.feedUrl
+					}
+		else
+			render :json=>result
+		end
     end
     
     #post a new aspect to the current user
