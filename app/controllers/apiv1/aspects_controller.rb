@@ -31,6 +31,11 @@ class Apiv1::AspectsController < Apiv1::BaseController
         render :json=>{:id=>results["id"], :status=>200}
     end
 	
+	def destroy
+		@aspect = Aspect.find(params[:id])
+		@aspect.destroy
+	end
+	
     #add a aspect to the current user
     def add
         #create an aspect
