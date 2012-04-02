@@ -39,9 +39,8 @@ class Apiv1::AspectsController < Apiv1::BaseController
         query('post', @uri.to_s, params)
   
         #add contacts
-        @uri=URI.parse(request.url)
         @uri.path='/apiv1/contacts'
-        @uri.query='aspect='+params[:aspectname]+'&userid='+params[:objectname]
+        @uri.query='aspect='+params[:aspectname]+'&username='+params[:objectname]
         results=ActiveSupport::JSON.decode(query('get', @uri.to_s));
         pids=results["pid"];
         uids=results["uid"];
