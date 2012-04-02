@@ -2,7 +2,11 @@ class Apiv1::AspectsController < Apiv1::BaseController
 	
     def index
         @aspects = Aspect.all
-      render :json=>@aspects
+        aspects=Array.new
+        @aspects.each do | aspect |
+          aspects << aspect
+        end
+		render :json=>aspects
     end
   
     def show
