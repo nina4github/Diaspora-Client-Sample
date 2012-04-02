@@ -7,7 +7,7 @@ class Apiv1::AspectsController < Apiv1::BaseController
   
     def show
         result=ActiveSupport::JSON.decode(query('get',request.url))
-		aspect=Aspect.find_by_name(result[:name])
+		aspect=Aspect.find_by_name(result["name"])
 		render :json=>{	:name=> result["name"],
                         :id=> result["id"],
                         :userId=> result["user_id"],
