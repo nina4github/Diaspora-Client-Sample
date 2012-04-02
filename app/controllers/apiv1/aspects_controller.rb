@@ -28,6 +28,7 @@ class Apiv1::AspectsController < Apiv1::BaseController
             @newaspect = Aspect.new(params[:aspect])
             @newaspect.save
         end
+        render :json=>{"status"=>200}
     end
 	
     #add a aspect to the current user
@@ -49,6 +50,6 @@ class Apiv1::AspectsController < Apiv1::BaseController
         uids.each do |uid|
             query('post', @uri.to_s, {:ids=>params[:userid], :aspect=>params[:aspectname], :userid=>uid} );
         end
-        output(results)
+        render :json=>{"status"=>200}
     end
 end

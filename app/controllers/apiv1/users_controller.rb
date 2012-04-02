@@ -10,6 +10,7 @@ class Apiv1::UsersController < Apiv1::BaseController
             @uri.path='/apiv1/aspects'
             output(query('post', @uri.to_s , params))
         end
+        render :json=>{"status"=>200}
     end
 
 end
