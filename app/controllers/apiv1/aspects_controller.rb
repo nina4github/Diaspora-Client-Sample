@@ -6,7 +6,7 @@ class Apiv1::AspectsController < Apiv1::BaseController
     end
   
     def show
-        output(query('get',request.url))
+        result=ActiveSupport::JSON.decode(query('get',request.url))
     end
     
     #post a new aspect to the current user

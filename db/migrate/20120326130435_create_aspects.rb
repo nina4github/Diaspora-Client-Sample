@@ -1,15 +1,12 @@
 class CreateAspects < ActiveRecord::Migration
-  def self.up
+  def change
     create_table :aspects do |t|
       t.string :name
       t.string :creator
-      t.string :feedUrl
+      t.int :feed_id
 
       t.timestamps
     end
   end
 
-  def self.down
-    drop_table :aspects
-  end
 end
