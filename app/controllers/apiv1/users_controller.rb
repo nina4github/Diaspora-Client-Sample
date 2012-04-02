@@ -1,5 +1,8 @@
 class Apiv1::UsersController < Apiv1::BaseController
-    
+    def show
+        output(query('get',request.url))
+    end
+	
     def create
         query('post',request.url, params)
         if(!params[:aspectname].nil?)
