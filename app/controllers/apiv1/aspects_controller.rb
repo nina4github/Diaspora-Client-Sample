@@ -20,7 +20,7 @@ class Apiv1::AspectsController < Apiv1::BaseController
     end
     
     def create
-  		  query('post',request.url, params)
+        results=ActiveSupport::JSON.decode(query('post',request.url, params))
   
         aspect=Aspect.find_by_name(params[:aspectname])
         if aspect.nil?
@@ -28,7 +28,7 @@ class Apiv1::AspectsController < Apiv1::BaseController
             @newaspect = Aspect.new(params[:aspect])
             @newaspect.save
         end
-        render :json=>{"status"=>200}
+        render :json=>{:id=>results["id"], :status=>200}
     end
 	
     #add a aspect to the current user
@@ -36,7 +36,7 @@ class Apiv1::AspectsController < Apiv1::BaseController
         #create an aspect
         @uri=URI.parse(request.url)
         @uri.path='/apiv1/aspects'
-        query('post', @uri.to_s, params)
+        aspect=ActiveSupport::JSON.decode(query('post',request.url, params))
   
         #add contacts
         @uri.path='/apiv1/contacts'
@@ -51,6 +51,6 @@ class Apiv1::AspectsController < Apiv1::BaseController
         uids.each do |uid|
             query('post', @uri.to_s, {:ids=>params[:userid], :aspect=>params[:aspectname], :userid=>uid} );
         end
-        render :json=>{"status"=>200}
+        render :json=>{:id=>aspect["id"],"status"=>200}
     end
 end
