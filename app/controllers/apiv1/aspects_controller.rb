@@ -4,7 +4,7 @@ class Apiv1::AspectsController < Apiv1::BaseController
         @aspects = Aspect.all
         aspects=Array.new
         @aspects.each do | aspect |
-          aspects << aspect[:aspect]
+          aspects << aspect.aspect
         end
 		render :json=>aspects
     end
