@@ -43,13 +43,14 @@ class Apiv1::AspectsController < Apiv1::BaseController
         results=ActiveSupport::JSON.decode(query('get', @uri.to_s));
         pids=results["pid"];
         uids=results["uid"];
+        render :json=>results
         #add contacts to user aspect
-        @uri.query=nil
-        query('post', @uri.to_s, {:ids=>pids, :aspect=>params[:aspectname], :username=>params[:username]} );
+    #    @uri.query=nil
+    #    query('post', @uri.to_s, {:ids=>pids, :aspect=>params[:aspectname], :username=>params[:username]} );
         #add contact to other users aspect
-        uids.each do |uid|
-            query('post', @uri.to_s, {:ids=>params[:userid], :aspect=>params[:aspectname], :userid=>uid} );
-        end
-        render :json=>{"status"=>200}
+    #    uids.each do |uid|
+    #        query('post', @uri.to_s, {:ids=>params[:userid], :aspect=>params[:aspectname], :userid=>uid} );
+    #    end
+    #    render :json=>{"status"=>200}
     end
 end
