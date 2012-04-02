@@ -7,31 +7,36 @@ class Apiv1::AspectsController < Apiv1::BaseController
   
     def show
         result=ActiveSupport::JSON.decode(query('get',request.url))
-		if !result["name"].nil?
-			aspect=Aspect.find_by_name(result["name"])
-			render :json=>{	:name=> result["name"],
+        if !result["name"].nil?
+        aspect=Aspect.find_by_name(result["name"])
+        render :json=>{	:name=> result["name"],
                         :id=> result["id"],
                         :userId=> result["user_id"],
 						:feedId=> aspect.feedUrl
-					}
-		else
-			render :json=>result
-		end
+				}
+    		else
+    			render :json=>result
+    		end
     end
     
-    #post a new aspect to the current user
     def create
-        #create an aspect
-        query('post',request.url, params)
-        @uri=URI.parse(request.url)
-        
+  		  query('post',request.url, params)
+  
         aspect=Aspect.find_by_name(params[:aspectname])
         if aspect.nil?
             params[:aspect]={:name=>params[:aspectname],:creator=>params[:username], :feedUrl=>params.has_key?("feedUrl")? params[:feedUrl]: ' '}
             @newaspect = Aspect.new(params[:aspect])
             @newaspect.save
         end
+    end
+	
+    #add a aspect to the current user
+    def add
+        #create an aspect
+        query('post',request.url, params)
+  
         #add contacts
+        @uri=URI.parse(request.url)
         @uri.path='/apiv1/contacts'
         @uri.query='aspect='+params[:aspectname]+'&username='+params[:objectname]
         results=ActiveSupport::JSON.decode(query('get', @uri.to_s));
