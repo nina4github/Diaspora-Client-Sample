@@ -24,17 +24,17 @@ class Apiv1::AspectsController < Apiv1::BaseController
   
         aspect=Aspect.find_by_name(params[:aspectname])
         if aspect.nil?
-            params[:aspect]={:name=>params[:aspectname],:creator=>params[:username], :feedUrl=>params.has_key?("feedUrl")? params[:feedUrl]: ' '}
+            params[:aspect]={:name=>params[:aspectname],:creator=>params[:username], :feedUrl=>params.has_key?("feedId")? params[:feedId]: ' '}
             @newaspect = Aspect.new(params[:aspect])
             @newaspect.save
         end
         render :json=>{:id=>results["id"], :status=>200}
     end
 	
-	def destroy
-		@aspect = Aspect.find(params[:id])
-		@aspect.destroy
-	end
+  	def destroy
+  		@aspect = Aspect.find(params[:id])
+  		@aspect.destroy
+  	end
 	
     #add a aspect to the current user
     def add
