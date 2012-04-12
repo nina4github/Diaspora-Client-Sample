@@ -9,7 +9,11 @@ class Apiv1::AspectsController < Apiv1::BaseController
         result=ActiveSupport::JSON.decode(query('get',request.url))
         if !result["name"].nil?
         aspect=Aspect.find_by_name(result["name"])
-		feedId=is_number?(aspect.feedUrl): aspect.feedUrl: 0
+		if(is_number?(aspect.feedUrl))
+			feedId= aspect.feedUrl
+		else
+			feedId=0
+		end
         render :json=>{	:name=> result["name"],
                         :id=> result["id"],
                         :userId=> result["user_id"],
