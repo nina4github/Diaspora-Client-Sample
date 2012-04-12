@@ -12,7 +12,7 @@ class Apiv1::AspectsController < Apiv1::BaseController
         render :json=>{	:name=> result["name"],
                         :id=> result["id"],
                         :userId=> result["user_id"],
-                        :feedId=> aspect.feedUrl
+                        :feedId=> aspect.feedUrl.to_i
 				}
     		else
     			render :json=>result
