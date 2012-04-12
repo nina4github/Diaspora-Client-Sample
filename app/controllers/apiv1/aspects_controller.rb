@@ -8,8 +8,8 @@ class Apiv1::AspectsController < Apiv1::BaseController
     def show
         result=ActiveSupport::JSON.decode(query('get',request.url))
         if !result["name"].nil?
-        aspect=Aspect.find_by_name(result["name"])
-        render :json=>{	:name=> result["name"],
+			aspect=Aspect.find_by_name(result["name"])
+			render :json=>{	:name=> result["name"],
                         :id=> result["id"],
                         :userId=> result["user_id"],
                         :feedId=> aspect.feedUrl.to_i
@@ -35,6 +35,11 @@ class Apiv1::AspectsController < Apiv1::BaseController
   		@aspect = Aspect.find(params[:id])
   		@aspect.destroy
   	end
+	
+	def delete
+		@aspect = Aspect.find(params[:id])
+  		@aspect.destroy
+	end
 	
     #add a aspect to the current user
     def add

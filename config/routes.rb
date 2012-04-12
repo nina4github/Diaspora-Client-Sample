@@ -30,9 +30,9 @@ SampleApp::Application.routes.draw do
       defaults :format => "json" do
           resources :aspects, :posts, :contacts, :profiles, :users
           match 'aspects/add'   => 'aspects#add'
+		  match 'aspects/delete'   => 'aspects#delete'
       end
   end
-  #match ':controller(/:action(/:id))', :controller => /apiv1\/[^\/]+/, :defaults => { :format => 'json' }
 
   #******************end of NFC Social API**************# 
   
