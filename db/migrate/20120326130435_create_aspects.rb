@@ -3,7 +3,7 @@ class CreateAspects < ActiveRecord::Migration
     create_table :aspects do |t|
       t.string :name
       t.string :creator
-      t.int :feed_id
+      t.int :feedId
 
       t.timestamps
     end
