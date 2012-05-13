@@ -28,9 +28,10 @@ SampleApp::Application.routes.draw do
   #******************NFC Social API**************#
   namespace :apiv1 do
       defaults :format => "json" do
-          resources :aspects, :posts, :contacts, :profiles, :users
-          match 'aspects/add'   => 'aspects#add'
+		  match 'aspects/add'   => 'aspects#add'
 		  match 'aspects/delete'   => 'aspects#delete'
+		  match 'contacts/all'   => 'contacts#all'
+          resources :aspects, :posts, :contacts, :profiles, :users
       end
   end
 

@@ -24,7 +24,7 @@ class Apiv1::AspectsController < Apiv1::BaseController
   
         aspect=Aspect.find_by_name(params[:aspectname])
         if aspect.nil?
-            params[:aspect]={:name=>params[:aspectname],:creator=>params[:username], :feedId=>params.has_key?("feedId")? params[:feedId]: ' '}
+            params[:aspect]={:name=>params[:aspectname],:creator=>params[:username], :feedId=>params.has_key?("feedId")? params[:feedId]: 0}
             @newaspect = Aspect.new(params[:aspect])
             @newaspect.save
         end
