@@ -43,7 +43,11 @@ class Apiv1::AspectsController < Apiv1::BaseController
 	
     #add a aspect to the current user
     def add
-		render :json=>params
+        #create an aspect
+        @uri=URI.parse(request.url)
+        @uri.path='/apiv1/aspects'
+        aspect=ActiveSupport::JSON.decode(query('post',request.url, params))
+  
         
     end
 end
