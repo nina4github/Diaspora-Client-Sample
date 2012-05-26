@@ -7,4 +7,8 @@ class Apiv1::UsersController < Apiv1::BaseController
         output(query('post',request.url, params))
     end
 
+    
+    def update
+        output(query('put',request.url, params))
+    end
 end
